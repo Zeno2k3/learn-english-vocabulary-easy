@@ -1,0 +1,627 @@
+{
+  "$schema": "../lesson.schema.json",
+  "id": 2,
+  "title": "Birth, marriage and death",
+  "topics": [],
+  "words": [
+    {
+      "w": "birth",
+      "ipa": "bɜːθ",
+      "t": "danh từ",
+      "vi": "sự ra đời, sự sinh nở",
+      "topic": "birth",
+      "q": "Sau chín tháng mang thai, người mẹ được đưa vào phòng sinh, và em bé cất tiếng khóc đầu tiên. Khoảnh khắc em bé chào đời ấy chính là điều này. (danh từ)",
+      "ex": "The ___ of a baby is a happy day for the family."
+    },
+    {
+      "w": "marriage",
+      "ipa": "ˈmærɪdʒ",
+      "t": "danh từ",
+      "vi": "hôn nhân",
+      "topic": "marriage",
+      "q": "Hai người cưới nhau rồi cùng sống như chồng với vợ suốt bốn mươi năm, lúc vui lúc buồn đều có nhau. Mối quan hệ vợ chồng lâu dài ấy chính là điều này. (danh từ)",
+      "ex": "If your ___ breaks up, you are separated or divorced."
+    },
+    {
+      "w": "death",
+      "ipa": "deθ",
+      "t": "danh từ",
+      "vi": "cái chết, sự qua đời",
+      "topic": "death",
+      "q": "Ông cụ sống đến 95 tuổi rồi ra đi nhẹ nhàng trong giấc ngủ, cả nhà ai cũng buồn. Sự ra đi ấy, khi cuộc đời một người kết thúc, chính là điều này. (danh từ)",
+      "ex": "His ___ was a shock to the whole family."
+    },
+    {
+      "w": "baby",
+      "ipa": "ˈbeɪbi",
+      "t": "danh từ",
+      "vi": "em bé",
+      "topic": "birth",
+      "q": "Nhà hàng xóm vừa có thêm một thành viên nhỏ xíu, suốt ngày chỉ bú sữa, ngủ và khóc oe oe. Đứa trẻ ấy là người này.",
+      "ex": "Anna had a ___ yesterday."
+    },
+    {
+      "w": "born",
+      "ipa": "bɔːn",
+      "t": "động từ",
+      "vi": "được sinh ra (be ___)",
+      "topic": "birth",
+      "q": "Mẹ kể: “Con chào đời vào một đêm mưa năm 2000.” Khi kể lại chuyện một người được sinh ra, ta dùng từ này, đặt ngay sau was hoặc were.",
+      "ex": "He was ___ at 1.15 yesterday morning."
+    },
+    {
+      "w": "weighed",
+      "ipa": "weɪd",
+      "t": "động từ",
+      "vi": "nặng (quá khứ của weigh)",
+      "topic": "birth",
+      "q": "Em bé vừa chào đời, cô y tá đặt bé lên cân rồi báo cả nhà: “Bé được 3 ký.” Kể lại chuyện hôm đó, ta dùng động từ này để nói bé nặng bao nhiêu. (thì quá khứ)",
+      "ex": "He ___ 3 kilograms."
+    },
+    {
+      "w": "birthday",
+      "ipa": "ˈbɜːθdeɪ",
+      "t": "danh từ",
+      "vi": "sinh nhật",
+      "topic": "birth",
+      "q": "Mỗi năm, đúng vào ngày bạn chào đời, cả nhà thắp nến, cắt bánh kem và tặng quà cho bạn. Ngày đặc biệt ấy chính là ngày này.",
+      "ex": "His grandfather's ___ is June 16th too."
+    },
+    {
+      "w": "single",
+      "ipa": "ˈsɪŋɡl",
+      "t": "tính từ",
+      "vi": "độc thân",
+      "topic": "status",
+      "q": "Đi đám cưới bạn, cô ấy bị các bác hỏi: “Bao giờ đến lượt cháu?” Cô cười: “Cháu chưa chồng, cũng chưa có người yêu ạ.” Cô ấy đang ở tình trạng này.",
+      "ex": "If you do not have a partner, you are ___."
+    },
+    {
+      "w": "separated",
+      "ipa": "ˈsepəreɪtɪd",
+      "t": "tính từ",
+      "vi": "ly thân",
+      "topic": "status",
+      "q": "Hai vợ chồng cãi nhau nhiều quá, anh chồng dọn ra thuê nhà ở riêng, nhưng hai người vẫn chưa ký giấy ly hôn. Họ đang ở tình trạng này.",
+      "ex": "They live apart now, but they are not divorced. They are ___."
+    },
+    {
+      "w": "divorced",
+      "ipa": "dɪˈvɔːst",
+      "t": "tính từ",
+      "vi": "ly hôn",
+      "topic": "status",
+      "q": "Sau nhiều năm không hạnh phúc, hai vợ chồng ra tòa và ký giấy chấm dứt cuộc hôn nhân. Từ nay họ ở tình trạng này.",
+      "ex": "Their marriage has legally ended. They are ___."
+    },
+    {
+      "w": "married",
+      "ipa": "ˈmærid",
+      "t": "tính từ",
+      "vi": "đã kết hôn",
+      "topic": "marriage",
+      "q": "Anh ấy đeo nhẫn cưới, ở nhà có vợ và hai con. Khi ai hỏi “Anh có gia đình chưa?”, anh ấy trả lời rằng mình đang ở tình trạng này. (tính từ)",
+      "ex": "If you have a husband or wife, you are ___."
+    },
+    {
+      "w": "widowed",
+      "ipa": "ˈwɪdəʊd",
+      "t": "tính từ",
+      "vi": "góa (vợ hoặc chồng đã mất)",
+      "topic": "status",
+      "q": "Chồng bà mất cách đây ba năm, từ đó bà sống một mình trong căn nhà cũ. Bà đang ở tình trạng này.",
+      "ex": "If your husband or wife dies, you are ___."
+    },
+    {
+      "w": "honeymoon",
+      "ipa": "ˈhʌnimuːn",
+      "t": "danh từ",
+      "vi": "tuần trăng mật",
+      "topic": "marriage",
+      "q": "Ngay sau đám cưới, hai vợ chồng mới cưới xách va li đi Đà Lạt vài ngày, chỉ có hai người với nhau. Chuyến đi ấy chính là điều này.",
+      "ex": "They went on their ___ to Italy."
+    },
+    {
+      "w": "the wedding",
+      "ipa": "ðə ˈwedɪŋ",
+      "t": "cụm danh từ",
+      "vi": "đám cưới",
+      "topic": "marriage",
+      "q": "Hai người yêu nhau quyết định về chung một nhà: họ mời họ hàng, bạn bè đến dự lễ, ăn tiệc và chụp ảnh chung. Buổi lễ và bữa tiệc ấy được gọi bằng cụm từ này. (có the ở đầu)",
+      "ex": "Harry and Sarah invited 100 people to ___."
+    },
+    {
+      "w": "groom",
+      "ipa": "ɡruːm",
+      "t": "danh từ",
+      "vi": "chú rể",
+      "topic": "marriage",
+      "q": "Trong ngày cưới, người đàn ông mặc vest chỉnh tề, đứng chờ ở lễ đường rồi đeo nhẫn cho người mình cưới. Anh ấy là người này.",
+      "ex": "Harry was the ___ in a grey suit."
+    },
+    {
+      "w": "bride",
+      "ipa": "braɪd",
+      "t": "danh từ",
+      "vi": "cô dâu",
+      "topic": "marriage",
+      "q": "Trong ngày cưới, người phụ nữ mặc váy trắng, tay cầm bó hoa, khoác tay bố bước vào lễ đường. Cô ấy là người này.",
+      "ex": "Sarah was the ___ in a white dress."
+    },
+    {
+      "w": "ill",
+      "ipa": "ɪl",
+      "t": "tính từ",
+      "vi": "ốm, bị bệnh",
+      "topic": "death",
+      "q": "Sáng nay em bé bị sốt, ho liên tục và không chịu ăn, mẹ phải xin cho bé nghỉ học để đi khám. Bé đang ở tình trạng này. (tính từ)",
+      "ex": "Then Harry became ___."
+    },
+    {
+      "w": "die",
+      "ipa": "daɪ",
+      "t": "động từ",
+      "vi": "chết, qua đời (nguyên mẫu)",
+      "topic": "death",
+      "q": "Nếu bạn quên cho con cá vàng ăn và không thay nước suốt mấy tuần, nó sẽ yếu dần rồi ngừng sống. Việc ngừng sống ấy chính là điều này. (động từ, dạng nguyên mẫu)",
+      "ex": "Without water, plants ___."
+    },
+    {
+      "w": "the funeral",
+      "ipa": "ðə ˈfjuːnərəl",
+      "t": "cụm danh từ",
+      "vi": "đám tang",
+      "topic": "death",
+      "q": "Ông cụ hàng xóm vừa qua đời, mọi người mặc đồ tối màu đến thắp hương, chia buồn và tiễn ông ra nghĩa trang. Buổi lễ tiễn biệt ấy được gọi bằng cụm từ này. (có the ở đầu)",
+      "ex": "Many people in black came to ___."
+    }
+  ],
+  "quiz": [
+    {
+      "tag": "had a baby",
+      "q": "Anna ___ yesterday. It's a boy!",
+      "vi": "Hôm qua Anna sinh em bé.",
+      "o": ["had a baby", "got a baby", "was a baby", "born a baby"],
+      "why": "“Sinh con” trong tiếng Anh là have a baby. Get a baby nghe như “nhận về / lấy được một em bé”, giống như đi mua hay nhận nuôi.",
+      "rule": "Sinh con = have a baby (quá khứ: had a baby)."
+    },
+    {
+      "tag": "was born",
+      "q": "My son ___ in 2020.",
+      "vi": "Con trai tôi sinh năm 2020.",
+      "o": ["was born", "born", "is born", "has born"],
+      "why": "Em bé không tự “sinh” ra mình, em bé được mẹ sinh ra, nên luôn dùng dạng bị động be + born. Năm 2020 là quá khứ nên dùng was.",
+      "rule": "Ngày/năm sinh: I was born… / They were born…"
+    },
+    {
+      "tag": "was born",
+      "q": "Where ___?",
+      "vi": "Bạn sinh ra ở đâu?",
+      "o": ["were you born", "did you born", "are you born", "you were born"],
+      "why": "Câu hỏi với be + born: đảo were lên trước chủ ngữ. Không dùng did vì born không phải động từ chính ở đây, động từ chính là be.",
+      "rule": "Hỏi nơi sinh: Where were you born?"
+    },
+    {
+      "tag": "weighed",
+      "q": "The baby ___ 3 kilograms.",
+      "vi": "Em bé nặng 3 ký.",
+      "o": ["weighed", "weight", "was weight", "weighted"],
+      "why": "Weigh là động từ (nặng bao nhiêu), quá khứ là weighed. Weight là danh từ (cân nặng), không đứng một mình làm động từ được.",
+      "rule": "Động từ: weigh → weighed. Danh từ: weight."
+    },
+    {
+      "tag": "got married to",
+      "q": "Sarah got married ___ Harry.",
+      "vi": "Sarah kết hôn với Harry.",
+      "o": ["to", "with", "for", "by"],
+      "why": "Tiếng Việt nói “cưới với”, nên người Việt hay dịch thành with. Nhưng tiếng Anh cố định là married to.",
+      "rule": "get married to / be married to + người."
+    },
+    {
+      "tag": "get married",
+      "q": "When did you ___?",
+      "vi": "Bạn cưới khi nào? (hỏi ngày cưới)",
+      "o": ["get married", "got married", "married", "be married"],
+      "why": "Hỏi thời điểm cưới là hỏi về hành động, nên dùng get married. Sau did luôn là động từ nguyên mẫu, nên không dùng got.",
+      "rule": "Hành động cưới: get married. Sau did: động từ nguyên mẫu."
+    },
+    {
+      "tag": "be married",
+      "q": "“Are you ___?” “Yes, I have a wife and two kids.”",
+      "vi": "Bạn đã có gia đình chưa?",
+      "o": ["married", "marry", "marrying", "get married"],
+      "why": "Câu hỏi về tình trạng hiện tại (đã có vợ/chồng chưa), không phải về đám cưới, nên dùng be + married. Married ở đây là tính từ, giống single hay divorced.",
+      "rule": "Tình trạng: be married. Hành động: get married."
+    },
+    {
+      "tag": "were married for",
+      "q": "They ___ for 15 years.",
+      "vi": "Họ làm vợ chồng được 15 năm.",
+      "o": ["were married", "got married", "married with", "marry"],
+      "why": "For 15 years nói về một khoảng thời gian kéo dài, tức là trạng thái. Got married là hành động xảy ra trong một ngày, không kéo dài 15 năm được.",
+      "rule": "Trạng thái kéo dài + for…: be married."
+    },
+    {
+      "tag": "married (trang trọng)",
+      "q": "Câu nào trang trọng hơn?",
+      "vi": "Cả hai câu đều đúng ngữ pháp.",
+      "o": ["They married in 2001.", "They got married in 2001."],
+      "why": "Cả hai đều đúng và cùng nghĩa. Bỏ got thì câu nghe trang trọng hơn, thường gặp trong văn viết. Khi nói chuyện hằng ngày, người ta hay dùng got married.",
+      "rule": "married (trang trọng) = got married (thân mật)."
+    },
+    {
+      "tag": "widowed",
+      "q": "His wife died two years ago. Now he is ___.",
+      "vi": "Vợ ông ấy mất hai năm trước.",
+      "o": ["widowed", "divorced", "separated", "dead"],
+      "why": "Vợ hoặc chồng mất thì người còn lại là widowed (góa). Divorced và separated là khi hôn nhân tan vỡ, cả hai người vẫn còn sống.",
+      "rule": "widowed = góa; divorced = ly hôn; separated = ly thân."
+    },
+    {
+      "tag": "divorced",
+      "q": "Their marriage has legally ended. They are ___.",
+      "vi": "Cuộc hôn nhân của họ đã chấm dứt về mặt pháp luật.",
+      "o": ["divorced", "separated", "single", "widowed"],
+      "why": "Legally ended (chấm dứt về pháp luật) là ly hôn: divorced. Separated là sống riêng nhưng trên giấy tờ vẫn còn là vợ chồng.",
+      "rule": "Có giấy ly hôn: divorced. Chỉ sống riêng: separated."
+    },
+    {
+      "tag": "died",
+      "q": "Harry ___ last year.",
+      "vi": "Harry qua đời năm ngoái.",
+      "o": ["died", "is dead", "was died", "was death"],
+      "why": "Last year là mốc thời gian quá khứ, chỉ thời điểm xảy ra hành động, nên dùng động từ died. Is dead là trạng thái hiện tại, không đi với last year.",
+      "rule": "Có mốc thời gian quá khứ: died."
+    },
+    {
+      "tag": "is dead",
+      "q": "I'm sorry. My grandfather ___. He died in 2019.",
+      "vi": "Ông tôi đã mất rồi.",
+      "o": ["is dead", "is died", "is death", "dead"],
+      "why": "Muốn nói tình trạng hiện tại (bây giờ ông không còn) thì dùng be + tính từ dead. Died là động từ nên không đứng sau is; death là danh từ.",
+      "rule": "Tình trạng hiện tại: is dead."
+    },
+    {
+      "tag": "die of",
+      "q": "He died ___ a heart attack.",
+      "vi": "Ông ấy mất vì một cơn đau tim.",
+      "o": ["of", "by", "with", "at"],
+      "why": "Nguyên nhân cái chết do bệnh tật dùng die of. Tiếng Việt nói “mất vì”, nên đừng dịch thẳng thành by hay with.",
+      "rule": "die of + bệnh: die of cancer, die of a heart attack."
+    },
+    {
+      "tag": "death / dead / die",
+      "q": "His ___ was a shock to everyone.",
+      "vi": "Cái chết của ông ấy làm mọi người bàng hoàng.",
+      "o": ["death", "dead", "die", "died"],
+      "why": "Sau his (của anh ấy) cần một danh từ. Death là danh từ, dead là tính từ, die và died là động từ.",
+      "rule": "die (động từ) · dead (tính từ) · death (danh từ)."
+    },
+    {
+      "tag": "tìm câu sai",
+      "q": "Tìm câu SAI:",
+      "vi": "Ba câu còn lại đều đúng.",
+      "o": ["He is died.", "She was born in 1990.", "They got married in Italy.", "He died of cancer."],
+      "why": "He is died sai vì sau is không dùng died. Đúng phải là He is dead (tình trạng) hoặc He died (hành động).",
+      "rule": "is dead hoặc died, không bao giờ là is died."
+    },
+    {
+      "tag": "tìm câu sai",
+      "q": "Tìm câu SAI:",
+      "vi": "Ba câu còn lại đều đúng.",
+      "o": [
+        "Anna got a baby last week.",
+        "She had a baby girl.",
+        "The baby was born at night.",
+        "She got married to Tom."
+      ],
+      "why": "Anna got a baby sai, vì sinh con phải là had a baby. Các câu kia đều dùng đúng mẫu: had a baby, was born, got married to.",
+      "rule": "Sinh con: have a baby, không dùng get a baby."
+    }
+  ],
+  "exercises": [
+    {
+      "id": "2.1",
+      "type": "free",
+      "en": "Think of people you know. Where were they born? When?",
+      "vi": "Nghĩ về những người bạn biết. Họ sinh ra ở đâu? Khi nào?",
+      "example": "My mother was born in Scotland on July 4th 1967.",
+      "lines": 4,
+      "needBorn": true,
+      "frames": ["My father …", "My best friend …", "My grandmother …", "I …"],
+      "model": [
+        "My father was born in Hanoi in 1968.",
+        "My best friend was born on March 3rd 2001.",
+        "My grandmother was born in Hue in 1945.",
+        "I was born in Ho Chi Minh City on May 20th 2000."
+      ],
+      "note": "Mẹo: năm, tháng, thành phố, đất nước đi với in (in 1967, in July, in Scotland). Ngày cụ thể đi với on (on July 4th)."
+    },
+    {
+      "id": "2.2",
+      "type": "type",
+      "en": "Find a word on the opposite page which means …",
+      "vi": "Tìm một từ ở trang bên có nghĩa là…",
+      "items": [
+        {
+          "p": "the name for a woman on her wedding day",
+          "vi": "tên gọi người phụ nữ trong ngày cưới",
+          "a": ["bride"],
+          "ex": true
+        },
+        {
+          "p": "the name for a man on his wedding day",
+          "vi": "tên gọi người đàn ông trong ngày cưới",
+          "a": ["groom", "bridegroom"]
+        },
+        {
+          "p": "what you are if you haven't got a partner",
+          "vi": "bạn là gì nếu không có người yêu/bạn đời",
+          "a": ["single"]
+        },
+        {
+          "p": "to be 57 kilograms",
+          "vi": "nặng 57 ký",
+          "a": ["weigh", "to weigh"]
+        },
+        {
+          "p": "what you are if your marriage has legally ended",
+          "vi": "bạn là gì nếu hôn nhân đã chấm dứt về pháp luật",
+          "a": ["divorced"]
+        },
+        {
+          "p": "a religious service for a dead person",
+          "vi": "một nghi lễ tôn giáo cho người đã mất",
+          "a": ["funeral", "a funeral", "the funeral"]
+        },
+        {
+          "p": "a holiday after a wedding",
+          "vi": "kỳ nghỉ sau đám cưới",
+          "a": ["honeymoon", "a honeymoon"]
+        },
+        {
+          "p": "what you are if your husband or wife dies",
+          "vi": "bạn là gì nếu chồng hoặc vợ qua đời",
+          "a": ["widowed", "a widow", "a widower", "widow", "widower"]
+        }
+      ]
+    },
+    {
+      "id": "2.3",
+      "type": "fill",
+      "en": "Complete the sentences with words from the box.",
+      "vi": "Hoàn thành các câu bằng từ trong khung.",
+      "box": ["in", "after", "of", "to", "born", "on"],
+      "parts": [
+        {
+          "a": "In",
+          "ex": true
+        },
+        " 2003 Anne got married ",
+        {
+          "a": "to"
+        },
+        " Daniel Smith. Unfortunately, Daniel's grandmother, Lydia Smith, died ",
+        {
+          "a": "of"
+        },
+        " old age soon after their wedding. Daniel and Anne were ",
+        {
+          "a": "on"
+        },
+        " their honeymoon when she died. Anne's baby daughter was ",
+        {
+          "a": "born"
+        },
+        " two years later. They called the baby Lydia, ",
+        {
+          "a": "after"
+        },
+        " Daniel's grandmother."
+      ],
+      "why": {
+        "to": "got married to + người",
+        "of": "died of + nguyên nhân (old age = tuổi già)",
+        "on": "be on (your) honeymoon = đang đi tuần trăng mật",
+        "born": "was born = được sinh ra",
+        "after": "call someone after… = đặt tên theo ai đó"
+      }
+    },
+    {
+      "id": "2.4",
+      "type": "sentence",
+      "en": "When were these people born and when did they die? Write sentences.",
+      "vi": "Những người này sinh năm nào và mất năm nào? Viết câu.",
+      "items": [
+        {
+          "n": "Genghis Khan",
+          "b": 1162,
+          "d": 1227,
+          "ex": true
+        },
+        {
+          "n": "Christopher Columbus",
+          "b": 1451,
+          "d": 1506
+        },
+        {
+          "n": "Leonardo da Vinci",
+          "b": 1452,
+          "d": 1519
+        },
+        {
+          "n": "Princess Diana",
+          "b": 1961,
+          "d": 1997
+        },
+        {
+          "n": "Heath Ledger",
+          "b": 1979,
+          "d": 2008
+        }
+      ]
+    },
+    {
+      "id": "2.5",
+      "type": "choose",
+      "en": "Complete the sentences using died, dead or death.",
+      "vi": "Hoàn thành câu bằng died, dead hoặc death.",
+      "choices": ["died", "dead", "death"],
+      "items": [
+        {
+          "p": "Kelly's grandfather ___ last year.",
+          "a": "died",
+          "ex": true,
+          "why": "Có mốc last year: hành động, dùng died."
+        },
+        {
+          "p": "His ___ made her very sad.",
+          "a": "death",
+          "why": "Sau his cần danh từ: death."
+        },
+        {
+          "p": "Her grandmother has been ___ for five years now.",
+          "a": "dead",
+          "why": "has been + tính từ, trạng thái kéo dài 5 năm: dead."
+        },
+        {
+          "p": "She ___ of a heart attack.",
+          "a": "died",
+          "why": "died of + nguyên nhân."
+        },
+        {
+          "p": "Now all Kelly's grandparents are ___.",
+          "a": "dead",
+          "why": "are + tính từ: dead."
+        }
+      ]
+    },
+    {
+      "id": "2.6",
+      "type": "free",
+      "en": "Write about your family. Use words and expressions from the opposite page.",
+      "vi": "Viết về gia đình bạn, dùng từ và cách diễn đạt ở trang bên.",
+      "lines": 4,
+      "frames": [
+        "I have … . I/my … got married in … (year).",
+        "I have / My … has … children. They were born in … and … (years).",
+        "For my/his/her honeymoon, I/he/she went to … .",
+        "Viết thêm một câu bất kỳ về gia đình bạn…"
+      ],
+      "model": [
+        "My parents got married in 1990.",
+        "My sister has two children. They were born in 2015 and 2018.",
+        "For their honeymoon, my parents went to Da Lat.",
+        "My grandfather died of a heart attack in 2010. My grandmother is widowed."
+      ],
+      "note": "Mẹo: được sinh ra là was/were born; cưới ai là got married to; sinh con là had a baby; đã mất là is dead hoặc died."
+    }
+  ],
+  "lint": [
+    {
+      "pattern": "\\b(am|is|are)\\s+born\\b",
+      "flags": "i",
+      "message": "Sinh ra là chuyện đã qua: dùng was born / were born, không dùng am/is/are born."
+    },
+    {
+      "pattern": "\\b(i|you|he|she|we|they)\\s+born\\b",
+      "flags": "i",
+      "message": "Thiếu was/were trước born: … was born …"
+    },
+    {
+      "pattern": "\\bborned\\b",
+      "flags": "i",
+      "message": "Không có từ borned. Dùng was born."
+    },
+    {
+      "pattern": "\\bmarried\\s+with\\b",
+      "flags": "i",
+      "message": "Dùng married to, không dùng married with."
+    },
+    {
+      "pattern": "\\b(is|are|was|were|am)\\s+died\\b",
+      "flags": "i",
+      "message": "Sau be không dùng died. Dùng is dead (trạng thái) hoặc died (hành động)."
+    },
+    {
+      "pattern": "\\b(is|are|was|were|am)\\s+death\\b",
+      "flags": "i",
+      "message": "Death là danh từ. Dùng is dead hoặc died."
+    },
+    {
+      "pattern": "\\b(got|get|gets|getting)\\s+a\\s+baby\\b",
+      "flags": "i",
+      "message": "Sinh con là have a baby / had a baby."
+    },
+    {
+      "pattern": "\\bdied\\s+(by|with|because\\s+of)\\s",
+      "flags": "i",
+      "message": "Chết vì bệnh hay tuổi già dùng died of …"
+    },
+    {
+      "pattern": "\\bon\\s+(1\\d{3}|20\\d{2})\\b",
+      "flags": "i",
+      "message": "Trước năm dùng in: in 1967."
+    },
+    {
+      "pattern": "\\bin\\s+(january|february|march|april|may|june|july|august|september|october|november|december)\\s+\\d{1,2}(st|nd|rd|th)?\\b",
+      "flags": "i",
+      "message": "Ngày cụ thể dùng on: on July 4th."
+    },
+    {
+      "pattern": "\\bin\\s+\\d{1,2}(st|nd|rd|th)?\\s+(january|february|march|april|may|june|july|august|september|october|november|december)\\b",
+      "flags": "i",
+      "message": "Ngày cụ thể dùng on: on 4th July."
+    },
+    {
+      "pattern": "\\bon\\s+(january|february|march|april|may|june|july|august|september|october|november|december)\\s+(1\\d{3}|20\\d{2})\\b",
+      "flags": "i",
+      "message": "Tháng và năm (không có ngày) dùng in: in July 1967."
+    },
+    {
+      "pattern": "\\bhoney\\s+moon\\b",
+      "flags": "i",
+      "message": "honeymoon viết liền một từ."
+    },
+    {
+      "pattern": "\\bweeding\\b",
+      "flags": "i",
+      "message": "Đám cưới là wedding. Weeding là nhổ cỏ."
+    },
+    {
+      "pattern": "\\bmariage\\b",
+      "flags": "i",
+      "message": "marriage có hai chữ r."
+    },
+    {
+      "pattern": "\\bbrithday\\b",
+      "flags": "i",
+      "message": "birthday viết là b-i-r-t-h-d-a-y."
+    },
+    {
+      "pattern": "\\bdid\\s+\\w+\\s+(got|was|were|died)\\b",
+      "flags": "i",
+      "message": "Sau did dùng động từ nguyên mẫu: Did he die…? / When did they get married?"
+    }
+  ],
+  "links": [
+    ["bride", "groom"],
+    ["husband", "married"],
+    ["wife", "married"],
+    ["marriage", "married"],
+    ["the wedding", "honeymoon"],
+    ["the wedding", "bride"],
+    ["baby", "born"],
+    ["birth", "born"],
+    ["birth", "birthday"],
+    ["baby", "children"],
+    ["die", "death"],
+    ["death", "the funeral"],
+    ["ill", "die"],
+    ["widowed", "death"],
+    ["separated", "divorced"],
+    ["divorced", "marriage"],
+    ["single", "married"],
+    ["baby", "weighed"]
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "$schema": "../lesson.schema.json",
+  "id": 1,
+  "title": "Family",
+  "topics": [],
+  "words": [
+    {
+      "w": "the family",
+      "ipa": "ðə ˈfæməli",
+      "t": "cụm danh từ",
+      "vi": "gia đình",
+      "topic": "family",
+      "q": "Mỗi tối, bố, mẹ và các con quây quần bên mâm cơm, cùng ăn và kể chuyện trong ngày. Cả nhóm người sống chung một nhà ấy được gọi chung bằng cụm từ này. (có the ở đầu)",
+      "ex": "Tom is the youngest person in ___."
+    },
+    {
+      "w": "family words",
+      "ipa": "ˈfæməli wɜːdz",
+      "t": "cụm danh từ",
+      "vi": "các từ chỉ người trong gia đình",
+      "topic": "family",
+      "q": "Trong giờ tiếng Anh, cô giáo dạy cả lớp cách gọi bố, mẹ, con trai, cô, chú… Những từ dùng để gọi các thành viên trong nhà như vậy được gọi chung bằng cụm từ này.",
+      "ex": "Mother, father, son and aunt are all ___."
+    },
+    {
+      "w": "relations",
+      "ipa": "rɪˈleɪʃənz",
+      "t": "danh từ số nhiều",
+      "vi": "họ hàng (cách nói 1, đuôi -ions)",
+      "topic": "relatives",
+      "q": "Tết năm nay cả nhà về quê, gặp lại cô, chú, bác và các anh chị em họ. Những người cùng dòng họ ấy được gọi bằng từ này. (cách nói 1, đuôi -ions)",
+      "ex": "We visit our ___ in the countryside every New Year."
+    },
+    {
+      "w": "relatives",
+      "ipa": "ˈrelətɪvz",
+      "t": "danh từ số nhiều",
+      "vi": "họ hàng (cách nói 2, đuôi -ives)",
+      "topic": "relatives",
+      "q": "Đến ngày giỗ ông, các cô chú, bác và anh chị em họ từ khắp nơi kéo về tụ họp. Những người cùng dòng họ ấy được gọi bằng từ này. (cách nói 2, đuôi -ives)",
+      "ex": "All my ___ came to my grandmother's 80th birthday party."
+    },
+    {
+      "w": "children",
+      "ipa": "ˈtʃɪldrən",
+      "t": "danh từ số nhiều",
+      "vi": "con cái; trẻ em (số nhiều của child)",
+      "topic": "family",
+      "q": "Hai vợ chồng nhà bên có ba đứa con, sáng nào cũng chở cả ba đi học. Khi nói về cả mấy đứa con ấy cùng lúc, ta dùng từ này. (số nhiều)",
+      "ex": "They have three ___: two sons and a daughter."
+    },
+    {
+      "w": "husband",
+      "ipa": "ˈhʌzbənd",
+      "t": "danh từ",
+      "vi": "chồng",
+      "topic": "marriage",
+      "q": "Khi một người phụ nữ kết hôn, người đàn ông mà cô ấy cưới sẽ trở thành người này.",
+      "ex": "Anna's ___ is called Peter."
+    },
+    {
+      "w": "wife",
+      "ipa": "waɪf",
+      "t": "danh từ",
+      "vi": "vợ",
+      "topic": "marriage",
+      "q": "Khi một người đàn ông kết hôn, người phụ nữ mà anh ấy cưới sẽ trở thành người này.",
+      "ex": "Peter's ___ is called Anna."
+    },
+    {
+      "w": "father",
+      "ipa": "ˈfɑːðə",
+      "t": "danh từ",
+      "vi": "bố, cha",
+      "topic": "family",
+      "q": "Mỗi sáng, người đàn ông chở bạn đến trường rồi mới đi làm, tối về lại kèm bạn học bài. Đối với bạn, người đàn ông ấy là người này. (cách nói đầy đủ, không phải dad)",
+      "ex": "My ___ is a doctor."
+    },
+    {
+      "w": "mother",
+      "ipa": "ˈmʌðə",
+      "t": "danh từ",
+      "vi": "mẹ",
+      "topic": "family",
+      "q": "Người phụ nữ đã mang thai và sinh ra bạn, ngày ngày nấu cơm và chăm sóc bạn, chính là người này. (cách nói đầy đủ, không phải mum)",
+      "ex": "My ___ cooks very well."
+    },
+    {
+      "w": "grandfather",
+      "ipa": "ˈɡrænfɑːðə",
+      "t": "danh từ",
+      "vi": "ông",
+      "topic": "grand",
+      "q": "Cuối tuần bạn về thăm nhà bố mẹ của bố. Người đàn ông tóc bạc ngồi pha trà và kể chuyện ngày xưa cho bạn nghe là người này.",
+      "ex": "My father's father is my ___."
+    },
+    {
+      "w": "grandmother",
+      "ipa": "ˈɡrænmʌðə",
+      "t": "danh từ",
+      "vi": "bà",
+      "topic": "grand",
+      "q": "Mỗi lần bạn về quê, mẹ của mẹ bạn lại nấu món bạn thích và dúi kẹo vào tay bạn. Người phụ nữ ấy là người này.",
+      "ex": "My mother's mother is my ___."
+    },
+    {
+      "w": "daughter",
+      "ipa": "ˈdɔːtə",
+      "t": "danh từ",
+      "vi": "con gái",
+      "topic": "family",
+      "q": "Hai vợ chồng vừa sinh em bé, cô y tá bế ra và nói: “Bé gái nhé!”. Từ hôm nay, cô bé ấy là người này của hai vợ chồng.",
+      "ex": "Anna and Peter have a ___ called Lucy."
+    },
+    {
+      "w": "son",
+      "ipa": "sʌn",
+      "t": "danh từ",
+      "vi": "con trai",
+      "topic": "family",
+      "q": "Hai vợ chồng vừa sinh em bé, cô y tá bế ra và nói: “Bé trai nhé!”. Từ hôm nay, cậu bé ấy là người này của hai vợ chồng.",
+      "ex": "Their ___ Tom is ten years old."
+    },
+    {
+      "w": "sister",
+      "ipa": "ˈsɪstə",
+      "t": "danh từ",
+      "vi": "chị gái, em gái",
+      "topic": "family",
+      "q": "Ở nhà có một bạn gái cùng bố cùng mẹ với bạn, hay tranh đồ chơi với bạn nhưng cũng hay bênh bạn. Dù lớn hay nhỏ tuổi hơn, bạn ấy là người này của bạn.",
+      "ex": "Lucy is Tom's ___."
+    },
+    {
+      "w": "brother",
+      "ipa": "ˈbrʌðə",
+      "t": "danh từ",
+      "vi": "anh trai, em trai",
+      "topic": "family",
+      "q": "Ở nhà có một cậu con trai cùng bố cùng mẹ với bạn, tối nào cũng rủ bạn chơi điện tử. Dù là anh hay em, cậu ấy là người này của bạn.",
+      "ex": "Tom is Lucy's ___."
+    },
+    {
+      "w": "grandparent",
+      "ipa": "ˈɡrænpeərənt",
+      "t": "danh từ",
+      "vi": "ông hoặc bà (số ít)",
+      "topic": "grand",
+      "q": "Chiều nay ông hoặc bà ra cổng trường đón bạn. Khi nói về một người như vậy mà không cần nói rõ là ông hay bà, ta dùng từ này. (số ít, dùng cho cả nam lẫn nữ)",
+      "ex": "Every ___ loves their grandchildren."
+    },
+    {
+      "w": "parent",
+      "ipa": "ˈpeərənt",
+      "t": "danh từ",
+      "vi": "bố hoặc mẹ (số ít)",
+      "topic": "family",
+      "q": "Trong buổi họp phụ huynh, mỗi học sinh có bố hoặc mẹ đến dự. Mỗi người đến họp, dù là bố hay mẹ, được gọi chung bằng từ này. (số ít, dùng cho cả nam lẫn nữ)",
+      "ex": "Each child must come to school with a ___."
+    },
+    {
+      "w": "granddaughter",
+      "ipa": "ˈɡrændɔːtə",
+      "t": "danh từ",
+      "vi": "cháu gái (con của con mình)",
+      "topic": "grand",
+      "q": "Con trai bạn vừa sinh một bé gái, và bạn chính thức lên chức ông bà. Đối với bạn, bé gái ấy là người này.",
+      "ex": "Lucy is her grandmother's only ___."
+    },
+    {
+      "w": "grandson",
+      "ipa": "ˈɡrænsʌn",
+      "t": "danh từ",
+      "vi": "cháu trai (con của con mình)",
+      "topic": "grand",
+      "q": "Con gái bạn vừa sinh một bé trai, và bạn chính thức lên chức ông bà. Đối với bạn, bé trai ấy là người này.",
+      "ex": "Tom is his grandfather's favourite ___."
+    },
+    {
+      "w": "uncle",
+      "ipa": "ˈʌŋkl",
+      "t": "danh từ",
+      "vi": "chú, bác trai, cậu (anh hoặc em trai của bố mẹ)",
+      "topic": "relatives",
+      "q": "Em trai của bố bạn hay ghé chơi, lần nào cũng dẫn bạn đi ăn kem. Đối với bạn, người đàn ông ấy là người này.",
+      "ex": "My mother's brother is my ___."
+    },
+    {
+      "w": "aunts",
+      "ipa": "ɑːnts",
+      "t": "danh từ số nhiều",
+      "vi": "các cô, dì, bác gái",
+      "topic": "relatives",
+      "q": "Mẹ bạn có hai chị em gái, Tết nào cũng lì xì cho bạn. Đối với bạn, hai người phụ nữ ấy là những người này. (số nhiều)",
+      "ex": "My father has two sisters, so I have two ___."
+    },
+    {
+      "w": "niece",
+      "ipa": "niːs",
+      "t": "danh từ",
+      "vi": "cháu gái (con của anh chị em mình)",
+      "topic": "relatives",
+      "q": "Chị gái bạn vừa sinh một bé gái, cả nhà ai cũng tranh nhau bế. Đối với bạn, bé gái ấy là người này.",
+      "ex": "My sister's daughter is my ___."
+    },
+    {
+      "w": "nephew",
+      "ipa": "ˈnefjuː",
+      "t": "danh từ",
+      "vi": "cháu trai (con của anh chị em mình)",
+      "topic": "relatives",
+      "q": "Anh trai bạn có một cậu con trai nhỏ, lần nào gặp cũng chạy ra đòi bạn cõng. Đối với bạn, cậu bé ấy là người này.",
+      "ex": "My brother's son is my ___."
+    },
+    {
+      "w": "cousins",
+      "ipa": "ˈkʌzənz",
+      "t": "danh từ số nhiều",
+      "vi": "anh chị em họ",
+      "topic": "relatives",
+      "q": "Mỗi hè bạn về quê chơi với các con của cô, dì, chú, bác, cùng nhau tắm sông và thả diều. Đối với bạn, những đứa trẻ ấy là những người này. (số nhiều)",
+      "ex": "My uncle's children are my ___."
+    }
+  ],
+  "quiz": [],
+  "exercises": [],
+  "lint": [],
+  "links": [
+    ["husband", "wife"],
+    ["father", "mother"],
+    ["son", "daughter"],
+    ["brother", "sister"],
+    ["parent", "grandparent"],
+    ["grandfather", "grandmother"],
+    ["grandson", "granddaughter"],
+    ["niece", "nephew"],
+    ["uncle", "aunts"],
+    ["relations", "relatives"],
+    ["the family", "relatives"],
+    ["the family", "family words"]
+  ]
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spell Quest · Học từ vựng tiếng Anh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap&subset=vietnamese" rel="stylesheet">
+<link rel="stylesheet" href="{{CSS}}">
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <h1>SPELL QUEST</h1>
+    <p>{{LESSON_COUNT}} bài · {{WORD_COUNT}} từ đã học</p>
+  </header>
+  <a class="mapcard" href="map/">
+    <span class="maptitle">Bản đồ từ vựng 3D</span>
+    <span class="meta">Xem mọi từ đã học theo chủ đề, tìm kiếm và ôn các từ hay sai</span>
+    <span class="go" aria-hidden="true">▶</span>
+  </a>
+  <h2>Bài học</h2>
+  <nav class="grid" aria-label="Danh sách bài học">
+{{LESSONS}}
+  </nav>
+</main>
+<script src="{{JS}}"></script>
+</body>
+</html>

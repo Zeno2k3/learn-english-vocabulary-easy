@@ -1,0 +1,15 @@
+{
+  "name": "spell-quest",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Website học từ vựng tiếng Anh, dữ liệu mỗi bài là một file JSON",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check"
+  }
+}

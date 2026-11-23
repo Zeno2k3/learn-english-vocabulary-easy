@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bản đồ từ vựng 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{CSS}}">
+</head>
+<body>
+<canvas id="cv" aria-label="Bản đồ 3D các từ đã học. Kéo để xoay, chụm hai ngón hoặc cuộn để phóng to, chạm một chấm để xem từ."></canvas>
+
+<div class="layer top">
+  <section class="panel brand">
+    <a class="backhome" href="../">← Danh sách bài</a>
+<h1>Bản đồ từ vựng</h1>
+    <div class="stats">
+      <div><b id="sWords">0</b>từ đã học</div>
+      <div><b id="sLessons">0</b>bài</div>
+      <div><b id="sTopics">0</b>chủ đề</div>
+    </div>
+    <label class="search" for="q">
+      <span class="sr-only">Tìm từ</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Tìm: bride, cô dâu, ly hôn…" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    </label>
+    <div class="msg" id="msg" aria-live="polite"></div>
+  </section>
+  <section class="panel ctrls" aria-label="Tuỳ chỉnh hiển thị">
+    <div class="seg">Tô màu theo
+      <div class="grp" id="modes">
+        <button type="button" data-m="topic" aria-pressed="true">Chủ đề</button>
+        <button type="button" data-m="lesson" aria-pressed="false">Bài</button>
+        <button type="button" data-m="type" aria-pressed="false">Loại từ</button>
+        <button type="button" data-m="miss" aria-pressed="false">Hay sai</button>
+      </div>
+    </div>
+    <div class="toggles">
+      <button class="chip" type="button" id="tLabels" aria-pressed="true">Tên từ</button>
+      <button class="chip" type="button" id="tLinks" aria-pressed="true">Đường nối</button>
+      <button class="chip" type="button" id="tAuto" aria-pressed="true">Tự xoay</button>
+      <button class="chip" type="button" id="tReset">Góc nhìn ban đầu</button>
+    </div>
+  </section>
+</div>
+
+<div class="layer bottom">
+  <nav class="panel legend" id="legend" aria-label="Chú thích"></nav>
+  <section class="panel card" id="card" aria-live="polite"></section>
+</div>
+
+<ul class="sr-only" id="srList"></ul>
+<script id="map-data" type="application/json">{{DATA}}</script>
+<script src="{{JS}}"></script>
+</body>
+</html>

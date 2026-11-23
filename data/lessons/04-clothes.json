@@ -1,0 +1,1011 @@
+{
+  "$schema": "../lesson.schema.json",
+  "id": 4,
+  "title": "Clothes",
+  "topics": [],
+  "words": [
+    {
+      "w": "hat",
+      "ipa": "hæt",
+      "t": "danh từ",
+      "vi": "mũ",
+      "topic": "accessories",
+      "img": "img/hat.jpg",
+      "ex": "It's sunny. Wear a ___ to protect your head."
+    },
+    {
+      "w": "coat",
+      "ipa": "kəʊt",
+      "t": "danh từ",
+      "vi": "áo khoác (dài, dày)",
+      "topic": "tops",
+      "img": "img/coat.jpg",
+      "h": "loại dài và dày, mặc khi trời lạnh",
+      "ex": "It's very cold outside, so put on your warm ___."
+    },
+    {
+      "w": "jacket",
+      "ipa": "ˈdʒækɪt",
+      "t": "danh từ",
+      "vi": "áo khoác ngắn",
+      "topic": "tops",
+      "img": "img/jacket.jpg",
+      "h": "loại ngắn, chỉ dài đến thắt lưng",
+      "ex": "He wore a light ___ over his T-shirt."
+    },
+    {
+      "w": "scarf",
+      "ipa": "skɑːf",
+      "t": "danh từ",
+      "vi": "khăn quàng cổ",
+      "topic": "accessories",
+      "img": "img/scarf.jpg",
+      "ex": "She wrapped a woolly ___ around her neck."
+    },
+    {
+      "w": "gloves",
+      "ipa": "ɡlʌvz",
+      "t": "danh từ số nhiều",
+      "vi": "găng tay",
+      "topic": "accessories",
+      "img": "img/gloves.jpg",
+      "ex": "My hands are cold. Where are my ___?"
+    },
+    {
+      "w": "shoe",
+      "ipa": "ʃuː",
+      "t": "danh từ (số ít)",
+      "vi": "giày (một chiếc)",
+      "topic": "shoes",
+      "img": "img/shoe.jpg",
+      "h": "số ít, một chiếc; giày thường, không phải giày thể thao hay bốt",
+      "ex": "This ___ is too small for my foot."
+    },
+    {
+      "w": "skirt",
+      "ipa": "skɜːt",
+      "t": "danh từ",
+      "vi": "chân váy",
+      "topic": "bottoms",
+      "img": "img/skirt.jpg",
+      "ex": "She is wearing a short red ___."
+    },
+    {
+      "w": "trainers",
+      "ipa": "ˈtreɪnəz",
+      "t": "danh từ số nhiều",
+      "vi": "giày thể thao",
+      "topic": "shoes",
+      "img": "img/trainers.jpg",
+      "h": "cách gọi của người Anh",
+      "ex": "I wear my ___ when I go running."
+    },
+    {
+      "w": "tie",
+      "ipa": "taɪ",
+      "t": "danh từ",
+      "vi": "cà vạt",
+      "topic": "accessories",
+      "img": "img/tie.jpg",
+      "ex": "He wore a white shirt and a blue ___ to work."
+    },
+    {
+      "w": "sweater",
+      "ipa": "ˈswetə",
+      "t": "danh từ",
+      "vi": "áo len (cách nói 1)",
+      "topic": "tops",
+      "img": "img/sweater.jpg",
+      "h": "cách nói 1, người Mỹ hay dùng",
+      "ex": "It's chilly, so I'm wearing a warm wool ___."
+    },
+    {
+      "w": "jumper",
+      "ipa": "ˈdʒʌmpə",
+      "t": "danh từ",
+      "vi": "áo len (cách nói 2, của người Anh)",
+      "topic": "tops",
+      "img": "img/jumper.jpg",
+      "h": "cách nói 2, người Anh hay dùng",
+      "ex": "Grandma knitted me a new ___ for winter."
+    },
+    {
+      "w": "boots",
+      "ipa": "buːts",
+      "t": "danh từ số nhiều",
+      "vi": "bốt, giày cao cổ",
+      "topic": "shoes",
+      "img": "img/boots.jpg",
+      "ex": "Put on your ___. It's raining and the ground is wet."
+    },
+    {
+      "w": "suit",
+      "ipa": "suːt",
+      "t": "danh từ",
+      "vi": "bộ com-lê",
+      "topic": "outfits",
+      "img": "img/suit.jpg",
+      "h": "cả bộ: áo vest và quần cùng màu",
+      "ex": "He wore a dark ___ to the job interview."
+    },
+    {
+      "w": "socks",
+      "ipa": "sɒks",
+      "t": "danh từ số nhiều",
+      "vi": "tất, vớ",
+      "topic": "shoes",
+      "img": "img/socks.jpg",
+      "ex": "I always wear ___ with my shoes."
+    },
+    {
+      "w": "t-shirt",
+      "ipa": "ˈtiː ʃɜːt",
+      "t": "danh từ",
+      "vi": "áo phông, áo thun",
+      "topic": "tops",
+      "img": "img/t-shirt.jpg",
+      "ex": "In summer I usually wear a ___ and shorts."
+    },
+    {
+      "w": "watch",
+      "ipa": "wɒtʃ",
+      "t": "danh từ",
+      "vi": "đồng hồ đeo tay",
+      "topic": "accessories",
+      "img": "img/watch.jpg",
+      "ex": "Look at your ___. What time is it?"
+    },
+    {
+      "w": "shirt",
+      "ipa": "ʃɜːt",
+      "t": "danh từ",
+      "vi": "áo sơ mi",
+      "topic": "tops",
+      "img": "img/shirt.jpg",
+      "h": "có cổ và hàng cúc",
+      "ex": "He ironed his white ___ before the meeting."
+    },
+    {
+      "w": "dress",
+      "ipa": "dres",
+      "t": "danh từ",
+      "vi": "váy liền, đầm",
+      "topic": "outfits",
+      "img": "img/dress.jpg",
+      "ex": "She wore a beautiful long ___ to the party."
+    },
+    {
+      "w": "ring",
+      "ipa": "rɪŋ",
+      "t": "danh từ",
+      "vi": "nhẫn",
+      "topic": "accessories",
+      "img": "img/ring.jpg",
+      "ex": "He gave her a diamond ___."
+    },
+    {
+      "w": "belt",
+      "ipa": "belt",
+      "t": "danh từ",
+      "vi": "thắt lưng",
+      "topic": "accessories",
+      "img": "img/belt.jpg",
+      "ex": "These trousers are too big. I need a ___."
+    },
+    {
+      "w": "bag",
+      "ipa": "bæɡ",
+      "t": "danh từ",
+      "vi": "túi, cặp",
+      "topic": "bags",
+      "img": "img/bag.jpg",
+      "h": "từ chung chỉ cái túi",
+      "ex": "Put your books in your ___."
+    },
+    {
+      "w": "suitcase",
+      "ipa": "ˈsuːtkeɪs",
+      "t": "danh từ",
+      "vi": "va li",
+      "topic": "bags",
+      "img": "img/suitcase.jpg",
+      "ex": "Pack your clothes in the ___. We leave for the airport tomorrow."
+    },
+    {
+      "w": "handbag",
+      "ipa": "ˈhændbæɡ",
+      "t": "danh từ",
+      "vi": "túi xách tay",
+      "topic": "bags",
+      "img": "img/handbag.jpg",
+      "h": "túi có quai xách của phụ nữ",
+      "ex": "She keeps her purse and keys in her ___."
+    },
+    {
+      "w": "umbrella",
+      "ipa": "ʌmˈbrelə",
+      "t": "danh từ",
+      "vi": "ô, dù",
+      "topic": "accessories",
+      "img": "img/umbrella.jpg",
+      "ex": "Take an ___. It's going to rain."
+    },
+    {
+      "w": "trousers",
+      "ipa": "ˈtraʊzəz",
+      "t": "danh từ số nhiều (luôn số nhiều)",
+      "vi": "quần dài",
+      "topic": "bottoms",
+      "img": "img/trousers.jpg",
+      "h": "quần dài nói chung, không phải loại vải bò",
+      "ex": "He wears grey ___ to the office."
+    },
+    {
+      "w": "jeans",
+      "ipa": "dʒiːnz",
+      "t": "danh từ số nhiều (luôn số nhiều)",
+      "vi": "quần bò, quần jean",
+      "topic": "bottoms",
+      "img": "img/jeans.jpg",
+      "h": "loại vải bò màu xanh",
+      "ex": "I'm wearing blue ___ and a T-shirt."
+    },
+    {
+      "w": "shorts",
+      "ipa": "ʃɔːts",
+      "t": "danh từ số nhiều (luôn số nhiều)",
+      "vi": "quần soóc, quần đùi",
+      "topic": "bottoms",
+      "img": "img/shorts.jpg",
+      "ex": "It's hot today, so I'm wearing ___."
+    },
+    {
+      "w": "tights",
+      "ipa": "taɪts",
+      "t": "danh từ số nhiều (luôn số nhiều)",
+      "vi": "quần tất",
+      "topic": "bottoms",
+      "img": "img/tights.jpg",
+      "ex": "She wore black ___ under her skirt."
+    },
+    {
+      "w": "glasses",
+      "ipa": "ˈɡlɑːsɪz",
+      "t": "danh từ số nhiều (luôn số nhiều)",
+      "vi": "kính (mắt)",
+      "topic": "accessories",
+      "img": "img/glasses.jpg",
+      "h": "tròng kính trong suốt",
+      "ex": "I can't read without my ___."
+    },
+    {
+      "w": "sunglasses",
+      "ipa": "ˈsʌnɡlɑːsɪz",
+      "t": "danh từ số nhiều (luôn số nhiều)",
+      "vi": "kính râm",
+      "topic": "accessories",
+      "img": "img/sunglasses.jpg",
+      "h": "tròng kính tối màu",
+      "ex": "It's very bright today. Wear your ___."
+    },
+    {
+      "w": "pyjamas",
+      "ipa": "pɪˈdʒɑːməz",
+      "t": "danh từ số nhiều (luôn số nhiều)",
+      "vi": "bộ đồ ngủ",
+      "topic": "outfits",
+      "img": "img/pyjamas.jpg",
+      "ex": "I put on my ___ and went to bed."
+    },
+    {
+      "w": "clothes",
+      "ipa": "kləʊðz",
+      "t": "danh từ số nhiều (luôn số nhiều)",
+      "vi": "quần áo (nói chung)",
+      "topic": "outfits",
+      "q": "Cuối tuần, mẹ gom hết áo sơ mi, quần dài, váy và tất bẩn của cả nhà bỏ vào máy giặt. Tất cả những thứ mặc trên người ấy, gọi chung bằng một từ, chính là từ này. (danh từ, luôn số nhiều)",
+      "ex": "I need to wash my dirty ___ this weekend."
+    },
+    {
+      "w": "wear",
+      "ipa": "weə",
+      "t": "động từ",
+      "vi": "mặc, đeo, đội, đi (đang có trên người)",
+      "topic": "dressverbs",
+      "q": "Sáng nay trời nắng, bạn mặc áo phông, đeo kính râm và đồng hồ rồi ra phố. Khi nói quần áo, kính, đồng hồ đang ở trên người bạn, ta dùng động từ này. (không dùng cho túi, ô hay va li)",
+      "ex": "Do you ___ glasses when you read?"
+    },
+    {
+      "w": "carry",
+      "ipa": "ˈkæri",
+      "t": "động từ",
+      "vi": "mang, xách, cầm theo",
+      "topic": "dressverbs",
+      "q": "Ra sân bay, bạn kéo va li, tay cầm chiếc ô, vai đeo túi xách. Khi nói bạn cầm hay xách đồ theo người như vậy, ta dùng động từ này.",
+      "ex": "Can you help me ___ this heavy suitcase?"
+    },
+    {
+      "w": "have got on",
+      "ipa": "hæv ɡɒt ɒn",
+      "t": "cụm động từ",
+      "vi": "đang mặc, đang đeo (= wear; có thể bỏ got)",
+      "topic": "dressverbs",
+      "q": "Cô giáo chỉ vào bức tranh và hỏi: “Bạn nhỏ đang mặc gì?”. Bạn trả lời bằng cụm này, nghĩa giống hệt wear, và tên món đồ chen vào giữa cụm. (3 từ, có got)",
+      "ex": "She [[has got]] a blue coat [[on]]. (= She is wearing a blue coat.)"
+    },
+    {
+      "w": "get dressed",
+      "ipa": "ɡet drest",
+      "t": "cụm động từ",
+      "vi": "mặc quần áo vào",
+      "topic": "dressverbs",
+      "q": "Sáng dậy, đánh răng rửa mặt xong, bạn mặc áo, quần, tất vào người để chuẩn bị đi học. Việc mặc quần áo chỉnh tề ấy chính là cụm này.",
+      "ex": "I get up, have a shower and ___."
+    },
+    {
+      "w": "put on",
+      "ipa": "pʊt ɒn",
+      "t": "cụm động từ",
+      "vi": "mặc vào, đeo vào, xỏ vào (một món đồ)",
+      "topic": "dressverbs",
+      "q": "Trời bỗng trở lạnh, bạn lấy chiếc áo khoác và tròng vào người trước khi ra ngoài. Hành động mặc một món đồ vào người ấy chính là cụm này. (lúc mặc vào, không phải đang mặc)",
+      "ex": "It's cold outside, so ___ your coat."
+    },
+    {
+      "w": "get undressed",
+      "ipa": "ɡet ʌnˈdrest",
+      "t": "cụm động từ",
+      "vi": "cởi quần áo ra",
+      "topic": "dressverbs",
+      "q": "Tối về, trước khi đi tắm, bạn cởi hết áo, quần, tất ra khỏi người. Việc cởi hết quần áo ấy chính là cụm này.",
+      "ex": "At night I ___ and go to bed."
+    },
+    {
+      "w": "take off",
+      "ipa": "teɪk ɒf",
+      "t": "cụm động từ",
+      "vi": "cởi ra, tháo ra (một món đồ)",
+      "topic": "dressverbs",
+      "q": "Đi mưa về, giày và áo khoác ướt sũng, mẹ bảo bạn cởi ngay ra trước khi vào nhà. Hành động cởi một món đồ ra khỏi người ấy chính là cụm này.",
+      "ex": "Please ___ your wet shoes before you come in."
+    }
+  ],
+  "quiz": [
+    {
+      "tag": "wear / carry",
+      "q": "She is ___ a suitcase and a handbag.",
+      "vi": "Cô ấy đang xách một chiếc va li và một túi xách.",
+      "o": ["carrying", "wearing", "putting", "dressing"],
+      "why": "Va li và túi xách là đồ bạn cầm, xách theo người, nên dùng carry. Wear chỉ dùng cho thứ đang ở trên người: quần áo, giày, kính, đồng hồ, nhẫn.",
+      "rule": "Mặc, đeo trên người: wear. Cầm, xách theo: carry."
+    },
+    {
+      "tag": "wear glasses",
+      "q": "Do you ___ glasses?",
+      "vi": "Bạn có đeo kính không?",
+      "o": ["wear", "carry", "put", "dress"],
+      "why": "Tiếng Việt nói đeo kính, đội mũ, đi giày, đeo đồng hồ, nhưng tiếng Anh chỉ dùng một động từ cho tất cả: wear.",
+      "rule": "đeo kính, đội mũ, đi giày, đeo đồng hồ = wear."
+    },
+    {
+      "tag": "carry an umbrella",
+      "q": "He always ___ an umbrella to work.",
+      "vi": "Anh ấy luôn mang ô đi làm.",
+      "o": ["carries", "wears", "puts on", "has on"],
+      "why": "Cái ô cầm trên tay, không ở trên người, nên dùng carry. Người Việt hay nói mang ô nên dễ dịch nhầm thành wear.",
+      "rule": "carry an umbrella, carry a bag, carry a suitcase."
+    },
+    {
+      "tag": "is wearing",
+      "q": "Look! Naomi ___ a long blue coat.",
+      "vi": "Nhìn kìa! Naomi đang mặc một chiếc áo khoác dài màu xanh.",
+      "o": ["is wearing", "wears", "is carrying", "puts"],
+      "why": "Look! cho biết đang nói về lúc này, nên dùng thì hiện tại tiếp diễn is wearing. Wears là thói quen (thường mặc), không hợp với Look!",
+      "rule": "Đang mặc lúc này: is wearing."
+    },
+    {
+      "tag": "have got … on",
+      "q": "Naomi has got a blue coat ___.",
+      "vi": "Naomi đang mặc một chiếc áo khoác xanh (= Naomi is wearing a blue coat).",
+      "o": ["on", "in", "off", "up"],
+      "why": "Have got … on nghĩa giống wear, tên món đồ chen vào giữa: has got a blue coat on. Off nghĩa ngược lại (cởi ra).",
+      "rule": "has (got) + món đồ + on = is wearing."
+    },
+    {
+      "tag": "putting on",
+      "q": "Wait a minute, I'm ___ my shoes.",
+      "vi": "Chờ chút, mình đang xỏ giày.",
+      "o": ["putting on", "wearing", "taking", "dressing"],
+      "why": "Xỏ giày là hành động mặc vào, nên dùng put on. I'm wearing my shoes nghĩa là giày đang ở trên chân rồi, không phải đang xỏ.",
+      "rule": "Hành động mặc vào: put on. Trạng thái đang mặc: wear."
+    },
+    {
+      "tag": "take off",
+      "q": "Please ___ your wet shoes before you come in.",
+      "vi": "Làm ơn cởi đôi giày ướt ra trước khi vào nhà.",
+      "o": ["take off", "put off", "take on", "get off"],
+      "why": "Cởi ra là take off. Người học hay nghĩ ngược với put on là put off, nhưng tiếng Anh không nói như vậy.",
+      "rule": "Mặc vào: put on. Cởi ra: take off (không dùng put off)."
+    },
+    {
+      "tag": "get dressed",
+      "q": "In the morning I get up, have a shower and ___.",
+      "vi": "Buổi sáng tôi dậy, tắm rồi mặc quần áo.",
+      "o": ["get dressed", "get dress", "dress up", "put on"],
+      "why": "Mặc quần áo vào là get dressed, có -ed. Dress up là ăn diện hoặc hoá trang; put on thì phải có món đồ đi sau.",
+      "rule": "Mặc quần áo vào: get dressed (có -ed)."
+    },
+    {
+      "tag": "get undressed",
+      "q": "At night I ___ and go to bed.",
+      "vi": "Buổi tối tôi cởi quần áo rồi đi ngủ.",
+      "o": ["get undressed", "get undress", "take off", "put off"],
+      "why": "Cởi hết quần áo ra là get undressed. Take off cần có món đồ đi sau (take off my shoes), còn put off không dùng cho quần áo.",
+      "rule": "Cởi quần áo ra: get undressed hoặc take my clothes off."
+    },
+    {
+      "tag": "jeans + are",
+      "q": "My jeans ___ blue.",
+      "vi": "Quần bò của tôi màu xanh.",
+      "o": ["are", "is", "am", "be"],
+      "why": "Jeans luôn ở dạng số nhiều trong tiếng Anh, nên động từ đi sau cũng số nhiều: are. Tiếng Việt nói một cái quần nên dễ dùng nhầm is.",
+      "rule": "trousers, jeans, shorts, tights, glasses, pyjamas + động từ số nhiều."
+    },
+    {
+      "tag": "a pair of",
+      "q": "I need to buy ___ jeans.",
+      "vi": "Tôi cần mua một chiếc quần bò.",
+      "o": ["a pair of", "a", "one", "an"],
+      "why": "Jeans là từ luôn số nhiều nên không đi với a hay one. Muốn nói một chiếc, dùng a pair of jeans.",
+      "rule": "một chiếc quần, một cặp kính: a pair of trousers / jeans / glasses."
+    },
+    {
+      "tag": "these + số nhiều",
+      "q": "___ pyjamas are too small for me.",
+      "vi": "Bộ đồ ngủ này nhỏ quá so với tôi.",
+      "o": ["These", "This", "That", "A"],
+      "why": "Pyjamas luôn số nhiều nên dùng these (này) hoặc those (kia), không dùng this, that hay a.",
+      "rule": "these trousers, these glasses, these pyjamas."
+    },
+    {
+      "tag": "tìm câu sai",
+      "q": "Tìm câu SAI:",
+      "vi": "Ba câu còn lại đều đúng.",
+      "o": [
+        "She put her clothes off and went to bed.",
+        "She took her clothes off and went to bed.",
+        "She got undressed and went to bed.",
+        "She took off her clothes."
+      ],
+      "why": "Put her clothes off sai. Cởi quần áo phải là take her clothes off, take off her clothes hoặc get undressed.",
+      "rule": "put clothes on, nhưng take clothes off (không nói put clothes off)."
+    },
+    {
+      "tag": "tìm câu sai",
+      "q": "Tìm câu SAI:",
+      "vi": "Ba câu còn lại đều đúng.",
+      "o": [
+        "My trousers is too long.",
+        "My trousers are too long.",
+        "I need a new pair of trousers.",
+        "These shorts are very comfortable."
+      ],
+      "why": "My trousers is sai vì trousers luôn số nhiều, phải dùng are.",
+      "rule": "trousers + are, không dùng is."
+    },
+    {
+      "tag": "tìm câu sai",
+      "q": "Tìm câu SAI:",
+      "vi": "Ba câu còn lại đều đúng.",
+      "o": [
+        "He wears an umbrella when it rains.",
+        "He carries an umbrella when it rains.",
+        "She is wearing glasses.",
+        "She is carrying a bag."
+      ],
+      "why": "He wears an umbrella sai vì cái ô cầm trên tay, phải dùng carries. Kính thì đeo trên người nên wearing glasses là đúng.",
+      "rule": "wear: đồ trên người. carry: đồ cầm, xách."
+    },
+    {
+      "tag": "tìm câu sai",
+      "q": "Tìm câu SAI:",
+      "vi": "Ba câu còn lại đều đúng.",
+      "o": [
+        "I bought a jean yesterday.",
+        "I bought some jeans yesterday.",
+        "I bought a pair of jeans yesterday.",
+        "These jeans are new."
+      ],
+      "why": "A jean sai vì jeans luôn số nhiều, không có dạng số ít. Nói a pair of jeans hoặc some jeans.",
+      "rule": "Không nói a jean, a trouser: dùng a pair of jeans / trousers."
+    },
+    {
+      "tag": "tìm câu sai",
+      "q": "Tìm câu SAI:",
+      "vi": "Ba câu còn lại đều đúng.",
+      "o": [
+        "I get dress at 7 o'clock.",
+        "I get dressed at 7 o'clock.",
+        "I put my clothes on at 7 o'clock.",
+        "I put on my clothes at 7 o'clock."
+      ],
+      "why": "Get dress sai, phải có -ed: get dressed. Put my clothes on và put on my clothes đều đúng.",
+      "rule": "get dressed / get undressed luôn có -ed."
+    }
+  ],
+  "exercises": [
+    {
+      "id": "4.1",
+      "type": "gaps",
+      "en": "Complete the sentences.",
+      "items": [
+        {
+          "t": [
+            "Joe has a job interview today, so he's wearing a smart ",
+            {
+              "p": "su",
+              "a": ["suit"],
+              "ex": true
+            },
+            ", a white ",
+            {
+              "p": "sh",
+              "a": ["shirt"]
+            },
+            " and a ",
+            {
+              "p": "t",
+              "a": ["tie"]
+            },
+            "."
+          ]
+        },
+        {
+          "t": [
+            "Julia's not working today, so she's wearing a ",
+            {
+              "p": "T-",
+              "a": ["t-shirt", "tshirt"]
+            },
+            " and ",
+            {
+              "p": "sh",
+              "s": "s",
+              "a": ["shorts"]
+            },
+            "."
+          ]
+        },
+        {
+          "t": [
+            "Lucy is going to play tennis. She's wearing white ",
+            {
+              "p": "s",
+              "s": "s",
+              "a": ["socks"]
+            },
+            " and ",
+            {
+              "p": "tr",
+              "s": "s",
+              "a": ["trainers"]
+            },
+            "."
+          ]
+        },
+        {
+          "t": [
+            "Gianni is going to a business meeting. He's ",
+            {
+              "s": "ing",
+              "a": ["carrying"],
+              "hint": "Túi cầm theo người, không mặc trên người."
+            },
+            " a ",
+            {
+              "p": "b",
+              "a": ["bag", "briefcase"]
+            },
+            " with his papers and laptop."
+          ]
+        },
+        {
+          "t": [
+            "My trousers are too big. I have to wear a ",
+            {
+              "p": "b",
+              "a": ["belt"]
+            },
+            "."
+          ]
+        },
+        {
+          "t": [
+            "It's cold today. I'll wear my ",
+            {
+              "p": "j",
+              "a": ["jacket", "jumper"]
+            },
+            ", and I'll take my ",
+            {
+              "p": "c",
+              "a": ["coat"]
+            },
+            " too."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4.2",
+      "type": "choose",
+      "wide": true,
+      "en": "Match the item of clothing with the part of the body.",
+      "choices": ["scarf", "belt", "shoe", "hat", "glove", "glasses", "tights", "ring"],
+      "items": [
+        {
+          "p": "☝️ ngón tay → ___",
+          "a": "ring",
+          "ex": true,
+          "why": "Đồ trang sức đeo ở ngón tay: ring."
+        },
+        {
+          "p": "🧍 eo, ngang bụng → ___",
+          "a": "belt",
+          "why": "Thắt quanh eo để giữ quần: belt."
+        },
+        {
+          "p": "👤 đầu → ___",
+          "a": "hat",
+          "why": "Đội trên đầu: hat."
+        },
+        {
+          "p": "👀 mắt → ___",
+          "a": "glasses",
+          "why": "Đeo trước mắt để nhìn rõ hơn: glasses."
+        },
+        {
+          "p": "🦶 bàn chân → ___",
+          "a": "shoe",
+          "why": "Xỏ vào bàn chân để đi: shoe."
+        },
+        {
+          "p": "✋ bàn tay → ___",
+          "a": "glove",
+          "why": "Đeo cho cả bàn tay, có năm ngón: glove."
+        },
+        {
+          "p": "🦵 hai chân → ___",
+          "a": "tights",
+          "why": "Mặc bó sát cả hai chân, từ eo xuống bàn chân: tights."
+        },
+        {
+          "p": "🧑 cổ → ___",
+          "a": "scarf",
+          "why": "Quàng quanh cổ cho ấm: scarf."
+        }
+      ]
+    },
+    {
+      "id": "4.3",
+      "type": "gaps",
+      "en": "Complete the sentences with one of the verbs in the box (be, wear, carry, have) and put it in the right form.",
+      "items": [
+        {
+          "t": [
+            "Tim's jeans ",
+            {
+              "a": ["are"],
+              "ex": true
+            },
+            " blue and his T-shirt ",
+            {
+              "a": ["is", "'s"],
+              "hint": "T-shirt là một cái áo, số ít."
+            },
+            " red."
+          ]
+        },
+        {
+          "t": [
+            "Julia ",
+            {
+              "a": ["is wearing", "'s wearing"],
+              "hint": "Có today: hôm nay đang mặc, dùng be + động từ đuôi -ing."
+            },
+            " jeans and a T-shirt today."
+          ]
+        },
+        {
+          "t": [
+            "Meena ",
+            {
+              "a": ["has", "'s"],
+              "hint": "Cụm have got … on, Meena là ngôi thứ ba số ít."
+            },
+            " got a red coat on and she ",
+            {
+              "a": ["is carrying", "'s carrying"],
+              "hint": "Hoa cầm trên tay, đang làm lúc này."
+            },
+            " some flowers."
+          ]
+        },
+        {
+          "t": [
+            "Sarah's dress ",
+            {
+              "a": ["is", "'s"],
+              "hint": "dress là số ít."
+            },
+            " old but her shoes ",
+            {
+              "a": ["are"],
+              "hint": "shoes là số nhiều."
+            },
+            " new."
+          ]
+        },
+        {
+          "t": [
+            "Last year Harry's trousers ",
+            {
+              "a": ["were"],
+              "hint": "Last year là quá khứ, trousers luôn số nhiều."
+            },
+            " white. Now they ",
+            {
+              "a": ["are", "'re"],
+              "hint": "Now là hiện tại, they là số nhiều."
+            },
+            " grey."
+          ]
+        },
+        {
+          "t": [
+            {
+              "a": ["is"],
+              "hint": "Chủ ngữ là a pair (một chiếc), số ít."
+            },
+            " this a new pair of jeans?"
+          ]
+        },
+        {
+          "t": [
+            "My favourite pyjamas ",
+            {
+              "a": ["are"],
+              "hint": "pyjamas luôn số nhiều."
+            },
+            " dark green."
+          ]
+        },
+        {
+          "t": [
+            "Kim ",
+            {
+              "a": ["has", "has got", "'s got", "is wearing", "'s wearing", "wears"],
+              "hint": "Dùng have hoặc wear cho đồ đang có, đang mặc."
+            },
+            " a new pair of shorts."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4.4",
+      "type": "type",
+      "en": "Label the picture.",
+      "items": [
+        {
+          "p": "",
+          "img": "img/sunglasses.jpg",
+          "a": ["sunglasses"],
+          "ex": true
+        },
+        {
+          "p": "",
+          "img": "img/jumper.jpg",
+          "a": ["jumper", "sweater", "a jumper", "a sweater"],
+          "hint": "Áo len, có hai cách gọi."
+        },
+        {
+          "p": "",
+          "img": "img/umbrella.jpg",
+          "a": ["umbrella", "an umbrella"]
+        },
+        {
+          "p": "",
+          "img": "img/skirt.jpg",
+          "a": ["skirt", "a skirt"]
+        },
+        {
+          "p": "",
+          "img": "img/suitcase.jpg",
+          "a": ["suitcase", "a suitcase"]
+        },
+        {
+          "p": "",
+          "img": "img/boots.jpg",
+          "a": ["boots", "boot"]
+        },
+        {
+          "p": "",
+          "img": "img/coat.jpg",
+          "a": ["coat", "a coat"],
+          "hint": "Áo khoác dài."
+        },
+        {
+          "p": "",
+          "img": "img/watch.jpg",
+          "a": ["watch", "a watch"]
+        },
+        {
+          "p": "",
+          "img": "img/shirt.jpg",
+          "a": ["shirt", "a shirt"],
+          "hint": "Áo có cổ và hàng cúc."
+        },
+        {
+          "p": "",
+          "img": "img/hat.jpg",
+          "a": ["hat", "a hat"]
+        }
+      ]
+    },
+    {
+      "id": "4.5",
+      "type": "gaps",
+      "en": "Complete the verbs in the table.",
+      "items": [
+        {
+          "t": [
+            "Morning: get ",
+            {
+              "a": ["dressed"],
+              "ex": true
+            },
+            " or ",
+            {
+              "a": ["put"]
+            },
+            " your clothes on"
+          ]
+        },
+        {
+          "t": [
+            "Night: get ",
+            {
+              "a": ["undressed"],
+              "hint": "Ngược với get dressed."
+            },
+            " or ",
+            {
+              "a": ["take"],
+              "hint": "Cởi ra không dùng put … off."
+            },
+            " your clothes off"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4.6",
+      "type": "free",
+      "en": "What are you wearing today? Use a dictionary to help you.",
+      "example": "I'm wearing a white T-shirt and a blue jumper.",
+      "lines": 4,
+      "frames": [
+        "I've got a pair of … on.",
+        "I'm wearing … socks and … .",
+        "I've also got … on.",
+        "Viết thêm một câu bất kỳ về đồ bạn đang mặc hoặc mang theo…"
+      ],
+      "model": [
+        "I've got a pair of blue jeans on.",
+        "I'm wearing white socks and black trainers.",
+        "I've also got a watch and a pair of glasses on.",
+        "I'm carrying a small bag and an umbrella."
+      ],
+      "note": "Mẹo: đồ đang mặc hôm nay dùng I'm wearing … hoặc I've got … on. Từ luôn số nhiều (trousers, jeans, glasses) đi với a pair of …, không nói a jean. Đồ cầm theo (túi, ô, va li) dùng I'm carrying …"
+    }
+  ],
+  "lint": [
+    {
+      "pattern": "\\bput(s|ting)?\\b[^.]*\\boff\\b",
+      "flags": "i",
+      "message": "Cởi ra là take … off, không dùng put … off."
+    },
+    {
+      "pattern": "\\b(wear|wears|wearing|wore)\\s+(an?\\s+|my\\s+|his\\s+|her\\s+|a\\s+big\\s+)?(umbrella|bag|suitcase|handbag)\\b",
+      "flags": "i",
+      "message": "Túi, ô, va li là đồ cầm theo: dùng carry, không dùng wear."
+    },
+    {
+      "pattern": "\\ba\\s+(jean|trouser|short|tight|pyjama|glass|sunglass)\\b",
+      "flags": "i",
+      "message": "Từ luôn số nhiều: dùng a pair of jeans / trousers / glasses…"
+    },
+    {
+      "pattern": "\\b(trousers|jeans|shorts|tights|glasses|sunglasses|pyjamas)\\s+(is|was|has)\\b",
+      "flags": "i",
+      "message": "Từ này luôn số nhiều: dùng are / were / have."
+    },
+    {
+      "pattern": "\\b(this|that)\\s+(trousers|jeans|shorts|tights|glasses|sunglasses|pyjamas)\\b",
+      "flags": "i",
+      "message": "Từ luôn số nhiều đi với these / those."
+    },
+    {
+      "pattern": "\\bget(s|ting)?\\s+(un)?dress\\b",
+      "flags": "i",
+      "message": "get dressed / get undressed phải có -ed."
+    },
+    {
+      "pattern": "\\bI\\s+wearing\\b",
+      "flags": "i",
+      "message": "Thiếu am: I'm wearing …"
+    },
+    {
+      "pattern": "\\b(am|is|are|I'm|she's|he's)\\s+wear\\b",
+      "flags": "i",
+      "message": "Sau am / is / are dùng wearing."
+    },
+    {
+      "pattern": "\\bt\\s?shirt\\b",
+      "flags": "i",
+      "message": "Viết là T-shirt, có dấu gạch nối."
+    },
+    {
+      "pattern": "\\bpajamas\\b",
+      "flags": "i",
+      "message": "Sách dùng cách viết của người Anh: pyjamas."
+    }
+  ],
+  "links": [
+    ["sweater", "jumper"],
+    ["coat", "jacket"],
+    ["shirt", "t-shirt"],
+    ["shirt", "tie"],
+    ["suit", "tie"],
+    ["trousers", "jeans"],
+    ["jeans", "shorts"],
+    ["skirt", "dress"],
+    ["socks", "trainers"],
+    ["trainers", "boots"],
+    ["glasses", "sunglasses"],
+    ["bag", "handbag"],
+    ["bag", "suitcase"],
+    ["scarf", "gloves"],
+    ["hat", "scarf"],
+    ["gloves", "hand"],
+    ["socks", "foot"],
+    ["scarf", "neck"],
+    ["glasses", "eye"],
+    ["ring", "finger"],
+    ["belt", "waist"],
+    ["tights", "leg"],
+    ["hat", "hair"],
+    ["ring", "the wedding"],
+    ["dress", "bride"],
+    ["suit", "groom"],
+    ["put on", "take off"],
+    ["get dressed", "get undressed"],
+    ["wear", "have got on"],
+    ["wear", "put on"],
+    ["put on", "get dressed"],
+    ["take off", "get undressed"],
+    ["carry", "bag"],
+    ["carry", "umbrella"],
+    ["carry", "suitcase"],
+    ["wear", "glasses"],
+    ["shoe", "trainers"],
+    ["shoe", "boots"],
+    ["shoe", "socks"],
+    ["shoe", "foot"],
+    ["clothes", "wear"],
+    ["clothes", "get dressed"],
+    ["clothes", "get undressed"],
+    ["clothes", "suitcase"]
+  ]
+}

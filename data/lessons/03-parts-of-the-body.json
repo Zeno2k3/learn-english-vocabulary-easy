@@ -1,0 +1,561 @@
+{
+  "$schema": "../lesson.schema.json",
+  "id": 3,
+  "title": "Parts of the body",
+  "topics": [],
+  "words": [
+    {
+      "w": "hair",
+      "ipa": "heə",
+      "t": "danh từ",
+      "vi": "tóc",
+      "topic": "head",
+      "q": "Mỗi tháng bạn ra tiệm cắt bớt cho gọn, về nhà lại gội và sấy khô. Thứ mọc dày trên đầu ấy chính là thứ này.",
+      "ex": "My ___ is very long. I must cut it soon."
+    },
+    {
+      "w": "mouth",
+      "ipa": "maʊθ",
+      "t": "danh từ",
+      "vi": "miệng",
+      "topic": "head",
+      "q": "Lúc ăn, bạn đưa thìa cơm vào đây để nhai; lúc nói chuyện, lời nói cũng phát ra từ đây. Bộ phận ấy trên mặt chính là bộ phận này.",
+      "ex": "Open your ___ and say “ah”."
+    },
+    {
+      "w": "lip",
+      "ipa": "lɪp",
+      "t": "danh từ",
+      "vi": "môi",
+      "topic": "head",
+      "q": "Trước khi đi tiệc, cô ấy tô son đỏ lên phần mềm ở phía trên hoặc phía dưới miệng. Một trong hai phần ấy chính là bộ phận này. (số ít)",
+      "ex": "He has a small cut on his bottom ___."
+    },
+    {
+      "w": "ear",
+      "ipa": "ɪə",
+      "t": "danh từ",
+      "vi": "tai",
+      "topic": "head",
+      "q": "Khi nghe điện thoại, bạn áp máy vào một bên đầu để nghe người kia nói. Bộ phận giúp bạn nghe ấy chính là bộ phận này. (số ít, chỉ một bên)",
+      "ex": "He put the phone to his ___."
+    },
+    {
+      "w": "neck",
+      "ipa": "nek",
+      "t": "danh từ",
+      "vi": "cổ",
+      "topic": "head",
+      "q": "Trời lạnh, mẹ quấn chiếc khăn len quanh phần nối giữa đầu và vai cho bạn. Phần cơ thể ấy chính là bộ phận này.",
+      "ex": "She wears a scarf around her ___."
+    },
+    {
+      "w": "eye",
+      "ipa": "aɪ",
+      "t": "danh từ",
+      "vi": "mắt",
+      "topic": "head",
+      "q": "Khi đọc sách hay xem tivi, bạn dùng bộ phận này để nhìn; buồn ngủ thì nó cứ díp lại. (số ít, chỉ một bên)",
+      "ex": "Close one ___ and look at the board."
+    },
+    {
+      "w": "nose",
+      "ipa": "nəʊz",
+      "t": "danh từ",
+      "vi": "mũi",
+      "topic": "head",
+      "q": "Đi ngang tiệm bánh mì, bạn hít một hơi và ngửi thấy mùi thơm phức. Bộ phận ở giữa khuôn mặt giúp bạn ngửi mùi ấy chính là bộ phận này.",
+      "ex": "He smelled the flowers with his ___."
+    },
+    {
+      "w": "tooth",
+      "ipa": "tuːθ",
+      "t": "danh từ",
+      "vi": "răng (số ít, một cái răng)",
+      "topic": "head",
+      "q": "Cậu bé 6 tuổi lắc lắc một chiếc nhỏ, cứng, màu trắng trong miệng, rồi nó rụng ra. Một chiếc như vậy chính là thứ này. (số ít, chỉ một chiếc)",
+      "ex": "The baby has got her first ___."
+    },
+    {
+      "w": "teeth",
+      "ipa": "tiːθ",
+      "t": "danh từ số nhiều",
+      "vi": "răng (số nhiều, nhiều cái răng)",
+      "topic": "head",
+      "q": "Mỗi sáng và tối, bạn cầm bàn chải và kem để chải sạch cả hàm trắng trong miệng. Cả hàm ấy chính là những thứ này. (số nhiều)",
+      "ex": "Brush your ___ twice a day."
+    },
+    {
+      "w": "arm",
+      "ipa": "ɑːm",
+      "t": "danh từ",
+      "vi": "cánh tay",
+      "topic": "limbs",
+      "q": "Muốn lấy hộp bánh trên nóc tủ, bạn duỗi thẳng phần dài từ vai xuống đến bàn tay để với lên. Phần ấy chính là bộ phận này.",
+      "ex": "He broke his ___ playing football."
+    },
+    {
+      "w": "leg",
+      "ipa": "leɡ",
+      "t": "danh từ",
+      "vi": "chân (cả phần từ hông xuống)",
+      "topic": "limbs",
+      "q": "Sau buổi chạy bộ 5 km, phần dài từ hông xuống đến bàn chân của bạn mỏi nhừ. Phần ấy chính là bộ phận này.",
+      "ex": "I have a pain in my ___."
+    },
+    {
+      "w": "shoulder",
+      "ipa": "ˈʃəʊldə",
+      "t": "danh từ",
+      "vi": "vai",
+      "topic": "limbs",
+      "q": "Bạn đeo ba lô đi học, quai ba lô đè lên phần nằm giữa cổ và cánh tay. Phần ấy chính là bộ phận này.",
+      "ex": "She carries her bag on her ___."
+    },
+    {
+      "w": "thumb",
+      "ipa": "θʌm",
+      "t": "danh từ",
+      "vi": "ngón tay cái",
+      "topic": "limbs",
+      "q": "Ăn món ngon, bạn giơ ngón ngắn và to nhất, đứng tách riêng với bốn ngón kia, để khen “tuyệt!”. Ngón ấy chính là ngón này.",
+      "ex": "You have four fingers and one ___ on each hand."
+    },
+    {
+      "w": "nail",
+      "ipa": "neɪl",
+      "t": "danh từ",
+      "vi": "móng (tay, chân)",
+      "topic": "limbs",
+      "q": "Cuối tuần cô ấy ra tiệm làm đẹp để cắt tỉa và sơn màu lớp cứng ở đầu mỗi ngón tay. Lớp ấy chính là thứ này.",
+      "ex": "She painted each ___ red."
+    },
+    {
+      "w": "hand",
+      "ipa": "hænd",
+      "t": "danh từ",
+      "vi": "bàn tay",
+      "topic": "limbs",
+      "q": "Trước khi ăn cơm, mẹ nhắc bạn rửa bằng xà phòng phần có năm ngón ở cuối cánh tay. Phần ấy chính là bộ phận này.",
+      "ex": "Put up your ___ if you know the answer."
+    },
+    {
+      "w": "finger",
+      "ipa": "ˈfɪŋɡə",
+      "t": "danh từ",
+      "vi": "ngón tay",
+      "topic": "limbs",
+      "q": "Trong lễ cầu hôn, chàng trai đeo nhẫn vào một trong những phần dài, nhỏ trên bàn tay cô gái. Một phần như vậy chính là bộ phận này.",
+      "ex": "She wears a ring on her ___."
+    },
+    {
+      "w": "knee",
+      "ipa": "niː",
+      "t": "danh từ",
+      "vi": "đầu gối",
+      "topic": "limbs",
+      "q": "Bạn chạy vội, vấp ngã và bị trầy ở khớp giữa chân, chỗ chân gập lại khi bạn ngồi xuống. Chỗ ấy chính là bộ phận này.",
+      "ex": "He fell and hurt his ___."
+    },
+    {
+      "w": "toe",
+      "ipa": "təʊ",
+      "t": "danh từ",
+      "vi": "ngón chân",
+      "topic": "limbs",
+      "q": "Đi chân trần trong nhà, bạn lỡ đá vào chân bàn và đau điếng ở một trong năm phần nhỏ ở đầu bàn chân. Phần ấy chính là bộ phận này.",
+      "ex": "These shoes are too small. They hurt my big ___."
+    },
+    {
+      "w": "foot",
+      "ipa": "fʊt",
+      "t": "danh từ",
+      "vi": "bàn chân (số ít, một bàn chân)",
+      "topic": "limbs",
+      "q": "Bạn xỏ thử giày mới nhưng giày hơi chật, phần ở cuối chân bên trái bị đau khi bước đi. Một bên như vậy chính là bộ phận này. (số ít, chỉ một bên)",
+      "ex": "He kicked the ball with his left ___."
+    },
+    {
+      "w": "feet",
+      "ipa": "fiːt",
+      "t": "danh từ số nhiều",
+      "vi": "bàn chân (số nhiều, hai bàn chân)",
+      "topic": "limbs",
+      "q": "Sau một ngày đi bộ tham quan, cả hai phần ở cuối chân của bạn đều mỏi rã rời, tối về bạn ngâm chúng vào nước ấm. Cả hai phần ấy chính là những bộ phận này. (số nhiều)",
+      "ex": "I walked all day and now my ___ hurt."
+    },
+    {
+      "w": "chest",
+      "ipa": "tʃest",
+      "t": "danh từ",
+      "vi": "ngực",
+      "topic": "torso",
+      "q": "Khi khám bệnh, bác sĩ đặt ống nghe lên phần phía trước thân người, giữa cổ và bụng, để nghe tim và phổi. Phần ấy chính là bộ phận này.",
+      "ex": "Put your hand on your ___ and feel your heart."
+    },
+    {
+      "w": "back",
+      "ipa": "bæk",
+      "t": "danh từ",
+      "vi": "lưng",
+      "topic": "torso",
+      "q": "Ngồi máy tính cả ngày, phần phía sau thân người từ cổ xuống hông của bạn đau mỏi, phải nhờ người khác đấm bóp vì tự mình không với tới. Phần ấy chính là bộ phận này.",
+      "ex": "I sleep on my ___, not on my stomach."
+    },
+    {
+      "w": "side",
+      "ipa": "saɪd",
+      "t": "danh từ",
+      "vi": "mạn sườn (hai bên thân)",
+      "topic": "torso",
+      "q": "Khi ngủ, bạn hay nằm nghiêng, đè lên một bên thân người, ngay bên dưới cánh tay. Phần ấy chính là bộ phận này.",
+      "ex": "He has a pain in his left ___, just under his arm."
+    },
+    {
+      "w": "waist",
+      "ipa": "weɪst",
+      "t": "danh từ",
+      "vi": "eo",
+      "topic": "torso",
+      "q": "Mặc quần xong, bạn thắt dây lưng quanh phần hẹp nhất ở giữa thân người. Phần ấy chính là bộ phận này.",
+      "ex": "These trousers are too big around my ___."
+    },
+    {
+      "w": "hip",
+      "ipa": "hɪp",
+      "t": "danh từ",
+      "vi": "hông",
+      "topic": "torso",
+      "q": "Người mẹ bế con bằng cách đặt bé ngồi lên phần nhô ra ở một bên thân người, ngay dưới eo. Phần ấy chính là bộ phận này.",
+      "ex": "My grandmother fell and broke her ___."
+    },
+    {
+      "w": "stomach",
+      "ipa": "ˈstʌmək",
+      "t": "danh từ",
+      "vi": "bụng",
+      "topic": "torso",
+      "q": "Ăn liền ba bát phở, phần phía trước thân người bên dưới ngực của bạn căng cứng và hơi đau. Phần ấy chính là bộ phận này.",
+      "ex": "I ate too much and now my ___ hurts."
+    },
+    {
+      "w": "skin",
+      "ipa": "skɪn",
+      "t": "danh từ",
+      "vi": "da",
+      "topic": "torso",
+      "q": "Đi biển cả ngày mà không bôi kem chống nắng, lớp mỏng bao phủ bên ngoài cơ thể của bạn bị cháy đỏ và rát. Lớp ấy chính là thứ này.",
+      "ex": "We have ___ covering our bodies."
+    },
+    {
+      "w": "heart",
+      "ipa": "hɑːt",
+      "t": "danh từ",
+      "vi": "tim, trái tim",
+      "topic": "inside",
+      "q": "Chạy một mạch lên năm tầng cầu thang, bạn đặt tay lên ngực và thấy thứ bên trong đập thình thịch để bơm máu đi khắp người. Bộ phận ấy chính là bộ phận này.",
+      "ex": "Your ___ beats faster when you run."
+    },
+    {
+      "w": "brain",
+      "ipa": "breɪn",
+      "t": "danh từ",
+      "vi": "não, bộ não",
+      "topic": "inside",
+      "q": "Khi bạn giải một bài toán khó hay cố nhớ lại một từ mới, thứ bên trong đầu phải làm việc rất nhiều. Bộ phận ấy chính là bộ phận này.",
+      "ex": "You think with your ___."
+    },
+    {
+      "w": "blood",
+      "ipa": "blʌd",
+      "t": "danh từ",
+      "vi": "máu",
+      "topic": "inside",
+      "q": "Gọt hoa quả không cẩn thận, bạn bị đứt tay, chất lỏng màu đỏ chảy ra và mẹ vội dán băng cá nhân cho bạn. Chất lỏng ấy chính là thứ này.",
+      "ex": "Your heart pumps ___ around your body."
+    }
+  ],
+  "quiz": [],
+  "exercises": [
+    {
+      "id": "3.1",
+      "type": "type",
+      "en": "Here are the names of some parts of the body with the letters mixed up. What are they?",
+      "items": [
+        {
+          "p": "eken",
+          "a": ["knee"],
+          "ex": true
+        },
+        {
+          "p": "osen",
+          "a": ["nose"]
+        },
+        {
+          "p": "rathe",
+          "a": ["heart"]
+        },
+        {
+          "p": "hamcost",
+          "a": ["stomach"]
+        },
+        {
+          "p": "olderush",
+          "a": ["shoulder"]
+        },
+        {
+          "p": "are",
+          "a": ["ear"]
+        },
+        {
+          "p": "hotot",
+          "a": ["tooth"]
+        },
+        {
+          "p": "buhtm",
+          "a": ["thumb"]
+        },
+        {
+          "p": "akbc",
+          "a": ["back"]
+        },
+        {
+          "p": "tiwas",
+          "a": ["waist"]
+        }
+      ]
+    },
+    {
+      "id": "3.2",
+      "type": "type",
+      "en": "Complete these sentences with words from the opposite page.",
+      "items": [
+        {
+          "p": "A hand has five ___ .",
+          "a": ["fingers"],
+          "ex": true
+        },
+        {
+          "p": "A foot has five ___ .",
+          "a": ["toes"],
+          "hint": "năm cái nên dùng số nhiều."
+        },
+        {
+          "p": "An adult has 32 ___ .",
+          "a": ["teeth"],
+          "hint": "số nhiều của từ này là bất quy tắc."
+        },
+        {
+          "p": "You smell with your ___ .",
+          "a": ["nose"]
+        },
+        {
+          "p": "The ___ is a symbol of love.",
+          "a": ["heart"]
+        },
+        {
+          "p": "You hear with your ___ .",
+          "a": ["ears", "ear"]
+        },
+        {
+          "p": "The child sat on her father's ___ .",
+          "a": ["shoulders", "shoulder", "knee", "knees"]
+        },
+        {
+          "p": "Your ___ type can be A, B, AB or O.",
+          "a": ["blood"]
+        },
+        {
+          "p": "You think with your ___ .",
+          "a": ["brain"]
+        }
+      ]
+    },
+    {
+      "id": "3.3",
+      "type": "type",
+      "wide": true,
+      "en": "Correct the mistakes in the sentences.",
+      "items": [
+        {
+          "p": "I have a pain in the side.",
+          "a": ["I have a pain in my side."],
+          "ex": true
+        },
+        {
+          "p": "That woman has got very big foots.",
+          "a": ["That woman has got very big feet."],
+          "hint": "số nhiều của foot là bất quy tắc."
+        },
+        {
+          "p": "My grandfather has a pain in the shoulder.",
+          "a": ["My grandfather has a pain in his shoulder."],
+          "hint": "bộ phận cơ thể đi với my, his, her…, không dùng the."
+        },
+        {
+          "p": "The baby has already got two tooths.",
+          "a": ["The baby has already got two teeth."],
+          "hint": "số nhiều của tooth là bất quy tắc."
+        },
+        {
+          "p": "The little girl needs to wash the face and the hands before dinner.",
+          "a": [
+            "The little girl needs to wash her face and her hands before dinner.",
+            "The little girl needs to wash her face and hands before dinner."
+          ],
+          "hint": "có hai chỗ dùng the trước bộ phận cơ thể."
+        },
+        {
+          "p": "My hairs are dirty. I need to wash them.",
+          "a": ["My hair is dirty. I need to wash it."],
+          "hint": "hair là từ số ít, nên cả động từ và đại từ phía sau cũng đổi theo."
+        }
+      ]
+    },
+    {
+      "id": "3.4",
+      "type": "type",
+      "en": "Parts of the body are often used in compound nouns too. Complete these nouns with a word from the opposite page.",
+      "items": [
+        {
+          "pic": "🛋️",
+          "p": "___chair",
+          "a": ["arm", "armchair"],
+          "ex": true
+        },
+        {
+          "pic": "⚽",
+          "p": "___ball",
+          "a": ["foot", "football"]
+        },
+        {
+          "pic": "💄",
+          "p": "___stick",
+          "a": ["lip", "lipstick"]
+        },
+        {
+          "pic": "🪮",
+          "p": "___brush",
+          "a": ["hair", "hairbrush"]
+        },
+        {
+          "pic": "🧕",
+          "p": "___scarf",
+          "a": ["head", "headscarf"]
+        },
+        {
+          "pic": "👜",
+          "p": "___bag",
+          "a": ["hand", "handbag"]
+        }
+      ]
+    },
+    {
+      "id": "3.5",
+      "type": "cross",
+      "en": "Complete the crossword. Look at the pictures.",
+      "rows": 9,
+      "cols": 6,
+      "items": [
+        {
+          "n": 1,
+          "dir": "d",
+          "r": 0,
+          "c": 4,
+          "a": "mouth",
+          "pic": "👄"
+        },
+        {
+          "n": 2,
+          "dir": "a",
+          "r": 3,
+          "c": 1,
+          "a": "foot",
+          "pic": "🦶"
+        },
+        {
+          "n": 2,
+          "dir": "d",
+          "r": 3,
+          "c": 1,
+          "a": "finger",
+          "pic": "👆"
+        },
+        {
+          "n": 3,
+          "dir": "a",
+          "r": 5,
+          "c": 0,
+          "a": "knee",
+          "pic": "🦵",
+          "hint": "(chỗ mũi tên chỉ, giữa chân)"
+        },
+        {
+          "n": 4,
+          "dir": "d",
+          "r": 5,
+          "c": 3,
+          "a": "eye",
+          "pic": "👁️"
+        },
+        {
+          "n": 5,
+          "dir": "a",
+          "r": 7,
+          "c": 2,
+          "a": "neck",
+          "pic": "🧣",
+          "hint": "(chỗ quàng khăn)"
+        }
+      ]
+    }
+  ],
+  "lint": [
+    {
+      "pattern": "\\bfoots\\b",
+      "flags": "i",
+      "message": "Số nhiều của foot là feet, không thêm s."
+    },
+    {
+      "pattern": "\\btooths\\b",
+      "flags": "i",
+      "message": "Số nhiều của tooth là teeth, không thêm s."
+    },
+    {
+      "pattern": "\\bhairs\\b",
+      "flags": "i",
+      "message": "hair (tóc trên đầu) là từ số ít: my hair is…, wash it."
+    },
+    {
+      "pattern": "\\bpain\\s+in\\s+the\\b",
+      "flags": "i",
+      "message": "Bộ phận cơ thể đi với my, his, her…: a pain in my/his …"
+    },
+    {
+      "pattern": "\\bwash\\s+the\\s+(face|hands?|hair|feet|teeth)\\b",
+      "flags": "i",
+      "message": "Bộ phận cơ thể đi với my, his, her…, không dùng the."
+    }
+  ],
+  "links": [
+    ["tooth", "teeth"],
+    ["foot", "feet"],
+    ["mouth", "lip"],
+    ["mouth", "teeth"],
+    ["finger", "thumb"],
+    ["hand", "finger"],
+    ["arm", "hand"],
+    ["finger", "nail"],
+    ["leg", "knee"],
+    ["leg", "foot"],
+    ["foot", "toe"],
+    ["arm", "shoulder"],
+    ["chest", "back"],
+    ["waist", "hip"],
+    ["heart", "blood"],
+    ["heart", "chest"],
+    ["brain", "heart"],
+    ["nose", "mouth"],
+    ["nose", "eye"]
+  ]
+}

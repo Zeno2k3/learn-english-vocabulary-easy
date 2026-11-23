@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>{{TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika&family=Press+Start+2P&family=VT323&display=swap&subset=vietnamese" rel="stylesheet">
+<link rel="stylesheet" href="{{CSS}}">
+</head>
+<body>
+<div class="app" id="app">
+<nav class="sitenav" aria-label="Điều hướng"><a href="../../">← Danh sách bài</a><a href="../../map/">Bản đồ 3D</a></nav>
+
+  <header class="hud">
+    <h1 class="logo">SPELL QUEST<small>{{HEADING}}</small></h1>
+    <nav class="tabs" id="tabs" aria-label="Chọn phần">
+      <button class="tab on" type="button" id="tabWrite" aria-pressed="true">PHẦN 1 · VIẾT TỪ</button>
+      <button class="tab" type="button" id="tabQuiz" aria-pressed="false">PHẦN 2 · TRẮC NGHIỆM</button>
+      <button class="tab" type="button" id="tabBook" aria-pressed="false">PHẦN 3 · BÀI TẬP SÁCH</button>
+      <button class="tab" type="button" id="tabMiss" aria-pressed="false">TỪ HAY SAI</button>
+    </nav>
+    <div class="hudgroup" id="hudBook" hidden>
+      <div class="stats">
+        <div>BÀI<b id="bNum">2.1</b></div>
+        <div>ĐÚNG<b id="bScore">00/20</b></div>
+      </div>
+    </div>
+    <div class="hudgroup" id="hudMiss" hidden>
+      <div class="stats">
+        <div>CẦN ÔN<b id="mNeed">00</b></div>
+        <div>ĐÃ SỬA<b id="mFixed">00</b></div>
+      </div>
+    </div>
+    <div class="hudgroup" id="hudWrite">
+      <div class="hearts" id="hearts" aria-label="Số tim còn lại"></div>
+      <div class="stats">
+        <div>SCORE<b id="score">0000</b></div>
+        <div>BEST<b id="best">0000</b></div>
+      </div>
+    </div>
+    <div class="hudgroup" id="hudQuiz" hidden>
+      <div class="stats">
+        <div>CÂU<b id="qNum">00/00</b></div>
+        <div>ĐÚNG<b id="qRight">00</b></div>
+        <div>BEST<b id="qBest">00</b></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="view" id="viewQuiz" hidden>
+    <div class="track" id="qTrack" aria-hidden="true"></div>
+    <section class="card" id="qCard">
+      <div class="cardtop">
+        <span class="stage" id="qStage">CÂU 01</span>
+        <span class="tag" id="qTag"></span>
+      </div>
+      <div class="qtext" id="qText"></div>
+      <div class="opts" id="qOpts"></div>
+      <div class="explain" id="qExplain" hidden></div>
+    </section>
+    <section class="card result" id="qResult" hidden></section>
+    <footer class="bar" id="qBar">
+      <div class="status" id="qStatus" aria-live="polite">Chọn đáp án đúng. Bấm vào ô hoặc nhấn phím 1 đến 4.</div>
+      <div class="actions"><button class="btn big go" id="qNext" type="button" hidden>CÂU TIẾP ▶</button></div>
+    </footer>
+  </div>
+
+  <div class="view" id="viewBook" hidden>
+    <nav class="exnav" id="exNav" aria-label="Chọn bài tập"></nav>
+    <section class="card" id="exCard"></section>
+    <footer class="bar">
+      <div class="status" id="bStatus" aria-live="polite"></div>
+      <div class="actions" id="bActions"></div>
+    </footer>
+  </div>
+
+  <div class="view" id="viewMiss" hidden>
+    <section class="card" id="missCard"></section>
+    <footer class="bar">
+      <div class="status" id="mStatus" aria-live="polite"></div>
+      <div class="actions" id="mActions"></div>
+    </footer>
+  </div>
+
+  <div class="view" id="viewWrite">
+  <div class="track" id="track" aria-hidden="true"></div>
+  <div class="revbar" id="revBar" hidden>
+    <span class="rt" id="revTxt">ĐANG ÔN TỪ HAY SAI</span>
+    <span class="actions"><button class="btn small" id="revList" type="button">← DANH SÁCH TỪ SAI</button><button class="btn small bad" id="exitReview" type="button">THOÁT, CHƠI ĐỦ BÀI</button></span>
+  </div>
+
+  <section class="card" id="card">
+    <div class="cardtop">
+      <span class="stage" id="stage">STAGE 01</span>
+      <span class="tag" id="tag"></span>
+    </div>
+    <figure class="pic4" id="pic" hidden></figure>
+    <div class="meaning" id="meaning"></div>
+    <div class="slots" id="slots" aria-label="Các ô chữ cái"></div>
+    <div class="hintrow">
+      <button class="btn small on" id="modeBtn" type="button">⌨ CHUYỂN SANG GÕ PHÍM</button>
+      <button class="btn small" id="hintFirst" type="button">GỢI Ý CHỮ ĐẦU</button>
+      <button class="btn small" id="hintIpa" type="button">PHIÊN ÂM</button>
+      <button class="btn small go" id="hintSay" type="button">▶ NGHE</button>
+      <button class="btn small go" id="hintSlow" type="button">▶ NGHE CHẬM</button>
+      <label class="voicebox" for="voiceSel">Giọng
+        <select id="voiceSel"></select>
+      </label>
+    </div>
+    <div class="tip" id="voiceTip" hidden>Trên iPad, Safari không cho trang web dùng giọng tải thêm (kể cả giọng “Cao cấp” như Ava, Zoe), nên chỉ chọn được trong danh sách này. Muốn nghe giọng tự nhiên hơn, mở trang này bằng Chrome hoặc Edge trên máy tính.</div>
+    <div class="example" id="example"></div>
+  </section>
+
+  <div class="keyhelp" id="keyhelp">Gõ bằng bàn phím, chữ hiện thẳng vào các ô. <kbd>BACKSPACE</kbd> xoá · <kbd>ENTER</kbd> kiểm tra, bấm lần nữa để sang từ tiếp · <kbd>1</kbd> phiên âm · <kbd>2</kbd> nghe · <kbd>3</kbd> nghe chậm · <kbd>4</kbd> gợi ý chữ đầu.<br>Nhớ tắt bộ gõ tiếng Việt (chuyển sang E) trước khi gõ.</div>
+
+  <section class="padwrap" id="padwrap">
+    <div class="tools">
+      <button class="btn small on" id="toolPen" type="button">BÚT</button>
+      <button class="btn small" id="toolEraser" type="button">TẨY</button>
+      <span class="sep"></span>
+      <button class="swatch on" type="button" data-color="#5debc0" style="background:#5debc0" aria-label="Màu xanh ngọc"></button>
+      <button class="swatch" type="button" data-color="#ffd166" style="background:#ffd166" aria-label="Màu vàng"></button>
+      <button class="swatch" type="button" data-color="#e9f4ff" style="background:#e9f4ff" aria-label="Màu trắng"></button>
+      <button class="swatch" type="button" data-color="#ff8fab" style="background:#ff8fab" aria-label="Màu hồng"></button>
+      <span class="sep"></span>
+      <button class="btn small" id="sizeBtn" type="button">NÉT: VỪA</button>
+      <button class="btn small" id="undoBtn" type="button">HOÀN TÁC</button>
+      <button class="btn small" id="clearBtn" type="button">XOÁ HẾT</button>
+      <span class="sep"></span>
+      <button class="btn small" id="penOnlyBtn" type="button" aria-pressed="false">CHỈ PENCIL: TẮT</button>
+    </div>
+    <div class="pad" id="pad">
+      <canvas id="cv"></canvas>
+      <div class="padhint" id="padhint">Viết từ tiếng Anh vào đây bằng Apple Pencil hoặc ngón tay</div>
+    </div>
+  </section>
+
+  <footer class="bar">
+    <div class="status" id="status" aria-live="polite">{{CUE}}, viết từ tiếng Anh vào ô, rồi bấm “Xem đáp án”.</div>
+    <div class="actions" id="actions"></div>
+  </footer>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <h2 id="mTitle">GAME OVER</h2>
+    <p id="mText"></p>
+    <div class="mbtns"><button class="btn big go" id="mBtn" type="button">CHƠI LẠI TỪ ĐẦU</button><button class="btn big" id="mBtn2" type="button" hidden>← DANH SÁCH TỪ SAI</button></div>
+  </div>
+</div>
+<script id="lesson-data" type="application/json">{{DATA}}</script>
+<script src="{{JS}}"></script>
+</body>
+</html>

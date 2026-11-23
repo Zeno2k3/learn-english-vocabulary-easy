@@ -1,0 +1,239 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Bài học Spell Quest",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "words"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Số bài, phải trùng với số đầu tên file (06-ten-bai.json có id 6)."
+    },
+    "title": {
+      "type": "string",
+      "description": "Tên bài, hiện ở trang chủ, đầu trò chơi và bản đồ 3D."
+    },
+    "topics": {
+      "type": "array",
+      "description": "Chủ đề MỚI của bài (nếu có). Chủ đề đã có trong data/topics.json thì không khai báo lại.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "vi"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Mã chủ đề, viết liền không dấu."
+          },
+          "vi": {
+            "type": "string",
+            "description": "Tên tiếng Việt."
+          },
+          "en": {
+            "type": "string",
+            "description": "Tên tiếng Anh."
+          },
+          "c": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3,
+            "description": "Toạ độ [x,y,z] từ -1.3 đến 1.3. Bỏ trống thì bản đồ tự đặt."
+          },
+          "color": {
+            "type": "string",
+            "description": "Màu riêng dạng #hex (không bắt buộc)."
+          }
+        }
+      }
+    },
+    "words": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Phần 1: Viết từ. Các từ này tự xuất hiện trên bản đồ 3D.",
+      "items": {
+        "type": "object",
+        "required": [
+          "w",
+          "vi",
+          "t",
+          "topic"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "q"
+            ]
+          },
+          {
+            "required": [
+              "img"
+            ]
+          }
+        ],
+        "properties": {
+          "w": {
+            "type": "string",
+            "description": "Đáp án tiếng Anh, có thể là cụm từ."
+          },
+          "ipa": {
+            "type": "string",
+            "description": "Phiên âm Anh-Anh, không có dấu gạch chéo."
+          },
+          "t": {
+            "type": "string",
+            "description": "Loại từ, ví dụ: danh từ."
+          },
+          "vi": {
+            "type": "string",
+            "description": "Nghĩa tiếng Việt, hiện sau khi trả lời."
+          },
+          "topic": {
+            "type": "string",
+            "description": "Mã chủ đề trên bản đồ 3D."
+          },
+          "q": {
+            "type": "string",
+            "description": "Câu gợi ý tình huống bằng tiếng Việt."
+          },
+          "img": {
+            "type": "string",
+            "description": "Ảnh dạng img/ten-anh.jpg, đặt trong data/images/<tên file bài>/."
+          },
+          "h": {
+            "type": "string",
+            "description": "Gợi ý ngắn hiện cùng ảnh."
+          },
+          "ex": {
+            "type": "string",
+            "description": "Câu ví dụ, chỗ trống viết ___ hoặc đánh dấu [[phần tô vàng]]."
+          }
+        }
+      }
+    },
+    "quiz": {
+      "type": "array",
+      "description": "Phần 2: Trắc nghiệm. Để [] nếu không có.",
+      "items": {
+        "type": "object",
+        "required": [
+          "q",
+          "o",
+          "why",
+          "rule"
+        ],
+        "properties": {
+          "tag": {
+            "type": "string",
+            "description": "Nhãn ngắn của lỗi."
+          },
+          "q": {
+            "type": "string",
+            "description": "Câu hỏi, chỗ trống viết ___."
+          },
+          "vi": {
+            "type": "string",
+            "description": "Dịch tiếng Việt."
+          },
+          "o": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "string"
+            },
+            "description": "Các đáp án. Đáp án ĐÚNG luôn đặt đầu tiên, trò chơi tự trộn."
+          },
+          "why": {
+            "type": "string",
+            "description": "Giải thích vì sao."
+          },
+          "rule": {
+            "type": "string",
+            "description": "Quy tắc ngắn để ghi nhớ."
+          }
+        }
+      }
+    },
+    "exercises": {
+      "type": "array",
+      "description": "Phần 3: Bài tập trong sách. Để [] nếu không có.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Số bài tập, ví dụ 6.1."
+          },
+          "type": {
+            "enum": [
+              "type",
+              "fill",
+              "sentence",
+              "choose",
+              "cross",
+              "free",
+              "gaps"
+            ],
+            "description": "Dạng bài tập."
+          },
+          "en": {
+            "type": "string",
+            "description": "Đề bài tiếng Anh."
+          }
+        }
+      }
+    },
+    "lint": {
+      "type": "array",
+      "description": "Bộ dò lỗi thường gặp cho phần 3.",
+      "items": {
+        "type": "object",
+        "required": [
+          "pattern",
+          "message"
+        ],
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "description": "Biểu thức chính quy."
+          },
+          "flags": {
+            "type": "string",
+            "description": "Cờ regex, thường là i."
+          },
+          "message": {
+            "type": "string",
+            "description": "Lời giải thích tiếng Việt."
+          }
+        }
+      }
+    },
+    "links": {
+      "type": "array",
+      "description": "Các cặp từ liên quan trên bản đồ 3D, có thể nối với từ của bài khác.",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "minItems": 2,
+        "maxItems": 2
+      }
+    }
+  }
+}

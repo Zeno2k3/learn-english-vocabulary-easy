@@ -307,7 +307,7 @@
       "t": "tính từ (so sánh hơn)",
       "vi": "lớn tuổi hơn, già hơn",
       "topic": "age",
-      "q": "Một từ tiếng Anh dùng để so sánh khi anh trai bạn 30 tuổi còn bạn 20 tuổi là gì?",
+      "q": "Một từ tiếng Anh dùng để so sánh khi một người có độ tuổi lớn hơn bạn rất nhiều?",
       "ex": "My brother is 30 and I'm 20, so he is ___ than me."
     },
     {
@@ -343,7 +343,12 @@
       "tag": "tall, không dùng high",
       "q": "My brother is very ___. He's almost two metres.",
       "vi": "Anh trai tôi rất cao. Anh ấy gần hai mét.",
-      "o": ["tall", "high", "long", "big"],
+      "o": [
+        "tall",
+        "high",
+        "long",
+        "big"
+      ],
       "why": "Người cao dùng tall. High dùng cho núi, toà nhà, bức tường, kệ sách… chứ không dùng cho người (sách ghi: People are tall, NOT high). Long là dài, big là to.",
       "rule": "Người cao: tall. Không nói a high man."
     },
@@ -351,7 +356,12 @@
       "tag": "medium height",
       "q": "He isn't tall and he isn't short. He's ___.",
       "vi": "Anh ấy không cao cũng không thấp. Anh ấy cao trung bình.",
-      "o": ["medium height", "medium tall", "middle tall", "half height"],
+      "o": [
+        "medium height",
+        "medium tall",
+        "middle tall",
+        "half height"
+      ],
       "why": "Không cao cũng không thấp thì nói medium height (be + medium height, không cần a). Không ghép medium hay middle với tính từ tall.",
       "rule": "Không cao không thấp: He's medium height."
     },
@@ -359,7 +369,12 @@
       "tag": "height",
       "q": "What's your ___? I'm 1 metre 70.",
       "vi": "Bạn cao bao nhiêu? Tôi cao 1 mét 70.",
-      "o": ["height", "heigth", "hight", "high"],
+      "o": [
+        "height",
+        "heigth",
+        "hight",
+        "high"
+      ],
       "why": "Danh từ chiều cao viết là height: h-e-i-g-h-t, đọc /haɪt/. Người học hay viết đảo thành heigth hoặc thiếu chữ e thành hight. High là tính từ, không dùng sau your.",
       "rule": "height /haɪt/: chữ e trước i, kết thúc bằng -ght."
     },
@@ -367,7 +382,12 @@
       "tag": "slim lịch sự hơn thin",
       "q": "Bạn muốn khen dáng của một người bạn. Câu nào lịch sự nhất?",
       "vi": "Chọn lời khen phù hợp.",
-      "o": ["You look really slim!", "You look really thin!", "You're so thin!", "You're too thin!"],
+      "o": [
+        "You look really slim!",
+        "You look really thin!",
+        "You're so thin!",
+        "You're too thin!"
+      ],
       "why": "Slim (thon thả) là lời khen. Thin (gầy) không hẳn là khen, có thể làm người nghe buồn, ví dụ khi họ gầy vì ốm. Sách ghi: slim is more polite than thin.",
       "rule": "Khen dáng người: slim. Thin nghe kém lịch sự hơn."
     },
@@ -375,7 +395,12 @@
       "tag": "overweight",
       "q": "I weigh too much. The doctor said I am ___.",
       "vi": "Tôi nặng quá. Bác sĩ nói tôi bị thừa cân.",
-      "o": ["overweight", "overweighted", "over weigh", "overweigh"],
+      "o": [
+        "overweight",
+        "overweighted",
+        "over weigh",
+        "overweigh"
+      ],
       "why": "Overweight là tính từ viết liền một chữ, nghĩa là weigh too much (nặng quá mức). Không thêm -ed, không tách thành hai chữ.",
       "rule": "overweight = weigh too much, viết liền, không có -ed."
     },
@@ -383,7 +408,12 @@
       "tag": "lời khuyên của sách",
       "q": "Câu nào KHÔNG nên nói thẳng với người khác?",
       "vi": "Ba câu còn lại là lời nói bình thường hoặc lời khen.",
-      "o": ["You're old.", "Your hair is beautiful.", "You're very tall.", "You look great today!"],
+      "o": [
+        "You're old.",
+        "Your hair is beautiful.",
+        "You're very tall.",
+        "You look great today!"
+      ],
       "why": "Sách có lời khuyên (Tip): vài từ trong bài nghe hơi tiêu cực, nên đừng nói thẳng với ai: You are fat / thin / ugly / old. Ba câu kia là lời khen hoặc nhận xét bình thường.",
       "rule": "Tránh nói thẳng: You are fat / thin / ugly / old."
     },
@@ -391,7 +421,12 @@
       "tag": "hair không có -s",
       "q": "She has long blonde ___.",
       "vi": "Cô ấy có mái tóc vàng dài.",
-      "o": ["hair", "hairs", "a hair", "the hairs"],
+      "o": [
+        "hair",
+        "hairs",
+        "a hair",
+        "the hairs"
+      ],
       "why": "Khi nói cả mái tóc trên đầu, hair là danh từ không đếm được: không thêm -s, không dùng a. Sách ghi: People have blonde or dark hair, NOT hairs.",
       "rule": "Cả mái tóc: hair (không -s). Hairs chỉ dùng khi đếm từng sợi."
     },
@@ -399,7 +434,12 @@
       "tag": "has got",
       "q": "Suri ___ dark hair and dark skin.",
       "vi": "Suri có tóc sẫm màu và da sẫm màu.",
-      "o": ["has got", "have got", "is got", "is having"],
+      "o": [
+        "has got",
+        "have got",
+        "is got",
+        "is having"
+      ],
       "why": "Tả ngoại hình có thể dùng has got thay cho has. Suri là ngôi thứ ba số ít nên dùng has got, không dùng have got. Không nói is got hay is having khi nói đặc điểm cơ thể.",
       "rule": "She/He has got … = She/He has …; I/You/They have got …"
     },
@@ -407,7 +447,12 @@
       "tag": "blonde = fair",
       "q": "Polly has blonde (or ___) hair and fair skin.",
       "vi": "Polly có tóc vàng và da trắng.",
-      "o": ["fair", "yellow", "gold", "clear"],
+      "o": [
+        "fair",
+        "yellow",
+        "gold",
+        "clear"
+      ],
       "why": "Tóc vàng nói blonde hair hoặc fair hair. Tiếng Việt nói tóc vàng nhưng tiếng Anh không nói yellow hair hay gold hair. Fair dùng cho cả tóc (sáng màu) và da (trắng).",
       "rule": "Tóc vàng: blonde hair = fair hair (không nói yellow hair)."
     },
@@ -415,7 +460,12 @@
       "tag": "beautiful",
       "q": "‘My mother is a very beautiful woman.’ Beautiful means ___.",
       "vi": "Mẹ tôi là một người phụ nữ rất đẹp. Beautiful nghĩa là…",
-      "o": ["very pretty", "a little pretty", "not pretty", "average-looking"],
+      "o": [
+        "very pretty",
+        "a little pretty",
+        "not pretty",
+        "average-looking"
+      ],
       "why": "Sách giải thích beautiful = very pretty, tức mức khen mạnh hơn pretty.",
       "rule": "beautiful = very pretty (khen mạnh nhất)."
     },
@@ -436,7 +486,12 @@
       "tag": "good-looking",
       "q": "My dad's a very ___ man.",
       "vi": "Bố tôi là một người đàn ông rất ưa nhìn.",
-      "o": ["good-looking", "good-looked", "good looks", "well-looking"],
+      "o": [
+        "good-looking",
+        "good-looked",
+        "good looks",
+        "well-looking"
+      ],
       "why": "Tính từ đúng là good-looking: good + looking, có dấu gạch nối, đuôi -ing. Không có good-looked hay well-looking. Good looks là danh từ (vẻ ngoài đẹp), không đứng trước man.",
       "rule": "good-looking: có gạch nối, đuôi -ing."
     },
@@ -444,7 +499,12 @@
       "tag": "ugly",
       "q": "Ugly is the opposite of ___.",
       "vi": "Ugly là từ trái nghĩa của…",
-      "o": ["beautiful or good-looking", "tall or short", "old or young", "slim or thin"],
+      "o": [
+        "beautiful or good-looking",
+        "tall or short",
+        "old or young",
+        "slim or thin"
+      ],
       "why": "Sách ghi: ugly = the opposite of beautiful or good-looking. Ugly là xấu về ngoại hình.",
       "rule": "ugly ↔ beautiful / good-looking."
     },
@@ -452,7 +512,12 @@
       "tag": "average-looking",
       "q": "I'm not ugly or beautiful, I'm just ___!",
       "vi": "Tôi không xấu cũng không đẹp, tôi chỉ bình thường thôi!",
-      "o": ["average-looking", "average-looked", "middle-looking", "medium-looking"],
+      "o": [
+        "average-looking",
+        "average-looked",
+        "middle-looking",
+        "medium-looking"
+      ],
       "why": "Không xấu không đẹp thì nói average-looking: average + looking, có dấu gạch nối, đuôi -ing (giống good-looking).",
       "rule": "Không xấu không đẹp: average-looking."
     },
@@ -460,7 +525,12 @@
       "tag": "elderly lịch sự hơn old",
       "q": "This hospital is for ___ people. (cách nói lịch sự)",
       "vi": "Bệnh viện này dành cho người cao tuổi.",
-      "o": ["elderly", "olderly", "elder", "oldly"],
+      "o": [
+        "elderly",
+        "olderly",
+        "elder",
+        "oldly"
+      ],
       "why": "Elderly là cách nói lịch sự hơn old (sách ghi: more polite than old), hay gặp ở bệnh viện, xe buýt, biển báo. Elder thường dùng cho anh chị trong nhà (my elder sister), không dùng thay elderly. Olderly, oldly không có trong tiếng Anh.",
       "rule": "Người già, nói lịch sự: elderly people."
     },
@@ -468,7 +538,12 @@
       "tag": "older",
       "q": "My sister is 14. She's young, but she would like to be ___.",
       "vi": "Em gái tôi 14 tuổi. Em ấy còn trẻ nhưng muốn được lớn hơn.",
-      "o": ["older", "more old", "elder", "oldder"],
+      "o": [
+        "older",
+        "more old",
+        "elder",
+        "oldder"
+      ],
       "why": "Old là tính từ ngắn nên so sánh hơn thêm -er: older (không dùng more old, không gấp đôi chữ d). Elder không đứng một mình sau be.",
       "rule": "old → older, young → younger (thêm -er)."
     },
@@ -476,7 +551,12 @@
       "tag": "middle-aged",
       "q": "My father is 56. He's ___.",
       "vi": "Bố tôi 56 tuổi. Ông ấy ở tuổi trung niên.",
-      "o": ["middle-aged", "middle-age", "medium-aged", "half-aged"],
+      "o": [
+        "middle-aged",
+        "middle-age",
+        "medium-aged",
+        "half-aged"
+      ],
       "why": "Trung niên là middle-aged: middle + aged, có dấu gạch nối và có -d ở cuối. Middle-age (không -d) là danh từ, không đứng sau He's.",
       "rule": "Tuổi trung niên: He's middle-aged (có -d)."
     },
@@ -484,7 +564,12 @@
       "tag": "hỏi chiều cao",
       "q": "A: ___ is Bettina?  B: She's 1.85 metres tall.",
       "vi": "A: Bettina cao bao nhiêu? B: Cô ấy cao 1,85 mét.",
-      "o": ["How tall", "What tall", "How height", "How long"],
+      "o": [
+        "How tall",
+        "What tall",
+        "How height",
+        "How long"
+      ],
       "why": "Hỏi chiều cao: How tall is …? Trả lời: She's 1.85 metres tall. Không dùng What tall hay How height.",
       "rule": "How tall is she? → She's … metres tall."
     },
@@ -492,7 +577,12 @@
       "tag": "hỏi cân nặng",
       "q": "A: How ___ are you?  B: I weigh 74 kilos.",
       "vi": "A: Bạn nặng bao nhiêu? B: Tôi nặng 74 cân.",
-      "o": ["heavy", "weight", "weigh", "much"],
+      "o": [
+        "heavy",
+        "weight",
+        "weigh",
+        "much"
+      ],
       "why": "Có hai cách hỏi cân nặng: How heavy are you? hoặc How much do you weigh? Ở đây có are you nên dùng How heavy. Weight là danh từ, weigh là động từ, không đứng sau How … are you.",
       "rule": "How heavy are you? = How much do you weigh?"
     },
@@ -500,7 +590,12 @@
       "tag": "trả lời cân nặng",
       "q": "A: How much do you weigh?  B: ___",
       "vi": "A: Bạn nặng bao nhiêu?",
-      "o": ["I weigh 62 kilos.", "I weight 62 kilos.", "My weigh is 62 kilos.", "I have 62 kilos."],
+      "o": [
+        "I weigh 62 kilos.",
+        "I weight 62 kilos.",
+        "My weigh is 62 kilos.",
+        "I have 62 kilos."
+      ],
       "why": "Weigh là động từ (cân nặng), weight là danh từ (cân nặng). Trả lời: I weigh 62 kilos. Nếu dùng danh từ thì phải là My weight is 62 kilos. Không nói I have 62 kilos.",
       "rule": "I weigh … kilos (động từ weigh, không có t)."
     },
@@ -508,7 +603,12 @@
       "tag": "hỏi và trả lời tuổi",
       "q": "A: How old is he?  B: ___",
       "vi": "A: Ông ấy bao nhiêu tuổi?",
-      "o": ["He's 84.", "He has 84 years.", "He's 84 years.", "He has 84."],
+      "o": [
+        "He's 84.",
+        "He has 84 years.",
+        "He's 84 years.",
+        "He has 84."
+      ],
       "why": "Tiếng Anh dùng be cho tuổi: He's 84 hoặc He's 84 years old. Không dùng have (He has 84 years là dịch từng chữ từ tiếng Việt), và nếu có years thì phải có old.",
       "rule": "Tuổi dùng be: He's 84 / He's 84 years old."
     },
@@ -516,7 +616,12 @@
       "tag": "hỏi ngoại hình",
       "q": "A: ___ does Gemma look like?  B: She's tall and dark. She's very pretty.",
       "vi": "A: Gemma trông thế nào? B: Cô ấy cao, tóc sẫm màu, rất xinh.",
-      "o": ["What", "How", "Who", "Which"],
+      "o": [
+        "What",
+        "How",
+        "Who",
+        "Which"
+      ],
       "why": "Hỏi ngoại hình: What does she look like? Người Việt hay nói How does she look like? vì dịch từ trông như thế nào, nhưng câu đó sai: đã có like thì phải dùng What.",
       "rule": "What does she look like? (không nói How … look like)."
     },
@@ -524,7 +629,12 @@
       "tag": "trả lời ngoại hình",
       "q": "A: What does your sister look like?  B: ___",
       "vi": "A: Chị gái bạn trông thế nào?",
-      "o": ["She's tall and dark.", "She likes music.", "She's fine, thanks.", "She looks like tall."],
+      "o": [
+        "She's tall and dark.",
+        "She likes music.",
+        "She's fine, thanks.",
+        "She looks like tall."
+      ],
       "why": "What does … look like? hỏi về ngoại hình, nên trả lời bằng chiều cao, vóc dáng, tóc, da: She's tall and dark. She likes music trả lời câu hỏi sở thích, She's fine trả lời How is she? Không nói looks like tall (look like + danh từ).",
       "rule": "Trả lời What … look like?: She's + tính từ ngoại hình."
     }
@@ -532,44 +642,161 @@
   "exercises": [],
   "lint": [],
   "links": [
-    ["tall", "short"],
-    ["slim", "thin"],
-    ["thin", "fat"],
-    ["fat", "overweight"],
-    ["height", "tall"],
-    ["height", "medium height"],
-    ["height", "weight"],
-    ["weight", "overweight"],
-    ["fair skin", "dark skin"],
-    ["dark hair", "blonde hair"],
-    ["blonde hair", "fair hair"],
-    ["fair hair", "fair skin"],
-    ["long hair", "short hair"],
-    ["brown eyes", "blue eyes"],
-    ["blue eyes", "green eyes"],
-    ["beard", "moustache"],
-    ["bald", "hair"],
-    ["long hair", "hair"],
-    ["brown eyes", "eye"],
-    ["moustache", "lip"],
-    ["beard", "face"],
-    ["face", "head"],
-    ["head", "hair"],
-    ["face", "nose"],
-    ["beautiful", "pretty"],
-    ["beautiful", "ugly"],
-    ["good-looking", "average-looking"],
-    ["pretty", "good-looking"],
-    ["age", "old"],
-    ["old", "young"],
-    ["older", "younger"],
-    ["old", "older"],
-    ["young", "younger"],
-    ["old", "elderly"],
-    ["middle-aged", "elderly"],
-    ["age", "birthday"],
-    ["beautiful", "bride"],
-    ["how heavy", "weight"],
-    ["how heavy", "overweight"]
+    [
+      "tall",
+      "short"
+    ],
+    [
+      "slim",
+      "thin"
+    ],
+    [
+      "thin",
+      "fat"
+    ],
+    [
+      "fat",
+      "overweight"
+    ],
+    [
+      "height",
+      "tall"
+    ],
+    [
+      "height",
+      "medium height"
+    ],
+    [
+      "height",
+      "weight"
+    ],
+    [
+      "weight",
+      "overweight"
+    ],
+    [
+      "fair skin",
+      "dark skin"
+    ],
+    [
+      "dark hair",
+      "blonde hair"
+    ],
+    [
+      "blonde hair",
+      "fair hair"
+    ],
+    [
+      "fair hair",
+      "fair skin"
+    ],
+    [
+      "long hair",
+      "short hair"
+    ],
+    [
+      "brown eyes",
+      "blue eyes"
+    ],
+    [
+      "blue eyes",
+      "green eyes"
+    ],
+    [
+      "beard",
+      "moustache"
+    ],
+    [
+      "bald",
+      "hair"
+    ],
+    [
+      "long hair",
+      "hair"
+    ],
+    [
+      "brown eyes",
+      "eye"
+    ],
+    [
+      "moustache",
+      "lip"
+    ],
+    [
+      "beard",
+      "face"
+    ],
+    [
+      "face",
+      "head"
+    ],
+    [
+      "head",
+      "hair"
+    ],
+    [
+      "face",
+      "nose"
+    ],
+    [
+      "beautiful",
+      "pretty"
+    ],
+    [
+      "beautiful",
+      "ugly"
+    ],
+    [
+      "good-looking",
+      "average-looking"
+    ],
+    [
+      "pretty",
+      "good-looking"
+    ],
+    [
+      "age",
+      "old"
+    ],
+    [
+      "old",
+      "young"
+    ],
+    [
+      "older",
+      "younger"
+    ],
+    [
+      "old",
+      "older"
+    ],
+    [
+      "young",
+      "younger"
+    ],
+    [
+      "old",
+      "elderly"
+    ],
+    [
+      "middle-aged",
+      "elderly"
+    ],
+    [
+      "age",
+      "birthday"
+    ],
+    [
+      "beautiful",
+      "bride"
+    ],
+    [
+      "how heavy",
+      "weight"
+    ],
+    [
+      "how heavy",
+      "overweight"
+    ]
   ]
 }

@@ -1,0 +1,55 @@
+{
+    "$schema": "../lesson.schema.json",
+    "id": 6,
+    "title": "Tên bài học",
+    "topics": [
+        {
+            "id": "chu-de-moi",
+            "vi": "Chủ đề mới",
+            "en": "New topic"
+        }
+    ],
+    "words": [
+        {
+            "w": "teacher",
+            "ipa": "ˈtiːtʃə",
+            "t": "danh từ",
+            "vi": "giáo viên",
+            "topic": "chu-de-moi",
+            "q": "Sáng nào đến lớp, người này cũng đứng trên bục giảng và hướng dẫn cả lớp làm bài.",
+            "ex": "My ___ is very kind."
+        },
+        {
+            "w": "student",
+            "ipa": "ˈstjuːdənt",
+            "t": "danh từ",
+            "vi": "học sinh, sinh viên",
+            "topic": "chu-de-moi",
+            "q": "Mỗi ngày người này đeo cặp đến trường, ngồi nghe giảng và làm bài tập về nhà.",
+            "ex": "She is a ___ at Hanoi University."
+        }
+    ],
+    "quiz": [
+        {
+            "tag": "good at",
+            "q": "She is good ___ English.",
+            "vi": "Cô ấy giỏi tiếng Anh.",
+            "o": [
+                "at",
+                "in",
+                "on",
+                "for"
+            ],
+            "why": "Sau good dùng giới từ at để nói về khả năng.",
+            "rule": "good at + môn học hoặc kỹ năng."
+        }
+    ],
+    "exercises": [],
+    "lint": [],
+    "links": [
+        [
+            "teacher",
+            "student"
+        ]
+    ]
+}

@@ -28,7 +28,7 @@ Sửa bài cũ cũng vậy: sửa file JSON rồi push.
 | `quiz` | | Phần 2: Trắc nghiệm lỗi thường gặp |
 | `exercises` | | Phần 3: Bài tập trong sách |
 | `lint` | | Quy tắc dò lỗi cho phần 3 |
-| `topics` | | Chủ đề **mới** trên bản đồ 3D |
+| `topics` | | Chủ đề **mới** trên bản đồ 3D, chỉ cần `id`, `vi`, `en`. Vị trí và màu do build tự tính |
 | `links` | | Cặp từ liên quan trên bản đồ 3D, ví dụ `["bride", "groom"]` |
 
 Mỗi từ trong `words`:

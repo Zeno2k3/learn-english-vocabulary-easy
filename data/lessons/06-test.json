@@ -1,55 +1,361 @@
 {
-    "$schema": "../lesson.schema.json",
     "id": 6,
-    "title": "Tên bài học",
+    "title": "Health and illness",
     "topics": [
         {
-            "id": "chu-de-moi",
-            "vi": "Chủ đề mới",
-            "en": "New topic"
+            "id": "health_state",
+            "vi": "Trạng thái sức khỏe",
+            "en": "Health states & feelings"
+        },
+        {
+            "id": "symptoms",
+            "vi": "Đau nhức & Triệu chứng",
+            "en": "Aches & common symptoms"
+        },
+        {
+            "id": "diseases",
+            "vi": "Bệnh lý & Tác nhân",
+            "en": "Serious illnesses & causes"
+        },
+        {
+            "id": "care",
+            "vi": "Y tế & Sống khỏe",
+            "en": "Medical care & healthy lifestyle"
         }
     ],
     "words": [
         {
-            "w": "teacher",
-            "ipa": "ˈtiːtʃə",
-            "t": "danh từ",
-            "vi": "giáo viên",
-            "topic": "chu-de-moi",
-            "q": "Sáng nào đến lớp, người này cũng đứng trên bục giảng và hướng dẫn cả lớp làm bài.",
-            "ex": "My ___ is very kind."
+            "w": "well",
+            "ipa": "wel",
+            "t": "tính từ / trạng từ",
+            "vi": "khỏe; tốt",
+            "topic": "health_state",
+            "q": "Khi ai đó hỏi thăm tình hình sức khỏe và bạn muốn đáp lại một cách tích cực nhất, bạn sẽ dùng từ gì?",
+            "ex": "I'm very ___, thanks."
         },
         {
-            "w": "student",
-            "ipa": "ˈstjuːdənt",
-            "t": "danh từ",
-            "vi": "học sinh, sinh viên",
-            "topic": "chu-de-moi",
-            "q": "Mỗi ngày người này đeo cặp đến trường, ngồi nghe giảng và làm bài tập về nhà.",
-            "ex": "She is a ___ at Hanoi University."
-        }
-    ],
-    "quiz": [
+            "w": "fine",
+            "ipa": "faɪn",
+            "t": "tính từ",
+            "vi": "ổn, khỏe",
+            "topic": "health_state",
+            "q": "Tính từ ngắn gọn, phổ biến nhất dùng để đáp lại lời chào hỏi thăm sức khỏe thường ngày?",
+            "ex": "I'm ___, thanks."
+        },
         {
-            "tag": "good at",
-            "q": "She is good ___ English.",
-            "vi": "Cô ấy giỏi tiếng Anh.",
-            "o": [
-                "at",
-                "in",
-                "on",
-                "for"
-            ],
-            "why": "Sau good dùng giới từ at để nói về khả năng.",
-            "rule": "good at + môn học hoặc kỹ năng."
+            "w": "feel ill",
+            "ipa": "fiːl ˈɪl",
+            "t": "cụm động từ",
+            "vi": "cảm thấy không khỏe, cảm thấy ốm",
+            "topic": "health_state",
+            "q": "Cụm động từ diễn tả cảm giác trong người khó chịu, báo hiệu cơ thể sắp đổ bệnh và cần đi khám?",
+            "ex": "I ___ and I think I need to see a doctor."
+        },
+        {
+            "w": "feel very well",
+            "ipa": "fiːl ˈveri wel",
+            "t": "cụm động từ",
+            "vi": "cảm thấy rất khỏe",
+            "topic": "health_state",
+            "q": "Cụm từ diễn tả trạng thái tràn đầy năng lượng, thường đi kèm với 'don't' khi bạn thấy mệt trong người?",
+            "ex": "I don't ___ today."
+        },
+        {
+            "w": "sick",
+            "ipa": "sɪk",
+            "t": "tính từ",
+            "vi": "ốm; buồn nôn",
+            "topic": "health_state",
+            "q": "Tính từ diễn tả trạng thái suy nhược thể chất, hoặc cảm giác cồn cào ở dạ dày như sắp trào ngược thức ăn?",
+            "ex": "I think I'm going to be ___."
+        },
+        {
+            "w": "vomit",
+            "ipa": "ˈvɒmɪt",
+            "t": "động từ",
+            "vi": "nôn, ói",
+            "topic": "symptoms",
+            "q": "Phản xạ mạnh của dạ dày đẩy ngược thức ăn ra ngoài qua đường miệng khi bị ngộ độc hoặc say xe?",
+            "ex": "I feel ill and I think I'm going to ___."
+        },
+        {
+            "w": "doctor",
+            "ipa": "ˈdɒktə(r)",
+            "t": "danh từ",
+            "vi": "bác sĩ",
+            "topic": "care",
+            "q": "Người có chuyên môn y khoa mà bạn tìm đến đầu tiên để chẩn đoán bệnh và kê đơn thuốc?",
+            "ex": "Can you get me a ___, please?"
+        },
+        {
+            "w": "ache",
+            "ipa": "eɪk",
+            "t": "danh từ",
+            "vi": "cơn đau nhức",
+            "topic": "symptoms",
+            "q": "Từ chỉ cảm giác khó chịu âm ỉ, kéo dài ở một vùng cơ thể, thường đứng sau tên các bộ phận (như lưng, bụng)?",
+            "ex": "I've got a dull ___ in my lower back."
+        },
+        {
+            "w": "headache",
+            "ipa": "ˈhedeɪk",
+            "t": "danh từ",
+            "vi": "chứng đau đầu",
+            "topic": "symptoms",
+            "q": "Triệu chứng khó chịu ở vùng thái dương hoặc trán, thường gặp khi bạn làm việc quá sức hoặc thiếu ngủ?",
+            "ex": "I've got a ___."
+        },
+        {
+            "w": "toothache",
+            "ipa": "ˈtuːθeɪk",
+            "t": "danh từ",
+            "vi": "chứng đau răng",
+            "topic": "symptoms",
+            "q": "Triệu chứng ê buốt, nhức nhối trong khoang miệng khiến bạn khó nhai nuốt và phải đi nha khoa?",
+            "ex": "I've got ___; I need to go to the dentist."
+        },
+        {
+            "w": "dentist",
+            "ipa": "ˈdentɪst",
+            "t": "danh từ",
+            "vi": "nha sĩ",
+            "topic": "care",
+            "q": "Chuyên gia y tế chuyên kiểm tra, trám, nhổ và chăm sóc các vấn đề về răng miệng?",
+            "ex": "I need to go to the ___."
+        },
+        {
+            "w": "hot drink",
+            "ipa": "ˌhɒt ˈdrɪŋk",
+            "t": "cụm danh từ",
+            "vi": "đồ uống nóng",
+            "topic": "care",
+            "q": "Thứ chất lỏng ấm áp (như trà gừng, sữa ấm) thường dùng trước khi đi ngủ để làm dịu cổ họng?",
+            "ex": "I'm going to bed with a ___"
+        },
+        {
+            "w": "cold",
+            "ipa": "kəʊld",
+            "t": "danh từ",
+            "vi": "bệnh cảm lạnh",
+            "topic": "symptoms",
+            "q": "Bệnh truyền nhiễm nhẹ phổ biến nhất khi giao mùa, gây nghẹt mũi, rát họng và ho nhẹ?",
+            "ex": "I've got a ___."
+        },
+        {
+            "w": "hay fever",
+            "ipa": "ˈheɪ ˌfiːvə(r)",
+            "t": "danh từ",
+            "vi": "bệnh dị ứng phấn hoa",
+            "topic": "symptoms",
+            "q": "Phản ứng mẫn cảm của cơ thể với các hạt li ti từ hoa cỏ vào mùa xuân hè, gây chảy nước mắt và ngứa mũi?",
+            "ex": "I get ___ every summer, from flowers and grass."
+        },
+        {
+            "w": "sneeze",
+            "ipa": "sniːz",
+            "t": "động từ / danh từ",
+            "vi": "hắt hơi; cái hắt hơi",
+            "topic": "symptoms",
+            "q": "Phản xạ tống luồng khí đột ngột và mạnh qua đường mũi miệng khi niêm mạc mũi bị kích ứng?",
+            "ex": "I ___ all day."
+        },
+        {
+            "w": "asthma",
+            "ipa": "ˈæsmə",
+            "t": "danh từ",
+            "vi": "bệnh hen suyễn",
+            "topic": "diseases",
+            "q": "Một tình trạng mãn tính làm đường dẫn khí bị thu hẹp, gây khò khè và buộc người bệnh phải dùng ống hít?",
+            "ex": "My little brother has ___; sometimes he can't breathe."
+        },
+        {
+            "w": "mosquito",
+            "ipa": "məˈskiːtəʊ",
+            "t": "danh từ",
+            "vi": "muỗi",
+            "topic": "diseases",
+            "q": "Loài côn trùng nhỏ có cánh, thường vo ve vào ban đêm, đốt gây ngứa và là trung gian truyền bệnh nguy hiểm?",
+            "ex": "A ___ can transmit diseases."
+        },
+        {
+            "w": "malaria",
+            "ipa": "məˈleəriə",
+            "t": "danh từ",
+            "vi": "bệnh sốt rét",
+            "topic": "diseases",
+            "q": "Căn bệnh nhiệt đới nguy hiểm gây sốt cao, rét run từng cơn do ký sinh trùng từ côn trùng hút máu truyền sang?",
+            "ex": "In some countries, mosquitoes can give people ___."
+        },
+        {
+            "w": "cholera",
+            "ipa": "ˈkɒlərə",
+            "t": "danh từ",
+            "vi": "bệnh tả",
+            "topic": "diseases",
+            "q": "Dịch bệnh đường tiêu hóa cấp tính gây tiêu chảy mất nước nghiêm trọng, lây lan qua nguồn nước mất vệ sinh?",
+            "ex": "The drinking water was bad, and many children had ___."
+        },
+        {
+            "w": "cancer",
+            "ipa": "ˈkænsə(r)",
+            "t": "danh từ",
+            "vi": "bệnh ung thư",
+            "topic": "diseases",
+            "q": "Căn bệnh hiểm nghèo xảy ra khi các tế bào bất thường phân chia mất kiểm soát và phá hủy mô cơ thể?",
+            "ex": "Every year ___ kills many people who smoke."
+        },
+        {
+            "w": "smoke",
+            "ipa": "sməʊk",
+            "t": "động từ",
+            "vi": "hút thuốc",
+            "topic": "diseases",
+            "q": "Thói quen xấu đưa khói từ các điếu lá cuộn vào phổi, làm tăng nguy cơ mắc các bệnh hô hấp nghiêm trọng?",
+            "ex": "People who ___ may increase their risk of cancer."
+        },
+        {
+            "w": "hospital",
+            "ipa": "ˈhɒspɪtl",
+            "t": "danh từ",
+            "vi": "bệnh viện",
+            "topic": "care",
+            "q": "Nơi tập trung đội ngũ y bác sĩ và trang thiết bị hiện đại để phẫu thuật, cấp cứu và điều trị nội trú?",
+            "ex": "My father went to ___ when he had a heart attack."
+        },
+        {
+            "w": "heart attack",
+            "ipa": "ˈhɑːt əˌtæk",
+            "t": "cụm danh từ",
+            "vi": "cơn đau tim, nhồi máu cơ tim",
+            "topic": "diseases",
+            "q": "Biến cố y tế khẩn cấp xảy ra khi dòng máu nuôi cơ quan bơm máu chính của cơ thể bị chặn đứng đột ngột?",
+            "ex": "My father had a ___."
+        },
+        {
+            "w": "healthy diet",
+            "ipa": "ˌhelθi ˈdaɪət",
+            "t": "cụm danh từ",
+            "vi": "chế độ ăn uống lành mạnh",
+            "topic": "care",
+            "q": "Thói quen nạp thực phẩm cân bằng giữa rau xanh, đạm và tinh bột để giữ vóc dáng và phòng ngừa bệnh tật?",
+            "ex": "Do you have a ___?"
+        },
+        {
+            "w": "exercise",
+            "ipa": "ˈeksəsaɪz",
+            "t": "danh từ / động từ",
+            "vi": "sự tập thể dục; tập thể dục",
+            "topic": "care",
+            "q": "Các hoạt động vận động thể chất như chạy bộ, bơi lội giúp tăng cường cơ bắp và sức bền?",
+            "ex": "Do you ___?"
+        },
+        {
+            "w": "feel stressed",
+            "ipa": "fiːl strest",
+            "t": "cụm động từ",
+            "vi": "cảm thấy căng thẳng",
+            "topic": "health_state",
+            "q": "Trạng thái tinh thần mệt mỏi, bức bối khi phải đối mặt với quá nhiều áp lực công việc hoặc học tập?",
+            "ex": "I ___ when I have too much work."
+        },
+        {
+            "w": "relax",
+            "ipa": "rɪˈlæks",
+            "t": "động từ",
+            "vi": "thư giãn",
+            "topic": "care",
+            "q": "Hành động thả lỏng tâm trí và cơ thể (như nghe nhạc, đọc sách) sau những giờ làm việc mệt mỏi?",
+            "ex": "You need to ___ more."
+        },
+        {
+            "w": "good for you",
+            "ipa": "ˈɡʊd fə juː",
+            "t": "cụm tính từ",
+            "vi": "tốt cho bạn, có lợi cho sức khỏe",
+            "topic": "care",
+            "q": "Cụm từ nhận xét một thói quen hay món ăn nào đó mang lại tác động tích cực cho thể chất?",
+            "ex": "Swimming and cycling are ___"
         }
     ],
+    "quiz": [],
     "exercises": [],
     "lint": [],
     "links": [
         [
-            "teacher",
-            "student"
+            "well",
+            "fine"
+        ],
+        [
+            "well",
+            "feel very well"
+        ],
+        [
+            "feel ill",
+            "feel very well"
+        ],
+        [
+            "feel ill",
+            "sick"
+        ],
+        [
+            "sick",
+            "vomit"
+        ],
+        [
+            "feel ill",
+            "doctor"
+        ],
+        [
+            "ache",
+            "headache"
+        ],
+        [
+            "ache",
+            "toothache"
+        ],
+        [
+            "toothache",
+            "dentist"
+        ],
+        [
+            "cold",
+            "hot drink"
+        ],
+        [
+            "hay fever",
+            "sneeze"
+        ],
+        [
+            "cold",
+            "sneeze"
+        ],
+        [
+            "mosquito",
+            "malaria"
+        ],
+        [
+            "cancer",
+            "smoke"
+        ],
+        [
+            "hospital",
+            "heart attack"
+        ],
+        [
+            "hospital",
+            "doctor"
+        ],
+        [
+            "healthy diet",
+            "good for you"
+        ],
+        [
+            "exercise",
+            "good for you"
+        ],
+        [
+            "feel stressed",
+            "relax"
         ]
     ]
 }

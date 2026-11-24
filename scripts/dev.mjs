@@ -7,6 +7,8 @@ import { fileURLToPath } from "node:url";
 import { build, report } from "./build.mjs";
 
 const ROOT = resolve(fileURLToPath(import.meta.url), "../..");
+/* Khoá Supabase khi chạy trên máy: đặt trong .env.local (không đưa lên git). */
+for (const f of [".env.local", ".env"]) if (existsSync(join(ROOT, f))) { process.loadEnvFile(join(ROOT, f)); break; }
 const DIST = join(ROOT, "dist");
 const PORT = Number(process.env.PORT) || 4173;
 const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".json": "application/json", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp" };

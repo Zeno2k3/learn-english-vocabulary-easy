@@ -3,3 +3,5 @@ dist/
 legacy/
 .DS_Store
 *.log
+.env
+.env.*

@@ -235,7 +235,7 @@ function setMode(m, save){
 $("modeBtn").onclick = () => setMode(S.mode==="type" ? "pen" : "type", true);
 
 document.addEventListener("keydown", e => {
-  if(S.mode!=="type" || $("viewWrite").hidden || !$("overlay").hidden) return;
+  if(SQSync.isOpen() || S.mode!=="type" || $("viewWrite").hidden || !$("overlay").hidden) return;
   if(e.metaKey || e.ctrlKey || e.altKey) return;
   const k = e.key;
   const isLetter = /^[a-zA-Z'\-]$/.test(k);
@@ -271,7 +271,7 @@ function nextWordReset(){
 }
 
 function saveBest(){
-  if(S.score > S.best){ S.best = S.score; try{ localStorage.setItem(KEY("best"), String(S.best)); }catch(e){} }
+  if(S.score > S.best){ S.best = S.score; try{ localStorage.setItem(KEY("best"), String(S.best)); }catch(e){} SQSync.touch(LESSON.id); }
 }
 
 function openModal(kind, title, text, btn){
@@ -510,7 +510,7 @@ document.querySelectorAll(".swatch").forEach(b => b.onclick = () => {
 if("ResizeObserver" in window) new ResizeObserver(fit).observe(pad); else window.addEventListener("resize", fit);
 
 document.addEventListener("keydown", e => {
-  if(!$("overlay").hidden) return;
+  if(SQSync.isOpen() || !$("overlay").hidden) return;
   if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==="z"){ e.preventDefault(); strokes.pop(); redraw(); }
 });
 
@@ -585,7 +585,7 @@ $("qNext").onclick = () => {
 };
 function quizFinish(){
   const n = Q.order.length;
-  if(n === QUIZ.length && Q.right > Q.best){ Q.best = Q.right; try{ localStorage.setItem(KEY("qbest"), String(Q.best)); }catch(e){} }
+  if(n === QUIZ.length && Q.right > Q.best){ Q.best = Q.right; try{ localStorage.setItem(KEY("qbest"), String(Q.best)); }catch(e){} SQSync.touch(LESSON.id); }
   const wrongIdx = Q.order.filter((_,k)=>Q.results[k]===false);
   const msg = Q.right === n ? "Hoàn hảo! Bạn đã nắm chắc các lỗi thường gặp." :
               Q.right >= n*0.75 ? "Rất tốt. Xem lại vài câu sai bên dưới là ổn." :
@@ -616,7 +616,12 @@ const norm = s => s.toLowerCase().replace(/[’‘]/g,"'").replace(/[.,!?;:]/g,"
 
 const B = {ex:0, ans:{}, res:{}, shown:{}, active:null};
 try { const saved = JSON.parse(localStorage.getItem(KEY("book"))||"null"); if(saved){ B.ans = saved.ans||{}; B.res = saved.res||{}; } } catch(e) {}
-function bSave(){ try{ localStorage.setItem(KEY("book"), JSON.stringify({ans:B.ans,res:B.res})); }catch(e){} }
+function bSave(){
+  const body = JSON.stringify({ans:B.ans,res:B.res});
+  let prev = null;
+  try{ prev = localStorage.getItem(KEY("book")); localStorage.setItem(KEY("book"), body); }catch(e){}
+  if(body !== prev) SQSync.touchBook(LESSON.id);
+}
 const key = (e,i) => `${EX[e].id}-${i}`;
 const SCORED = () => EX.flatMap((ex,e) => {
   if(ex.type==="gaps") return ex.items.flatMap((it,i)=>it.t.map((g,j)=>typeof g==="object"&&!g.ex?key(e,i+"_"+j):null).filter(Boolean));
@@ -968,27 +973,23 @@ $("tabQuiz").hidden = !QUIZ.length;
 $("tabBook").hidden = !EX.length;
 $("tabs").hidden = false;
 
-/* ---------- từ hay sai: ghi mỗi lần sai, lưu trên máy và đồng bộ qua db (collection "mistakes") ---------- */
+/* ---------- từ hay sai: ghi mỗi lần sai, lưu trên máy và đồng bộ qua Supabase (src/sync/sync.js) ---------- */
 const MISS_KEY = KEY("miss");
 const MASTER = 3;
-const M = {stats:{}, db:null, q:{}, synced:false, wipeArm:false};
+const M = {stats:{}, wipeArm:false};
 const wkey = w => String(w).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"") || "x";
 try { M.stats = JSON.parse(localStorage.getItem(MISS_KEY)||"{}") || {}; } catch(e) { M.stats = {}; }
 function missSaveLocal(){ try{ localStorage.setItem(MISS_KEY, JSON.stringify(M.stats)); }catch(e){} }
-function missPush(k){
-  if(!M.db) return;
-  const body = Object.assign({}, M.stats[k]);
-  M.q[k] = (M.q[k] || Promise.resolve()).then(() => M.db.doc("mistakes/" + k).set(body)).catch(() => {});
-}
 function recordResult(w, ok){
   const k = wkey(w);
   let s = M.stats[k];
   if(ok && !s) return;
   if(!s) s = {w, wrong:0, right:0, streak:0, last:0, lastWrong:0};
-  if(ok){ s.right++; s.streak++; } else { s.wrong++; s.streak = 0; s.lastWrong = Date.now(); }
-  s.w = w; s.last = Date.now();
+  const at = SQSync.stamp(LESSON.id, s.last);
+  if(ok){ s.right++; s.streak++; } else { s.wrong++; s.streak = 0; s.lastWrong = at; }
+  s.w = w; s.last = at;
   M.stats[k] = s;
-  missSaveLocal(); missPush(k); missHud();
+  missSaveLocal(); SQSync.touch(LESSON.id); missHud();
   if(!$("viewMiss").hidden) renderMiss();
 }
 function missItems(){
@@ -1019,7 +1020,7 @@ function missRow(x, max, fixed){
 function renderMiss(){
   const {need, fixed} = missLists();
   const max = Math.max(1, ...need.map(x => x.wrong), ...fixed.map(x => x.wrong));
-  let h = `<div class="mhead"><h2>Từ hay sai</h2><span class="sync">${M.db ? "Đồng bộ giữa iPad và máy tính" : "Chỉ lưu trên máy này"}</span></div>
+  let h = `<div class="mhead"><h2>Từ hay sai</h2><span class="sync">${SQSync.signedIn() ? "Đồng bộ giữa iPad và máy tính" : "Chỉ lưu trên máy này"}</span></div>
     <p class="mintro">Mỗi lần viết sai ở phần 1 đều được ghi lại. Viết đúng ${MASTER} lần liền thì từ chuyển xuống mục “Đã sửa được”.</p>`;
   if(!need.length && !fixed.length){
     h += `<div class="mempty">Chưa có từ nào bị sai. Chơi phần 1, từ nào bạn viết sai sẽ hiện ở đây.</div>`;
@@ -1043,9 +1044,9 @@ function renderMiss(){
 function wipeMiss(){
   const b = $("mWipe");
   if(!M.wipeArm){ M.wipeArm = true; b.classList.add("arm"); b.textContent = "BẤM LẦN NỮA ĐỂ XOÁ"; $("mStatus").textContent = "Thao tác này xoá toàn bộ lịch sử sai của bài này."; return; }
-  const keys = Object.keys(M.stats);
+  const maxLast = Math.max(0, ...Object.values(M.stats).map(s => (s && s.last) || 0));
   M.stats = {}; missSaveLocal();
-  if(M.db) keys.forEach(k => { M.q[k] = (M.q[k] || Promise.resolve()).then(() => M.db.doc("mistakes/" + k).delete()).catch(() => {}); });
+  SQSync.wipe(LESSON.id, maxLast);
   renderMiss();
   $("mStatus").textContent = "Đã xoá thống kê.";
 }
@@ -1073,31 +1074,37 @@ $("exitReview").onclick = exitReview;
 $("revList").onclick = () => { exitReview(); showView("miss"); };
 $("mBtn2").onclick = () => { $("overlay").hidden = true; exitReview(); showView("miss"); };
 $("tabMiss").onclick = () => showView("miss");
-(async () => {
-  try{
-    if(!(window.claude && typeof window.claude.use === "function")) return;
-    const db = await window.claude.use("db");
-    if(!db) return;
-    const snap = await db.collection("mistakes").get();
-    M.db = db;
-    const remote = {};
-    snap.docs.forEach(d => { const v = d.data(); if(v) remote[d.id] = v; });
-    const keys = new Set([...Object.keys(remote), ...Object.keys(M.stats)]);
-    keys.forEach(k => {
-      const r = remote[k], l = M.stats[k];
-      if(r && (!l || (r.last || 0) >= (l.last || 0))) M.stats[k] = Object.assign({}, r);
-      else if(l) missPush(k);
-    });
-    missSaveLocal(); M.synced = true;
-    missHud();
-    if(!$("viewMiss").hidden) renderMiss();
-  }catch(e){ M.db = null; }
-})();
+function syncApply(){
+  try { M.stats = JSON.parse(localStorage.getItem(MISS_KEY)||"{}") || {}; } catch(e) { M.stats = {}; }
+  S.best = Math.max(S.best, parseInt(localStorage.getItem(KEY("best"))||"0",10)||0);
+  Q.best = Math.max(Q.best, parseInt(localStorage.getItem(KEY("qbest"))||"0",10)||0);
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem(KEY("book"))||"null"); } catch(e) {}
+  const ans = (saved && saved.ans) || {}, res = (saved && saved.res) || {};
+  if(JSON.stringify({ans,res}) !== JSON.stringify({ans:B.ans,res:B.res})){
+    B.ans = ans; B.res = res;
+    if(EX.length){
+      /* đang gõ dở thì chờ rời ô rồi mới vẽ lại, tránh mất con trỏ */
+      if($("viewBook").contains(document.activeElement) && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) B.stale = true;
+      else bRender();
+    }
+  }
+  missHud(); renderHud();
+  if(QUIZ.length) quizHud();
+  if(!$("viewMiss").hidden) renderMiss();
+}
+$("viewBook").addEventListener("focusout", e => {
+  if(!B.stale || (e.relatedTarget && $("viewBook").contains(e.relatedTarget))) return;
+  B.stale = false; bRender();
+});
+window.addEventListener("sq-sync", e => { if(e.detail.lessons.includes(LESSON.id)) syncApply(); });
+window.addEventListener("sq-sync-auth", () => { if(!$("viewMiss").hidden) renderMiss(); });
+window.addEventListener("storage", e => { if([MISS_KEY, KEY("best"), KEY("qbest"), KEY("book")].includes(e.key)) syncApply(); });
 missHud();
 window.addEventListener("hashchange", () => showView(viewFromHash()));
 if(EX.length) bRender();
 document.addEventListener("keydown", e => {
-  if(Q.view !== "quiz" || e.metaKey || e.ctrlKey || e.altKey) return;
+  if(SQSync.isOpen() || Q.view !== "quiz" || e.metaKey || e.ctrlKey || e.altKey) return;
   if(!Q.answered && $("qResult").hidden){
     const k = KEYS.indexOf(e.key);
     const b = $("qOpts").children[k];

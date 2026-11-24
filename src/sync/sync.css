@@ -1,0 +1,15 @@
+.sqs-pill{position:fixed;right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));z-index:9000;padding:7px 12px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:rgba(20,22,38,.88);color:#fff;font:500 13px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer}
+.sqs-pill:focus-visible,.sqs-dialog button:focus-visible,.sqs-dialog input:focus-visible{outline:2px solid #ffd166;outline-offset:2px}
+.sqs-pill[data-state="ok"]{border-color:#59a14f}
+.sqs-pill[data-state="error"],.sqs-pill[data-state="offline"]{border-color:#e15759}
+.sqs-dialog{width:min(92vw,360px);padding:20px;border:1px solid #454a6b;border-radius:10px;background:#171a2e;color:#f4f5fb;font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+.sqs-dialog::backdrop{background:rgba(5,6,15,.65)}
+.sqs-dialog h2{margin:0 0 14px;font-size:18px;font-weight:600}
+.sqs-dialog label{display:block;margin-bottom:12px;font-size:13px;color:#c5c8dc}
+.sqs-dialog input{display:block;box-sizing:border-box;width:100%;margin-top:4px;padding:9px 10px;border:1px solid #565c80;border-radius:6px;background:#0e1020;color:#fff;font-size:16px}
+.sqs-who{margin:0 0 6px;font-weight:600;overflow-wrap:anywhere}
+.sqs-msg{min-height:20px;margin:0 0 12px;font-size:13px;color:#ffd166}
+.sqs-row{display:flex;flex-wrap:wrap;gap:8px}
+.sqs-dialog button{padding:8px 12px;border:1px solid #565c80;border-radius:6px;background:#262a45;color:#fff;font:inherit;cursor:pointer}
+.sqs-dialog .sqs-go{border-color:#59a14f;background:#2f6b2a}
+.sqs-dialog button:disabled{opacity:.6;cursor:default}

@@ -1,0 +1,20 @@
+name: Keep database active
+
+on:
+  schedule:
+    - cron: "17 3 * * 1,4"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    if: vars.SUPABASE_URL != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read one row
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+        run: curl --fail --silent --show-error --output /dev/null -H "apikey: $SUPABASE_PUBLISHABLE_KEY" "${SUPABASE_URL%/}/rest/v1/lessons?select=id&limit=1"

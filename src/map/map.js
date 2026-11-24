@@ -24,8 +24,7 @@ function readMistakes() {
   const t = new Date(latest);
   return {at: latest ? day(latest) + " " + pad(t.getHours()) + ":" + pad(t.getMinutes()) : "", w};
 }
-const MISTAKES = readMistakes();
-window.addEventListener("storage", e => { if (e.key && e.key.startsWith("spellquest-miss-")) location.reload(); });
+let MISTAKES = readMistakes();
 function hash(s){ let h = 2166136261; for(const ch of String(s)){ h ^= ch.charCodeAt(0); h = Math.imul(h,16777619); } return (h>>>0)/4294967295; }
 function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
@@ -70,7 +69,8 @@ const links = LINKS.map(([a,b]) => [byW.get(norm(a)), byW.get(norm(b))]).filter(
 const relOf = w => links.filter(([a,b]) => a===w || b===w).map(([a,b]) => a===w ? b : a);
 const usedTopics = topics.filter(t => t.n > 0);
 const MASTER = 3;
-words.forEach(w => { const m = (MISTAKES.w || {})[norm(w.w)]; w.miss = m && m.n > 0 ? m : null; });
+const linkMistakes = () => words.forEach(w => { const m = (MISTAKES.w || {})[norm(w.w)]; w.miss = m && m.n > 0 ? m : null; });
+linkMistakes();
 const needWords = () => words.filter(w => w.miss && (w.miss.s || 0) < MASTER).sort((a,b) => b.miss.n - a.miss.n);
 const MISS_GROUPS = [
   {id:"M3", name:"Sai từ 3 lần", color:"#b5172e"},
@@ -299,7 +299,7 @@ function tap(x, y){
   if(best) select(best); else if(st.sel){ st.sel = null; renderCard(); dirty = true; }
 }
 addEventListener("keydown", e => {
-  if(e.target.tagName === "INPUT") return;
+  if(SQSync.isOpen() || e.target.tagName === "INPUT") return;
   const k = e.key;
   if(k === "/"){ e.preventDefault(); $("q").focus(); return; }
   if(k === "ArrowLeft"){ cam.yaw -= 0.12; } else if(k === "ArrowRight"){ cam.yaw += 0.12; }
@@ -441,6 +441,9 @@ function setMode(m){
 }
 if(location.hash === "#hay-sai") setMode("miss");
 addEventListener("hashchange", () => { if(location.hash === "#hay-sai") setMode("miss"); });
+function refreshMistakes(){ MISTAKES = readMistakes(); linkMistakes(); renderLegend(); renderCard(); dirty = true; }
+window.addEventListener("sq-sync", refreshMistakes);
+window.addEventListener("storage", e => { if (e.key && e.key.startsWith("spellquest-miss-")) refreshMistakes(); });
 fit();
 renderLegend();
 renderCard();

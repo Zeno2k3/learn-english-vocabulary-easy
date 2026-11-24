@@ -129,8 +129,8 @@ export function loadSite() {
   return { lessons, topics, firstSeen, rep };
 }
 
-function asset(from, to) {
-  const body = readFileSync(join(SRC, from));
+function asset(from, to, prefix = "") {
+  const body = prefix + readFileSync(join(SRC, from), "utf8");
   mkdirSync(join(DIST, "assets"), { recursive: true });
   writeFileSync(join(DIST, "assets", to), body);
   return "assets/" + to + "?v=" + createHash("sha256").update(body).digest("hex").slice(0, 8);
@@ -139,6 +139,19 @@ function asset(from, to) {
 function page(path, html) {
   mkdirSync(dirname(join(DIST, path)), { recursive: true });
   writeFileSync(join(DIST, path), html);
+}
+
+/* Chỉ khoá công khai được đưa vào website. Khoá bí mật lọt vào đây sẽ làm build thất bại. */
+function syncConfig(rep) {
+  const url = String(process.env.SUPABASE_URL || "").trim().replace(/\/+$/, "");
+  const key = String(process.env.SUPABASE_PUBLISHABLE_KEY || "").trim();
+  if (!url && !key) return null;
+  if (!url || !key) { rep.errors.push("cần đặt cả SUPABASE_URL và SUPABASE_PUBLISHABLE_KEY"); return null; }
+  if (!/^https:\/\/|^http:\/\/(localhost|127\.0\.0\.1)(:|$)/.test(url)) rep.errors.push("SUPABASE_URL phải dùng https");
+  let role = "";
+  if (key.startsWith("eyJ")) { try { role = JSON.parse(Buffer.from(key.split(".")[1], "base64url").toString()).role; } catch (e) {} }
+  if (key.startsWith("sb_secret_") || role === "service_role") rep.errors.push("SUPABASE_PUBLISHABLE_KEY đang là khoá bí mật, không được đưa vào website");
+  return { url, key };
 }
 
 function renderHome(lessons, wordCount, vars) {
@@ -153,6 +166,7 @@ function renderHome(lessons, wordCount, vars) {
 
 export function build() {
   const { lessons, topics, firstSeen, rep } = loadSite();
+  const sync = syncConfig(rep);
   if (rep.errors.length) return rep;
   rmSync(DIST, { recursive: true, force: true });
   mkdirSync(DIST, { recursive: true });
@@ -161,6 +175,7 @@ export function build() {
   const gameCss = asset("game/game.css", "game.css"), gameJs = asset("game/game.js", "game.js");
   const mapCss = asset("map/map.css", "map.css"), mapJs = asset("map/map.js", "map.js");
   const homeCss = asset("home/home.css", "home.css"), homeJs = asset("home/home.js", "home.js");
+  const syncCss = asset("sync/sync.css", "sync.css"), syncJs = asset("sync/sync.js", "sync.js", "window.SQ_SYNC_CONFIG=" + safeJson(sync) + ";\n");
 
   const gameTpl = readFileSync(join(SRC, "game/game.html"), "utf8");
   for (const l of lessons) {
@@ -168,7 +183,7 @@ export function build() {
     page("lessons/" + l.id + "/index.html", fill(gameTpl, {
       TITLE: esc("Spell Quest bài " + l.id), HEADING: esc("Bài " + l.id + " · " + l.title),
       CUE: l.words.some(w => w.img) ? "Nhìn hình" : "Đọc câu gợi ý",
-      CSS: "../../" + gameCss, JS: "../../" + gameJs, DATA: safeJson(data),
+      CSS: "../../" + gameCss, JS: "../../" + gameJs, SYNC_CSS: "../../" + syncCss, SYNC_JS: "../../" + syncJs, DATA: safeJson(data),
     }));
     const img = join(DATA, "images", l.base);
     if (existsSync(img)) cpSync(img, join(DIST, "lessons", String(l.id), "img"), { recursive: true });
@@ -178,8 +193,8 @@ export function build() {
   const words = lessons.flatMap(l => l.words.map(w => ({ w: w.w, vi: w.vi, t: w.t, l: l.id, topic: w.topic, ex: String(w.ex || "").replace(/\[\[|\]\]/g, "") })))
     .filter(w => { const k = w.w.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
   const mapData = { lessons: lessons.map(l => ({ id: l.id, name: l.title, game: "../lessons/" + l.id + "/" })), topics, words, links: lessons.flatMap(l => l.links) };
-  page("map/index.html", fill(readFileSync(join(SRC, "map/map.html"), "utf8"), { CSS: "../" + mapCss, JS: "../" + mapJs, DATA: safeJson(mapData) }));
-  page("index.html", renderHome(lessons, firstSeen.size, { CSS: homeCss, JS: homeJs }));
+  page("map/index.html", fill(readFileSync(join(SRC, "map/map.html"), "utf8"), { CSS: "../" + mapCss, JS: "../" + mapJs, SYNC_CSS: "../" + syncCss, SYNC_JS: "../" + syncJs, DATA: safeJson(mapData) }));
+  page("index.html", renderHome(lessons, firstSeen.size, { CSS: homeCss, JS: homeJs, SYNC_CSS: syncCss, SYNC_JS: syncJs }));
   rep.summary = lessons.length + " bài, " + words.length + " từ trên bản đồ 3D, " + topics.length + " chủ đề";
   return rep;
 }

@@ -11,6 +11,7 @@
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
     "check": "node scripts/build.mjs --check",
-    "db:publish": "node scripts/publish-db.mjs"
+    "db:publish": "node scripts/publish-db.mjs",
+    "editor": "node editor/server.mjs"
   }
 }

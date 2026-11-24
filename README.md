@@ -71,6 +71,23 @@ SUPABASE_URL=https://xxxx.supabase.co
 SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
 
+## Sửa dữ liệu bằng giao diện
+
+Thay vì mở file JSON, có thể sửa bài trong trình duyệt:
+
+```bash
+npm run editor   # mở http://localhost:4174
+```
+
+- Mỗi bài có các tab: Thông tin, Từ vựng, Trắc nghiệm, Bài tập, Chủ đề mới, Liên kết, Dò lỗi và JSON (sửa thẳng cả file). Chủ đề chung trong `data/topics.json` nằm ở mục **Chủ đề bản đồ 3D**.
+- Cột bên phải kiểm tra dữ liệu ngay khi gõ, dùng đúng quy tắc của `npm run check`. Bấm vào một lỗi để nhảy tới chỗ sai.
+- Bấm **Lưu** (hoặc Ctrl+S) để ghi vào `data/`. File được ghi giữ kiểu định dạng cũ nên `git diff` chỉ hiện phần đã sửa.
+- **Tải ảnh lên** ở mỗi từ sẽ chép ảnh vào `data/images/<tên file bài>/` và điền sẵn `img`.
+- **＋ Bài mới** tạo bài từ số bài và tên bài. File chỉ được tạo khi bấm Lưu.
+- Chạy song song `npm run dev` để xem ngay bài vừa sửa trên web (nút **Xem trên web**).
+
+Trình chỉnh sửa chỉ nhận kết nối từ chính máy bạn. Sửa xong vẫn `git add data`, commit và push như thường.
+
 ## Đưa lên GitHub lần đầu
 
 1. Tạo repository trống trên GitHub.
@@ -104,5 +121,6 @@ data/images/     Ảnh của từng bài
 data/topics.json Các chủ đề trên bản đồ 3D
 src/             Giao diện trang chủ, trò chơi, bản đồ 3D
 scripts/         Kiểm tra dữ liệu, build, chạy thử
+editor/          Trình chỉnh sửa dữ liệu chạy trên máy (npm run editor)
 .github/         Tự động deploy lên GitHub Pages
 ```

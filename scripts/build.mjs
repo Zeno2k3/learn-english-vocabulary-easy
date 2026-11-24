@@ -88,16 +88,19 @@ function checkLesson(l, name, base, rep) {
   }
 }
 
-export function loadSite() {
+/* draft (không bắt buộc): { lessons: { "06-ten-bai.json": {...} }, topics: [...] } để kiểm tra bản nháp chưa lưu, dùng cho trình chỉnh sửa. */
+export function loadSite(draft = {}) {
   const rep = { errors: [], warnings: [] };
   const dir = join(DATA, "lessons");
+  const drafts = draft.lessons || {};
   const lessons = [];
-  for (const name of readdirSync(dir).sort()) {
+  for (const name of [...new Set([...readdirSync(dir), ...Object.keys(drafts)])].sort()) {
     if (!name.endsWith(".json") || name.startsWith("_")) continue;
     if (!FILE_RE.test(name)) { rep.errors.push(name + ": tên file phải có dạng 06-ten-bai.json (chữ thường, không dấu)"); continue; }
     let lesson;
-    try { lesson = JSON.parse(readFileSync(join(dir, name), "utf8")); }
+    try { lesson = name in drafts ? drafts[name] : JSON.parse(readFileSync(join(dir, name), "utf8")); }
     catch (e) { rep.errors.push(name + ": JSON sai cú pháp (" + e.message + ")"); continue; }
+    if (!lesson || typeof lesson !== "object" || Array.isArray(lesson)) { rep.errors.push(name + ": nội dung phải là một object JSON"); continue; }
     const base = name.replace(/\.json$/, "");
     checkLesson(lesson, name, base, rep);
     const arr = v => (Array.isArray(v) ? v : []);
@@ -106,7 +109,7 @@ export function loadSite() {
   lessons.sort((a, b) => a.id - b.id);
   lessons.forEach((l, i) => { if (i && l.id === lessons[i - 1].id) rep.errors.push(l.file + ": trùng id " + l.id + " với " + lessons[i - 1].file); });
 
-  const topics = JSON.parse(readFileSync(join(DATA, "topics.json"), "utf8"));
+  const topics = draft.topics ? structuredClone(draft.topics) : JSON.parse(readFileSync(join(DATA, "topics.json"), "utf8"));
   const topicIds = new Set(topics.map(t => t.id));
   for (const l of lessons) for (const t of l.topics) {
     if (!text(t.id) || !text(t.vi)) { rep.errors.push(l.file + ": chủ đề mới cần \"id\" và \"vi\""); continue; }

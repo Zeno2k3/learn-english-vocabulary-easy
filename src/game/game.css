@@ -111,7 +111,7 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .explain .rule{color:var(--gold)}
 .result{gap:16px}
 .result h2{margin:0;font-family:var(--font-display);font-weight:400;font-size:20px;color:var(--gold);line-height:1.4}
-.result .big{font-family:var(--font-display);font-size:28px;color:var(--neon)}
+.result .score{font-family:var(--font-display);font-size:28px;color:var(--neon)}
 .review{display:grid;gap:10px}
 .review div{border:2px solid var(--line);padding:10px 12px;font-size:22px}
 .review b{color:var(--gold);font-weight:400}

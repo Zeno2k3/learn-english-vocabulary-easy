@@ -599,7 +599,7 @@ function quizFinish(){
     const q = it.q.includes("___") ? escapeHtml(it.q).replace("___", `<b>${escapeHtml(it.o[0])}</b>`) : `${escapeHtml(it.q)} <b>${escapeHtml(it.o[0])}</b>`;
     return `<div>${q}<br><span style="color:var(--muted)">${escapeHtml(it.rule)}</span></div>`;
   }).join("");
-  $("qResult").innerHTML = `<h2>KẾT QUẢ</h2><div class="big">${Q.right}/${n}</div><p style="margin:0;font-size:26px">${msg}</p>` +
+  $("qResult").innerHTML = `<h2>KẾT QUẢ</h2><div class="score">${Q.right}/${n}</div><p style="margin:0;font-size:26px">${msg}</p>` +
     (wrongIdx.length ? `<div class="review"><div style="border:none;padding:0;color:var(--muted)">Các câu bạn làm sai (đáp án đúng tô vàng):</div>${review}</div>` : "") +
     `<div class="actions"><button class="btn big go" type="button" id="qAgain">LÀM LẠI TẤT CẢ</button>` +
     (wrongIdx.length ? `<button class="btn big" type="button" id="qRetry">LÀM LẠI CÂU SAI</button>` : "") + `</div>`;

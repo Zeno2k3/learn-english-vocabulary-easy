@@ -13,11 +13,13 @@ const DIST = join(ROOT, "dist");
 const PORT = Number(process.env.PORT) || 4173;
 const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".json": "application/json", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp" };
 
-report(build());
+/* Lỗi lúc build lại (ví dụ đang chạy npm run build song song) chỉ in ra, server vẫn chạy. */
+const rebuild = () => { try { report(build()); } catch (e) { console.error("Build lỗi, sửa xong file sẽ tự build lại: " + e.message); } };
+rebuild();
 let timer;
 for (const dir of ["data", "src"]) watch(join(ROOT, dir), { recursive: true }, () => {
   clearTimeout(timer);
-  timer = setTimeout(() => report(build()), 150);
+  timer = setTimeout(rebuild, 150);
 });
 
 createServer((req, res) => {

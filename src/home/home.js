@@ -166,3 +166,85 @@ renderProgress();
 renderAccount();
 window.addEventListener("sq-sync", renderProgress);
 window.addEventListener("storage", e => { if (e.key && e.key.startsWith("spellquest-")) renderProgress(); });
+
+/* ---------- nền ô vuông nổi lên khi rê chuột ----------
+   Lưới 24px giống nền CSS (background-attachment: fixed nên canvas cố định khớp đúng ô).
+   Ô dưới con trỏ nổi hẳn, 8 ô quanh nổi nhẹ, ô vừa đi qua hạ dần tạo vệt.
+   Chỉ chạy trên máy có chuột và khi không bật giảm chuyển động. */
+(() => {
+  const cv = $("tiles");
+  const ok = window.matchMedia && matchMedia("(hover: hover) and (pointer: fine)").matches && !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!cv || !ok || !cv.getContext) { if (cv) cv.remove(); return; }
+  const ctx = cv.getContext("2d");
+  const CELL = 24, LIFT = 4, RISE = 90, FALL = 650;   // px, px, ms để nổi hết, ms để hạ hết
+  const cells = new Map();                             // "x,y" -> {x, y, a: độ nổi 0..1}
+  let C = {}, cur = null, last = null, raf = 0, prev = 0, w = 0, h = 0;
+
+  function colors() {
+    const s = getComputedStyle(document.documentElement);
+    C = {tile: s.getPropertyValue("--tile").trim(), hi: s.getPropertyValue("--tile-hi").trim(),
+      lo: s.getPropertyValue("--tile-lo").trim(), shadow: s.getPropertyValue("--tile-shadow").trim()};
+  }
+  function size() {
+    const d = window.devicePixelRatio || 1;
+    w = innerWidth; h = innerHeight;
+    cv.width = Math.round(w * d); cv.height = Math.round(h * d);
+    ctx.setTransform(d, 0, 0, d, 0, 0);
+    kick();
+  }
+  const cellAt = (x, y) => ({x: Math.floor(x / CELL), y: Math.floor(y / CELL)});
+  function bump(cx, cy, a) {
+    const k = cx + "," + cy, c = cells.get(k);
+    if (c) c.peak = Math.max(c.peak || 0, a); else cells.set(k, {x: cx, y: cy, a: 0, peak: a});
+  }
+  /* Ô đang dưới con trỏ (mạnh) và vòng ô quanh nó (nhẹ). */
+  const targetOf = c => !cur ? 0 : Math.max(Math.abs(c.x - cur.x), Math.abs(c.y - cur.y)) === 0 ? 1 : Math.max(Math.abs(c.x - cur.x), Math.abs(c.y - cur.y)) === 1 ? 0.4 : 0;
+
+  function draw(c) {
+    const a = c.a, lift = Math.round(LIFT * a);
+    const x = c.x * CELL + 1, y = c.y * CELL + 1, s = CELL - 1;
+    ctx.globalAlpha = Math.min(1, a * 1.4);
+    ctx.fillStyle = C.shadow; ctx.fillRect(x - lift + 2, y - lift + 2, s + lift, s + lift);
+    ctx.fillStyle = C.tile; ctx.fillRect(x - lift, y - lift, s, s);
+    ctx.fillStyle = C.hi; ctx.fillRect(x - lift, y - lift, s, 2); ctx.fillRect(x - lift, y - lift, 2, s);
+    ctx.fillStyle = C.lo; ctx.fillRect(x - lift, y - lift + s - 2, s, 2); ctx.fillRect(x - lift + s - 2, y - lift, 2, s);
+  }
+  function frame(t) {
+    const dt = Math.min(64, t - (prev || t)); prev = t; raf = 0;
+    ctx.clearRect(0, 0, w, h);
+    let busy = false;
+    const live = [];
+    for (const [k, c] of cells) {
+      const goal = Math.max(targetOf(c), c.peak || 0);
+      c.peak = 0;
+      if (goal > c.a) c.a = Math.min(goal, c.a + dt / RISE);
+      else c.a = Math.max(goal, c.a - dt / FALL);
+      if (c.a <= 0 && goal <= 0) { cells.delete(k); continue; }
+      if (c.a !== goal) busy = true;
+      live.push(c);
+    }
+    live.sort((p, q) => p.a - q.a).forEach(draw);   // ô nổi cao nhất vẽ sau cùng, nằm trên bóng ô bên cạnh
+    ctx.globalAlpha = 1;
+    if (busy) kick(); else prev = 0;
+  }
+  function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+
+  addEventListener("pointermove", e => {
+    if (e.pointerType && e.pointerType !== "mouse" && e.pointerType !== "pen") return;
+    const p = {x: e.clientX, y: e.clientY};
+    /* đi nhanh thì nội suy để vệt không bị đứt quãng */
+    if (last) {
+      const n = Math.min(40, Math.ceil(Math.hypot(p.x - last.x, p.y - last.y) / (CELL / 2)));
+      for (let i = 1; i < n; i++) { const q = cellAt(last.x + (p.x - last.x) * i / n, last.y + (p.y - last.y) * i / n); bump(q.x, q.y, 0.8); }
+    }
+    last = p; cur = cellAt(p.x, p.y);
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) bump(cur.x + dx, cur.y + dy, 0);
+    kick();
+  }, {passive: true});
+  const leave = () => { cur = null; last = null; kick(); };
+  document.documentElement.addEventListener("pointerleave", leave);
+  addEventListener("blur", leave);
+  addEventListener("resize", size);
+  addEventListener("sq-theme", () => { colors(); kick(); });
+  colors(); size();
+})();

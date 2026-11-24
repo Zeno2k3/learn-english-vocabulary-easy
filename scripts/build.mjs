@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { layoutTopics } from "./layout.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "data");
@@ -210,7 +211,11 @@ export function build() {
   const seen = new Set();
   const words = lessons.flatMap(l => l.words.map(w => ({ w: w.w, vi: w.vi, t: w.t, l: l.id, topic: w.topic, ex: String(w.ex || "").replace(/\[\[|\]\]/g, "") })))
     .filter(w => { const k = w.w.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
-  const mapData = { lessons: lessons.map(l => ({ id: l.id, name: l.title, game: "../lessons/" + l.id + "/" })), topics, words, links: lessons.flatMap(l => l.links) };
+  const links = lessons.flatMap(l => l.links);
+  /* Vị trí 3D và màu của chủ đề được tính lại mỗi lần build, không cần khai báo tay. */
+  const pos = layoutTopics(topics, words, links);
+  const mapTopics = topics.map(({ c, color, ...t }) => (pos.has(t.id) ? { ...t, c: pos.get(t.id).c, color: pos.get(t.id).color } : t));
+  const mapData = { lessons: lessons.map(l => ({ id: l.id, name: l.title, game: "../lessons/" + l.id + "/" })), topics: mapTopics, words, links };
   page("map/index.html", fill(readFileSync(join(SRC, "map/map.html"), "utf8"), { CSS: "../" + mapCss, JS: "../" + mapJs, SYNC_CSS: "../" + syncCss, SYNC_JS: "../" + syncJs, DATA: safeJson(mapData) }));
   page("index.html", renderHome(lessons, firstSeen.size, { CSS: homeCss, JS: homeJs, SYNC_CSS: syncCss, SYNC_JS: syncJs, THEME_JS: themeJs }));
   rep.summary = lessons.length + " bài, " + words.length + " từ trên bản đồ 3D, " + topics.length + " chủ đề";

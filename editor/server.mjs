@@ -109,6 +109,49 @@ const send = (res, code, obj) => { res.writeHead(code, { "Content-Type": "applic
 const fail = (code, msg) => Object.assign(new Error(msg), { code });
 const isObj = v => v && typeof v === "object" && !Array.isArray(v);
 
+/* Bài mẫu đầy đủ, chỉ để xem trong editor: ghép từ các bài đã có một từ dùng câu gợi ý, một từ dùng ảnh,
+   một câu trắc nghiệm, mỗi dạng bài tập một bài (chọn bản ngắn nhất), một quy tắc dò lỗi và vài liên kết. */
+function sample() {
+  const pick = {}, ex = {};
+  const files = lessonFiles();
+  const real = files.filter(f => !/-test\.json$/.test(f));
+  const take = (key, file, item) => { if (!pick[key] && item) pick[key] = { file, item }; };
+  for (const file of real.length ? real : files) {
+    let d;
+    try { d = JSON.parse(readFileSync(join(LESSONS, file), "utf8")); } catch (e) { continue; }
+    for (const e of Array.isArray(d.exercises) ? d.exercises : []) {
+      if (!isObj(e) || !e.type) continue;
+      const len = JSON.stringify(e).length;
+      if (!ex[e.type] || len < ex[e.type].len) ex[e.type] = { file, len, item: e };
+    }
+    const words = Array.isArray(d.words) ? d.words.filter(isObj) : [];
+    take("word", file, words.find(w => w.w && w.ipa && w.q && w.ex));
+    take("imgWord", file, words.find(w => w.w && w.img && w.ex));
+    take("quiz", file, (Array.isArray(d.quiz) ? d.quiz : []).find(q => isObj(q) && q.q && q.why));
+    take("lint", file, (Array.isArray(d.lint) ? d.lint : []).find(r => isObj(r) && r.pattern));
+    take("links", file, Array.isArray(d.links) && d.links.length >= 2 ? d.links.slice(0, 2) : null);
+  }
+  const order = ["type", "fill", "sentence", "choose", "cross", "free", "gaps"].filter(t => ex[t]);
+  const lesson = {
+    $schema: "../lesson.schema.json", id: 99, title: "Bài mẫu",
+    topics: [{ id: "hobbies", vi: "Sở thích", en: "Hobbies" }],
+    words: [pick.word, pick.imgWord].filter(Boolean).map(p => p.item),
+    quiz: pick.quiz ? [pick.quiz.item] : [],
+    exercises: order.map(t => ex[t].item),
+    lint: pick.lint ? [pick.lint.item] : [],
+    links: pick.links ? pick.links.item : [],
+  };
+  const from = arr => [...new Set(arr.filter(Boolean).map(p => p.file))];
+  const sources = {
+    words: from([pick.word, pick.imgWord]), quiz: from([pick.quiz]), exercises: from(order.map(t => ex[t])),
+    lint: from([pick.lint]), links: from([pick.links]),
+  };
+  /* Ảnh của từ mẫu nằm trong thư mục bài gốc của nó. */
+  const imgBase = pick.imgWord ? baseOf(pick.imgWord.file) : "";
+  const used = pick.imgWord ? [String(pick.imgWord.item.img).replace(/^img\//, "")] : [];
+  return { lesson, sources, base: imgBase, images: imgBase ? listImages(imgBase).filter(f => used.includes(f)) : [] };
+}
+
 async function api(req, res, url) {
   const p = url.pathname, m = req.method;
   if (m === "GET" && p === "/api/overview") return send(res, 200, overview());
@@ -120,6 +163,7 @@ async function api(req, res, url) {
     return send(res, 200, { file, data, mtime, images: listImages(baseOf(file)) });
   }
   if (m === "GET" && p === "/api/topics") { const { data, mtime } = readJson(TOPICS); return send(res, 200, { data, mtime }); }
+  if (m === "GET" && p === "/api/sample") return send(res, 200, sample());
   if (m === "GET" && p === "/api/template") return send(res, 200, JSON.parse(readFileSync(join(LESSONS, "_template.json"), "utf8")));
 
   if (m !== "POST") throw fail(404, "Không có đường dẫn này");

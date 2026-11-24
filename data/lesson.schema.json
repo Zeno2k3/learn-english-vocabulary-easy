@@ -41,19 +41,6 @@
           "en": {
             "type": "string",
             "description": "Tên tiếng Anh."
-          },
-          "c": {
-            "type": "array",
-            "items": {
-              "type": "number"
-            },
-            "minItems": 3,
-            "maxItems": 3,
-            "description": "Toạ độ [x,y,z] từ -1.3 đến 1.3. Bỏ trống thì bản đồ tự đặt."
-          },
-          "color": {
-            "type": "string",
-            "description": "Màu riêng dạng #hex (không bắt buộc)."
           }
         }
       }

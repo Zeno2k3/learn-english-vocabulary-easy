@@ -42,6 +42,7 @@ words.forEach(w => {
     w.topic = t.id;
   }
 });
+/* Vị trí chủ đề do scripts/layout.mjs tính sẵn lúc build; chỉ chủ đề lạ (không có trong dữ liệu) mới cần đặt tạm ở đây. */
 const missing = topics.filter(t => !Array.isArray(t.c));
 missing.forEach((t,k) => {
   const n = missing.length, y = n === 1 ? 0.6 : 1 - 2*(k+0.5)/n, r = Math.sqrt(1-y*y), th = k*2.39996 + 0.7;
@@ -63,6 +64,9 @@ topics.forEach((t,i) => {
   });
   t.lp = [t.c[0], t.c[1] + t.R + 0.09, t.c[2]];
 });
+/* Lùi camera vừa đủ để thấy hết bản đồ, dù có thêm bao nhiêu chủ đề. */
+const EXTENT = Math.max(1.6, ...topics.filter(t => t.n > 0).map(t => Math.hypot(...t.c) + t.R + 0.1));
+const FAR = Math.max(7, 3.4*EXTENT/1.6*2);
 const lessonById = {}; LESSONS.forEach((l,i) => { l.i = i; lessonById[l.id] = l; });
 const types = [...new Set(words.map(w => w.t))];
 const links = LINKS.map(([a,b]) => [byW.get(norm(a)), byW.get(norm(b))]).filter(([a,b]) => a && b && a !== b);
@@ -96,8 +100,8 @@ $("srList").innerHTML = words.map(w => `<li>${esc(w.w)}: ${esc(w.vi)}</li>`).joi
 /* ---------- state ---------- */
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const st = {mode:"topic", iso:null, sel:null, hits:null, labels:true, links:true, auto:!reduce, lastTouch:0};
-const cam = {yaw:0.55, pitch:-0.22, dist:3.4, ty:null, tp:null, td:null, vy:0, vp:0};
-const HOME = {yaw:0.55, pitch:-0.22, dist:3.4};
+const HOME = {yaw:0.55, pitch:-0.22, dist:3.4*EXTENT/1.6};
+const cam = {yaw:HOME.yaw, pitch:HOME.pitch, dist:HOME.dist, ty:null, tp:null, td:null, vy:0, vp:0};
 
 function groupOf(w){
   if(st.mode === "miss") return missGroup(w);
@@ -267,7 +271,7 @@ cv.addEventListener("pointermove", e => {
     cam.vy = -dx*k*0.6; cam.vp = dy*k*0.6;
     dirty = true;
   } else if(ptrs.size === 2 && pinch){
-    cam.dist = Math.max(1.5, Math.min(7, pinch.dist * pinch.d / Math.max(10, pdist())));
+    cam.dist = Math.max(1.5, Math.min(FAR, pinch.dist * pinch.d / Math.max(10, pdist())));
     dirty = true;
   }
 });
@@ -285,7 +289,7 @@ cv.addEventListener("pointercancel", up);
 cv.addEventListener("wheel", e => {
   e.preventDefault();
   cam.ty = null;
-  cam.dist = Math.max(1.5, Math.min(7, cam.dist * Math.exp(e.deltaY*0.0012)));
+  cam.dist = Math.max(1.5, Math.min(FAR, cam.dist * Math.exp(e.deltaY*0.0012)));
   st.lastTouch = performance.now(); dirty = true;
 }, {passive:false});
 function tap(x, y){
@@ -304,7 +308,7 @@ addEventListener("keydown", e => {
   if(k === "/"){ e.preventDefault(); $("q").focus(); return; }
   if(k === "ArrowLeft"){ cam.yaw -= 0.12; } else if(k === "ArrowRight"){ cam.yaw += 0.12; }
   else if(k === "ArrowUp"){ cam.pitch = clampPitch(cam.pitch - 0.1); } else if(k === "ArrowDown"){ cam.pitch = clampPitch(cam.pitch + 0.1); }
-  else if(k === "+" || k === "="){ cam.dist = Math.max(1.5, cam.dist*0.88); } else if(k === "-"){ cam.dist = Math.min(7, cam.dist*1.13); }
+  else if(k === "+" || k === "="){ cam.dist = Math.max(1.5, cam.dist*0.88); } else if(k === "-"){ cam.dist = Math.min(FAR, cam.dist*1.13); }
   else if(k === "Escape" && st.sel){ st.sel = null; renderCard(); }
   else return;
   cam.ty = null; st.lastTouch = performance.now(); dirty = true;

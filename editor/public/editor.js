@@ -6,7 +6,7 @@ const S = { ov: null, doc: null, tab: "words", check: null, bad: new Set(), coll
 
 const WORD_ORDER = ["w", "ipa", "t", "vi", "topic", "q", "img", "h", "ex"];
 const QUIZ_ORDER = ["tag", "q", "vi", "o", "why", "rule"];
-const TOPIC_ORDER = ["id", "vi", "en", "c", "color"];
+const TOPIC_ORDER = ["id", "vi", "en"];
 const LINT_ORDER = ["pattern", "flags", "message"];
 const LESSON_ORDER = ["$schema", "id", "title", "topics", "words", "quiz", "exercises", "lint", "links"];
 const EX_COMMON = ["id", "type", "wide", "en", "vi"];
@@ -116,6 +116,13 @@ function updateStatus() {
   $("#btnSave").disabled = !d;
   $("#btnCheck").disabled = !d;
   if (!d) { st.textContent = ""; $("#docTitle").textContent = ""; $("#preview").hidden = true; return; }
+  if (d.sample) {
+    $("#btnSave").disabled = true; $("#btnCheck").disabled = true; $("#preview").hidden = true;
+    st.textContent = "Chỉ xem"; st.className = "status";
+    document.title = "Bài mẫu · Spell Quest";
+    $("#docTitle").textContent = "Bài mẫu (ghép từ các bài có sẵn)";
+    return;
+  }
   st.textContent = d.isNew ? "Bài mới, chưa lưu" : d.dirty ? "● Chưa lưu" : "Đã lưu";
   st.className = "status " + (d.dirty || d.isNew ? "dirty" : "saved");
   document.title = (d.dirty ? "● " : "") + (d.kind === "topics" ? "topics.json" : d.file) + " · Spell Quest";
@@ -149,6 +156,8 @@ function renderSide() {
   $("#lessonList").replaceChildren(...items);
   $("#globalList").replaceChildren(h("a", { class: "side-item" + (S.doc && S.doc.kind === "topics" ? " active" : ""), href: "#/topics" },
     h("span", { class: "num" }, "◎"), h("span", { class: "nm" }, h("b", {}, "Chủ đề bản đồ 3D"), h("small", {}, "topics.json · " + S.ov.topics.length + " chủ đề"))));
+  $("#refList").replaceChildren(h("a", { class: "side-item sample-item" + (S.doc && S.doc.sample ? " active" : ""), href: "#/sample" },
+    h("span", { class: "num" }, "💡"), h("span", { class: "nm" }, h("b", {}, "Bài mẫu đầy đủ"), h("small", {}, "Đủ mọi phần · 7 dạng bài tập"))));
 }
 
 function fillDatalists() {
@@ -168,15 +177,20 @@ function fillDatalists() {
 /* ---------- Mở tài liệu ---------- */
 
 async function route() {
-  const m = location.hash.match(/^#\/(lesson|topics|new)(?:\/([^/]+))?(?:\/(\w+))?/);
+  const m = location.hash.match(/^#\/(lesson|topics|new|sample)(?:\/([^/]+))?(?:\/(\w+))?/);
   if (!m) { if (S.ov.lessons[0]) location.replace("#/lesson/" + S.ov.lessons[0].file); return; }
-  const [, kind, file, tab] = m;
-  const same = S.doc && ((kind === "topics" && S.doc.kind === "topics") || (kind === "lesson" && S.doc.file === file && !S.doc.isNew) || (kind === "new" && S.doc.isNew));
+  let [, kind, file, tab] = m;
+  if (kind === "sample" && !tab && file && LESSON_TABS.some(t => t[0] === file)) { tab = file; file = undefined; }
+  const same = S.doc && ((kind === "topics" && S.doc.kind === "topics") || (kind === "lesson" && S.doc.file === file && !S.doc.isNew) || (kind === "new" && S.doc.isNew) || (kind === "sample" && S.doc.sample));
   if (same) { if (tab && tab !== S.tab) { S.tab = tab; render(); } return; }
   if (kind === "new") { if (!S.doc || !S.doc.isNew) location.replace("#/lesson/" + (S.ov.lessons[0] || {}).file); return; }
   if (!confirmLeave()) { history.replaceState(null, "", S.doc.hashBase + "/" + S.tab); return; }
   try {
-    if (kind === "topics") {
+    if (kind === "sample") {
+      const r = await api("/api/sample");
+      S.doc = { kind: "lesson", sample: true, file: "99-bai-mau.json", base: r.base, data: r.lesson, sources: r.sources, images: r.images, mtime: 0, dirty: false, hashBase: "#/sample" };
+      S.tab = LESSON_TABS.some(t => t[0] === tab) ? tab : "words";
+    } else if (kind === "topics") {
       const r = await api("/api/topics");
       S.doc = { kind: "topics", data: r.data, mtime: r.mtime, dirty: false, hashBase: "#/topics" };
       S.tab = tab === "json" ? "json" : "topics";
@@ -270,7 +284,7 @@ function stringList(obj, key, o = {}) {
   const box = h("div", { class: "slist" });
   const draw = () => {
     box.replaceChildren(...list.map((v, i) => {
-      const input = h("input", { value: v, placeholder: o.placeholder || "", list: o.list });
+      const input = h("input", { value: v, placeholder: (typeof o.placeholder === "function" ? o.placeholder(i) : o.placeholder) || "", list: o.list });
       input.addEventListener("input", () => { list[i] = input.value; changed(); });
       return h("div", { class: "srow" + (o.firstCorrect && i === 0 ? " correct" : "") },
         o.firstCorrect ? (i === 0 ? h("span", { class: "badge ok", title: "Đáp án đúng luôn đứng đầu" }, "Đúng")
@@ -329,6 +343,41 @@ function imageField(obj, key, o = {}) {
   draw();
   return h("div", { class: "f img-field" + (o.wide ? " wide" : "") }, h("span", { class: "lab" }, o.label || "Ảnh"),
     h("div", { class: "img-row" }, thumb, h("div", { class: "img-ctl" }, input, up)), o.hint ? h("small", {}, o.hint) : null);
+}
+
+/* ---------- Bài mẫu ---------- */
+
+/* Liên kết mở bài mẫu (đúng tab đang xem) ở thẻ trình duyệt khác, để không rời bài đang sửa. */
+function sampleLink(tab) {
+  if (S.doc && S.doc.sample) return null;
+  return h("a", { class: "sample-link", href: "#/sample/" + tab, target: "_blank", rel: "noopener", title: "Mở bài mẫu ở thẻ mới" }, "💡 Xem ví dụ mẫu ↗");
+}
+
+const SAMPLE_NOTES = {
+  info: "Mỗi bài cần số bài (trùng số đầu tên file) và tên bài. Các phần còn lại nằm ở các tab bên trên.",
+  words: "Hai kiểu thẻ từ: từ #1 dùng câu gợi ý (q), từ #2 dùng ảnh (img). Mỗi từ cần ít nhất một trong hai.",
+  quiz: "Đáp án đúng luôn đứng đầu danh sách, trò chơi tự trộn thứ tự khi hiện ra.",
+  exercises: "Đủ 7 dạng bài tập, mỗi dạng một bài. Phần nội dung (JSON) của mỗi dạng có cấu trúc khác nhau, xem dòng hướng dẫn phía trên ô JSON.",
+  topics: "Chủ đề này là mẫu tự đặt. Chỉ khai báo ở đây khi bài cần chủ đề chưa có trong topics.json.",
+  links: "Mỗi dòng nối hai từ liên quan trên bản đồ 3D.",
+  lint: "Ô Thử vẫn gõ được: thử gõ một câu sai để xem quy tắc bắt lỗi thế nào.",
+  json: "Toàn bộ bài mẫu đúng như khi ghi ra file data/lessons/*.json.",
+};
+
+function sampleBanner() {
+  const src = (S.doc.sources || {})[S.tab] || [];
+  return h("div", { class: "sample-banner" },
+    h("div", {}, h("b", {}, "Bài mẫu, chỉ để xem."), " " + (SAMPLE_NOTES[S.tab] || "")),
+    src.length ? h("small", { class: "muted" }, "Ví dụ ở tab này lấy từ: " + src.join(", ") + ".") : null);
+}
+
+/* Khoá mọi ô nhập của bài mẫu, trừ ô có class keep-edit (ô lọc, ô thử quy tắc). */
+function lockView(view) {
+  for (const el of view.querySelectorAll("input, textarea")) {
+    if (el.classList.contains("keep-edit")) continue;
+    if (["checkbox", "color", "file"].includes(el.type)) el.disabled = true; else { el.readOnly = true; el.placeholder = ""; }
+  }
+  for (const el of view.querySelectorAll("select")) el.disabled = true;
 }
 
 /* ---------- Danh sách thẻ ---------- */
@@ -405,7 +454,7 @@ function tabWords() {
   const d = S.doc.data;
   const list = arr(d, "words", LESSON_ORDER);
   const opts = topicOptions();
-  const search = h("input", { class: "search", type: "search", placeholder: "Lọc theo từ hoặc nghĩa…", value: S.filter });
+  const search = h("input", { class: "search keep-edit", type: "search", placeholder: "Lọc theo từ hoặc nghĩa…", value: S.filter });
   const applyFilter = () => {
     const q = slug(search.value);
     S.filter = search.value;
@@ -420,38 +469,38 @@ function tabWords() {
     body: (w, i, setTitle) => {
       const upd = () => { setTitle(); const c = document.getElementById("words-" + i); if (c) c.dataset.search = slug([w.w, w.vi, w.topic].join(" ")); };
       return h("div", { class: "grid" },
-        field(w, "w", { label: "Từ tiếng Anh", req: true, order: WORD_ORDER, onChange: upd, spell: false, hint: "Chỉ chữ cái, dấu cách, gạch nối, nháy đơn." }),
+        field(w, "w", { label: "Từ tiếng Anh", req: true, order: WORD_ORDER, onChange: upd, spell: false, placeholder: "Ví dụ: honeymoon", hint: "Chỉ chữ cái, dấu cách, gạch nối, nháy đơn." }),
         field(w, "ipa", { label: "Phiên âm", order: WORD_ORDER, mono: true, spell: false, placeholder: "ˈhʌnimuːn", hint: "Anh-Anh, không có dấu /." }),
-        field(w, "t", { label: "Loại từ", req: true, order: WORD_ORDER, list: "dl-types" }),
-        field(w, "vi", { label: "Nghĩa tiếng Việt", req: true, order: WORD_ORDER, onChange: upd }),
+        field(w, "t", { label: "Loại từ", req: true, order: WORD_ORDER, list: "dl-types", placeholder: "Ví dụ: danh từ" }),
+        field(w, "vi", { label: "Nghĩa tiếng Việt", req: true, order: WORD_ORDER, onChange: upd, placeholder: "Ví dụ: tuần trăng mật" }),
         field(w, "topic", { label: "Chủ đề", req: true, kind: "select", options: opts, order: WORD_ORDER, onChange: upd }),
-        field(w, "h", { label: "Gợi ý ngắn khi có ảnh", order: WORD_ORDER, cls: "span2" }),
-        field(w, "q", { label: "Câu gợi ý (q)", kind: "textarea", wide: true, order: WORD_ORDER, hint: "Cần có câu gợi ý hoặc ảnh." }),
+        field(w, "h", { label: "Gợi ý ngắn khi có ảnh", order: WORD_ORDER, cls: "span2", placeholder: "Ví dụ: đội trên đầu khi trời nắng" }),
+        field(w, "q", { label: "Câu gợi ý (q)", kind: "textarea", wide: true, order: WORD_ORDER, placeholder: "Ví dụ: Cưới xong, hai vợ chồng đi Đà Lạt một tuần để nghỉ ngơi bên nhau. Chuyến đi ngay sau đám cưới ấy gọi là gì?", hint: "Cần có câu gợi ý hoặc ảnh." }),
         imageField(w, "img", { order: WORD_ORDER, wide: true, suggest: () => w.w, onChange: upd }),
-        field(w, "ex", { label: "Câu ví dụ", kind: "textarea", wide: true, order: WORD_ORDER, hint: "Chỗ trống viết ___, phần tô vàng đánh dấu [[…]]." }));
+        field(w, "ex", { label: "Câu ví dụ", kind: "textarea", wide: true, order: WORD_ORDER, placeholder: "Ví dụ: They went to Paris on their ___.", hint: "Chỗ trống viết ___, phần tô vàng đánh dấu [[…]]." }));
     },
     make: () => ({}),
   });
   setTimeout(applyFilter);
-  return h("div", {}, toolbar(search, h("span", { class: "grow" }),
+  return h("div", {}, toolbar(search, h("span", { class: "grow" }), sampleLink("words"),
     h("button", { class: "btn small ghost", type: "button", onclick: () => foldAll(list, true) }, "Thu gọn tất cả"),
     h("button", { class: "btn small ghost", type: "button", onclick: () => foldAll(list, false) }, "Mở tất cả")), ed);
 }
 
 function tabQuiz() {
   const list = arr(S.doc.data, "quiz", LESSON_ORDER);
-  return listEditor(list, {
+  return h("div", {}, S.doc.sample ? null : toolbar(h("span", { class: "grow" }), sampleLink("quiz")), listEditor(list, {
     prefix: "quiz", noun: "câu trắc nghiệm",
     title: q => [q.tag ? h("span", { class: "tag" }, q.tag) : null, " ", h("b", {}, q.q || "(chưa có câu hỏi)")],
     body: (q, i, setTitle) => h("div", { class: "grid" },
-      field(q, "tag", { label: "Nhãn lỗi", order: QUIZ_ORDER, onChange: setTitle }),
-      field(q, "q", { label: "Câu hỏi", req: true, order: QUIZ_ORDER, cls: "span2", onChange: setTitle, hint: "Chỗ trống viết ___." }),
-      field(q, "vi", { label: "Dịch tiếng Việt", order: QUIZ_ORDER, wide: true }),
-      stringList(q, "o", { label: "Đáp án", req: true, firstCorrect: true, order: QUIZ_ORDER, addLabel: "Thêm đáp án", hint: "Đáp án đúng luôn đứng đầu, trò chơi tự trộn. Cần ít nhất 2 đáp án." }),
-      field(q, "why", { label: "Giải thích", req: true, kind: "textarea", wide: true, order: QUIZ_ORDER }),
-      field(q, "rule", { label: "Quy tắc ghi nhớ", req: true, wide: true, order: QUIZ_ORDER })),
+      field(q, "tag", { label: "Nhãn lỗi", order: QUIZ_ORDER, onChange: setTitle, placeholder: "Ví dụ: good at" }),
+      field(q, "q", { label: "Câu hỏi", req: true, order: QUIZ_ORDER, cls: "span2", onChange: setTitle, placeholder: "Ví dụ: She is good ___ English.", hint: "Chỗ trống viết ___." }),
+      field(q, "vi", { label: "Dịch tiếng Việt", order: QUIZ_ORDER, wide: true, placeholder: "Ví dụ: Cô ấy giỏi tiếng Anh." }),
+      stringList(q, "o", { label: "Đáp án", req: true, firstCorrect: true, placeholder: i => i === 0 ? "Đáp án đúng, ví dụ: at" : "Đáp án sai, ví dụ: " + (["in", "on", "for"][i - 1] || "with"), order: QUIZ_ORDER, addLabel: "Thêm đáp án", hint: "Đáp án đúng luôn đứng đầu, trò chơi tự trộn. Cần ít nhất 2 đáp án." }),
+      field(q, "why", { label: "Giải thích", req: true, kind: "textarea", wide: true, order: QUIZ_ORDER, placeholder: "Ví dụ: Sau good dùng giới từ at để nói về khả năng." }),
+      field(q, "rule", { label: "Quy tắc ghi nhớ", req: true, wide: true, order: QUIZ_ORDER, placeholder: "Ví dụ: good at + môn học hoặc kỹ năng." })),
     make: () => ({ q: "", o: ["", "", "", ""] }),
-  });
+  }));
 }
 
 function exerciseBody(ex, i, setTitle) {
@@ -479,14 +528,14 @@ function exerciseBody(ex, i, setTitle) {
     field(ex, "id", { label: "Số bài tập", req: true, order: EX_COMMON, onChange: setTitle, placeholder: "6.1" }),
     field(ex, "type", { label: "Dạng", req: true, kind: "select", options: Object.entries(EX_TYPES).map(([k, t]) => [k, k + " · " + t.name]), order: EX_COMMON, onChange: () => { setTitle(); drawHelp(); } }),
     h("div", { class: "f" }, h("span", { class: "lab" }, "Hiển thị"), checkbox(ex, "wide", "Ô nhập rộng (wide)", EX_COMMON)),
-    field(ex, "en", { label: "Đề bài tiếng Anh", wide: true, order: EX_COMMON, onChange: setTitle }),
-    field(ex, "vi", { label: "Đề bài tiếng Việt", wide: true, order: EX_COMMON }),
+    field(ex, "en", { label: "Đề bài tiếng Anh", wide: true, order: EX_COMMON, onChange: setTitle, placeholder: "Ví dụ: Complete the sentences with words from the box." }),
+    field(ex, "vi", { label: "Đề bài tiếng Việt", wide: true, order: EX_COMMON, placeholder: "Ví dụ: Hoàn thành các câu bằng từ trong khung." }),
     h("div", { class: "f wide" }, h("span", { class: "lab" }, "Nội dung bài tập (JSON)", h("span", { class: "grow" }), fmtBtn), help, ta, msg));
 }
 
 function tabExercises() {
   const list = arr(S.doc.data, "exercises", LESSON_ORDER);
-  return listEditor(list, {
+  return h("div", {}, S.doc.sample ? null : toolbar(h("span", { class: "muted" }, "Mỗi dạng bài tập có cấu trúc JSON riêng."), h("span", { class: "grow" }), sampleLink("exercises")), listEditor(list, {
     prefix: "exercises", noun: "bài tập",
     title: ex => [h("b", {}, ex.id || "?"), " ", h("span", { class: "tag" }, ex.type || "chưa chọn dạng"), h("span", { class: "muted" }, " " + (ex.en || ""))],
     body: exerciseBody,
@@ -498,39 +547,22 @@ function tabExercises() {
       const next = nums.length ? nums[nums.length - 1].replace(/(\d+)$/, n => Number(n) + 1) : (S.doc.data.id || 1) + ".1";
       return { id: next, type, en: "", ...clone(EX_TYPES[type].skel) };
     },
-  });
+  }));
 }
 
 function topicBody(t, i, setTitle, usage) {
-  const c = Array.isArray(t.c) ? t.c.slice() : ["", "", ""];
-  const coord = h("div", { class: "coords" }, ["x", "y", "z"].map((ax, k) => {
-    const input = h("input", { type: "number", step: "0.05", min: "-1.3", max: "1.3", placeholder: ax, value: c[k] === undefined ? "" : c[k] });
-    input.addEventListener("input", () => {
-      c[k] = input.value === "" ? "" : Number(input.value);
-      setKey(t, "c", c.every(v => v === "") ? undefined : c.map(v => (v === "" ? 0 : v)), TOPIC_ORDER);
-      changed();
-    });
-    return h("label", {}, h("span", {}, ax), input);
-  }));
-  const color = h("input", { type: "color", value: /^#[0-9a-f]{6}$/i.test(t.color || "") ? t.color : "#888888" });
-  const colorText = h("input", { value: t.color || "", placeholder: "#hex", class: "mono" });
-  const setColor = v => { setKey(t, "color", v.trim(), TOPIC_ORDER); changed(); };
-  color.addEventListener("input", () => { colorText.value = color.value; setColor(color.value); });
-  colorText.addEventListener("input", () => { if (/^#[0-9a-f]{6}$/i.test(colorText.value)) color.value = colorText.value; setColor(colorText.value); });
   return h("div", { class: "grid" },
-    field(t, "id", { label: "Mã chủ đề", req: true, order: TOPIC_ORDER, mono: true, onChange: setTitle, hint: "Viết liền, không dấu." }),
-    field(t, "vi", { label: "Tên tiếng Việt", req: true, order: TOPIC_ORDER, onChange: setTitle }),
-    field(t, "en", { label: "Tên tiếng Anh", order: TOPIC_ORDER }),
-    h("div", { class: "f span2" }, h("span", { class: "lab" }, "Toạ độ trên bản đồ 3D"), coord, h("small", {}, "Từ -1.3 đến 1.3. Để trống cả ba thì bản đồ tự đặt.")),
-    h("div", { class: "f" }, h("span", { class: "lab" }, "Màu riêng"), h("div", { class: "color-row" }, color, colorText)),
-    usage !== undefined ? h("p", { class: "muted wide" }, usage ? usage + " từ đang dùng chủ đề này." : "Chưa có từ nào dùng chủ đề này.") : null);
+    field(t, "id", { label: "Mã chủ đề", req: true, order: TOPIC_ORDER, mono: true, onChange: setTitle, placeholder: "Ví dụ: wedding", hint: "Viết liền, không dấu." }),
+    field(t, "vi", { label: "Tên tiếng Việt", req: true, order: TOPIC_ORDER, onChange: setTitle, placeholder: "Ví dụ: Đám cưới" }),
+    field(t, "en", { label: "Tên tiếng Anh", order: TOPIC_ORDER, placeholder: "Ví dụ: Wedding" }),
+    usage !== undefined ? h("p", { class: "muted wide" }, (usage ? usage + " từ đang dùng chủ đề này." : "Chưa có từ nào dùng chủ đề này.") + " Vị trí và màu trên bản đồ 3D được tự tính lại mỗi lần build, không cần nhập.") : null);
 }
 
-function topicTitle(t) { return [h("b", { class: "mono" }, t.id || "(chưa có mã)"), h("span", { class: "muted" }, " — " + (t.vi || "")), t.color ? h("span", { class: "swatch", style: "background:" + t.color }) : null]; }
+function topicTitle(t) { return [h("b", { class: "mono" }, t.id || "(chưa có mã)"), h("span", { class: "muted" }, " — " + (t.vi || "")), ]; }
 
 function tabLessonTopics() {
   const list = arr(S.doc.data, "topics", LESSON_ORDER);
-  return h("div", {}, h("p", { class: "muted intro" }, "Chỉ khai báo chủ đề MỚI của bài này. Chủ đề đã có trong topics.json thì chọn thẳng ở tab Từ vựng."),
+  return h("div", {}, h("p", { class: "muted intro" }, "Chỉ khai báo chủ đề MỚI của bài này. Chủ đề đã có trong topics.json thì chọn thẳng ở tab Từ vựng. ", sampleLink("topics")),
     listEditor(list, { prefix: "topics", noun: "chủ đề", title: topicTitle, body: (t, i, st) => topicBody(t, i, st, (S.doc.data.words || []).filter(w => w.topic === t.id).length), make: () => ({ id: "", vi: "" }) }));
 }
 
@@ -544,18 +576,18 @@ function tabLinks() {
       h("button", { class: "icon danger", type: "button", title: "Xoá", onclick: () => { list.splice(i, 1); changed(); draw(); } }, "✕"));
   }), h("button", { class: "btn add", type: "button", onclick: () => { list.push(["", ""]); changed(); draw(); rows.querySelectorAll(".link-row:last-of-type input")[0].focus(); } }, "＋ Thêm liên kết"));
   draw();
-  return h("div", {}, h("p", { class: "muted intro" }, "Cặp từ liên quan được nối với nhau trên bản đồ 3D. Có thể nối tới từ của bài khác (gõ để xem gợi ý)."), rows);
+  return h("div", {}, h("p", { class: "muted intro" }, "Cặp từ liên quan được nối với nhau trên bản đồ 3D. Có thể nối tới từ của bài khác (gõ để xem gợi ý). ", sampleLink("links")), rows);
 }
 
 function tabLint() {
   const list = arr(S.doc.data, "lint", LESSON_ORDER);
-  return h("div", {}, h("p", { class: "muted intro" }, "Biểu thức chính quy dò lỗi thường gặp trong câu trả lời phần 3. Gõ câu thử ở mỗi quy tắc để xem có bắt được không."),
+  return h("div", {}, h("p", { class: "muted intro" }, "Biểu thức chính quy dò lỗi thường gặp trong câu trả lời phần 3. Gõ câu thử ở mỗi quy tắc để xem có bắt được không. ", sampleLink("lint")),
     listEditor(list, {
       prefix: "lint", noun: "quy tắc",
       title: r => [h("code", {}, r.pattern || "(chưa có biểu thức)"), r.flags ? h("span", { class: "tag" }, "/" + r.flags) : null],
       body: (r, i, setTitle) => {
         const out = h("small", { class: "test-out" });
-        const test = h("input", { placeholder: "Gõ một câu để thử, ví dụ: I am born in 1990." });
+        const test = h("input", { class: "keep-edit", placeholder: "Gõ một câu để thử, ví dụ: I am born in 1990." });
         const run = () => {
           if (!test.value) { out.textContent = ""; out.className = "test-out"; return; }
           try { const hit = new RegExp(r.pattern || "", r.flags || "").test(test.value); out.textContent = hit ? "Bắt được → " + (r.message || "") : "Không khớp"; out.className = "test-out " + (hit ? "hit" : "miss"); }
@@ -564,9 +596,9 @@ function tabLint() {
         test.addEventListener("input", run);
         const onPat = () => { setTitle(); run(); };
         return h("div", { class: "grid" },
-          field(r, "pattern", { label: "Biểu thức", req: true, mono: true, spell: false, order: LINT_ORDER, cls: "span2", onChange: onPat }),
+          field(r, "pattern", { label: "Biểu thức", req: true, mono: true, spell: false, order: LINT_ORDER, cls: "span2", onChange: onPat, placeholder: "Ví dụ: \\b(am|is|are)\\s+born\\b" }),
           field(r, "flags", { label: "Cờ", mono: true, order: LINT_ORDER, placeholder: "i", onChange: onPat }),
-          field(r, "message", { label: "Lời giải thích", req: true, kind: "textarea", wide: true, order: LINT_ORDER }),
+          field(r, "message", { label: "Lời giải thích", req: true, kind: "textarea", wide: true, order: LINT_ORDER, placeholder: "Ví dụ: Sinh ra là chuyện đã qua: dùng was born / were born, không dùng am/is/are born." }),
           h("div", { class: "f wide" }, h("span", { class: "lab" }, "Thử"), test, out));
       },
       make: () => ({ pattern: "", flags: "i", message: "" }),
@@ -587,6 +619,13 @@ function tabJson() {
     apply.disabled = false;
     try { JSON.parse(ta.value); msg.textContent = ""; ta.classList.remove("invalid"); } catch (e) { msg.textContent = "JSON chưa đúng: " + e.message; ta.classList.add("invalid"); }
   });
+  if (S.doc.sample) {
+    const copy = h("button", { class: "btn small keep", type: "button", onclick: async () => {
+      try { await navigator.clipboard.writeText(ta.value); toast("Đã chép JSON của bài mẫu", "ok"); }
+      catch (e) { ta.select(); toast("Không chép được tự động, hãy bấm Ctrl+C", "err"); }
+    } }, "Chép JSON");
+    return h("div", {}, toolbar(h("span", { class: "grow" }), copy), ta);
+  }
   return h("div", {}, toolbar(h("span", { class: "muted" }, "Sửa trực tiếp toàn bộ dữ liệu. Bấm Áp dụng trước khi chuyển tab hoặc lưu."), h("span", { class: "grow" }), apply), ta, msg);
 }
 
@@ -606,6 +645,7 @@ function render() {
   if (S.tab === "json") view = tabJson();
   else if (d.kind === "topics") view = tabGlobalTopics();
   else view = ({ info: tabInfo, words: tabWords, quiz: tabQuiz, exercises: tabExercises, topics: tabLessonTopics, links: tabLinks, lint: tabLint }[S.tab] || tabWords)();
+  if (d.sample) { view = h("div", { class: "readonly" }, sampleBanner(), view); lockView(view); }
   $("#content").replaceChildren(view);
   paintIssues();
 }
@@ -617,6 +657,7 @@ function scheduleCheck() { clearTimeout(checkTimer); checkTimer = setTimeout(run
 
 async function runCheck() {
   if (!S.doc) return null;
+  if (S.doc.sample) { S.check = null; paintIssues(); return null; }
   const seq = ++checkSeq;
   try {
     const r = S.doc.kind === "topics" ? await api("/api/check", { topics: S.doc.data }) : await api("/api/check", { file: S.doc.file, data: S.doc.data });
@@ -667,7 +708,7 @@ function paintIssues() {
 
 async function save(force = false) {
   const d = S.doc;
-  if (!d) return;
+  if (!d || d.sample) return;
   if (S.bad.size) { toast("Còn ô JSON chưa đúng cú pháp ở tab Bài tập, sửa xong mới lưu được.", "err"); return; }
   if (!force) {
     const r = await runCheck();

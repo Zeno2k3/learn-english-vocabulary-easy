@@ -216,7 +216,10 @@
     pill.textContent = "☁ " + (on ? LABEL[status] : "Đăng nhập đồng bộ");
     pill.dataset.state = on ? status : "out";
     if (dlg && dlg.open && dlg.dataset.view !== (on ? "in" : "out")) renderDialog();
+    window.dispatchEvent(new CustomEvent("sq-sync-paint"));
   }
+  function open() { if (!dlg) return; renderDialog(); dlg.showModal(); }
+  const label = () => signedIn() ? LABEL[status] : "Đăng nhập";
   function renderDialog() {
     const s = session();
     dlg.dataset.view = s ? "in" : "out";
@@ -242,7 +245,7 @@
   }
 
   /* Trò chơi và bản đồ bắt phím toàn trang, nên phải bỏ qua khi hộp đăng nhập đang mở. */
-  window.SQSync = {enabled, signedIn, touch, touchBook, wipe, stamp, run, isOpen: () => !!(dlg && dlg.open)};
+  window.SQSync = {enabled, signedIn, touch, touchBook, wipe, stamp, run, open, label, email: () => (session() || {}).email || "", state: () => signedIn() ? status : "out", isOpen: () => !!(dlg && dlg.open)};
   if (!enabled) return;
 
   pill = document.createElement("button");

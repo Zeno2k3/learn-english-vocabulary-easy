@@ -154,14 +154,28 @@ function syncConfig(rep) {
   return { url, key };
 }
 
+/* Biểu tượng nhỏ trên thẻ bài: viết từ, trắc nghiệm, bài tập. */
+const HOME_ICONS = {
+  "words": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 20h4L19 9l-4-4L4 16z\"/><path d=\"M13 7l4 4\"/></svg>",
+  "quiz": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6l2 2 3-3\"/><path d=\"M4 16l2 2 3-3\"/><path d=\"M12 7h8M12 17h8\"/></svg>",
+  "book": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z\"/><path d=\"M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z\"/></svg>"
+};
+
 function renderHome(lessons, wordCount, vars) {
   const cards = lessons.map(l => {
-    const meta = [l.words.length + " từ"];
-    if (l.quiz.length) meta.push(l.quiz.length + " trắc nghiệm");
-    if (l.exercises.length) meta.push(l.exercises.length + " bài tập");
-    return '<a class="lesson" href="lessons/' + l.id + '/" data-id="' + l.id + '"><span class="num">' + pad2(l.id) + '</span><span class="name">' + esc(l.title) + '</span><span class="meta">' + meta.join(" · ") + '</span><span class="prog" hidden></span></a>';
+    const meta = [["words", l.words.length + " từ"]];
+    if (l.quiz.length) meta.push(["quiz", l.quiz.length + " trắc nghiệm"]);
+    if (l.exercises.length) meta.push(["book", l.exercises.length + " bài tập"]);
+    const chips = meta.map(([icon, text]) => '<span class="chip">' + HOME_ICONS[icon] + text + '</span>').join("");
+    return '<a class="lesson" href="lessons/' + l.id + '/" data-id="' + l.id + '" data-words="' + l.words.length + '" data-state="new">' +
+      '<span class="num">' + pad2(l.id) + '</span><span class="name">' + esc(l.title) + '</span>' +
+      '<span class="chips">' + chips + '</span>' +
+      '<span class="bar" aria-hidden="true">' + "<i></i>".repeat(10) + '</span>' +
+      '<span class="prog">Chưa chơi</span><span class="hit" hidden></span></a>';
   }).join("\n");
-  return fill(readFileSync(join(SRC, "home/home.html"), "utf8"), { ...vars, LESSONS: cards, LESSON_COUNT: lessons.length, WORD_COUNT: wordCount });
+  /* Chỉ mục cho ô tìm kiếm trên trang chủ: tên bài và từng từ kèm nghĩa. */
+  const index = lessons.map(l => ({ id: l.id, title: l.title, words: l.words.map(w => [w.w, w.vi]) }));
+  return fill(readFileSync(join(SRC, "home/home.html"), "utf8"), { ...vars, LESSONS: cards, LESSON_COUNT: lessons.length, WORD_COUNT: wordCount, INDEX: safeJson(index) });
 }
 
 export function build() {
@@ -175,6 +189,7 @@ export function build() {
   const gameCss = asset("game/game.css", "game.css"), gameJs = asset("game/game.js", "game.js");
   const mapCss = asset("map/map.css", "map.css"), mapJs = asset("map/map.js", "map.js");
   const homeCss = asset("home/home.css", "home.css"), homeJs = asset("home/home.js", "home.js");
+  const themeJs = asset("theme/theme.js", "theme.js");
   const syncCss = asset("sync/sync.css", "sync.css"), syncJs = asset("sync/sync.js", "sync.js", "window.SQ_SYNC_CONFIG=" + safeJson(sync) + ";\n");
 
   const gameTpl = readFileSync(join(SRC, "game/game.html"), "utf8");
@@ -183,7 +198,7 @@ export function build() {
     page("lessons/" + l.id + "/index.html", fill(gameTpl, {
       TITLE: esc("Spell Quest bài " + l.id), HEADING: esc("Bài " + l.id + " · " + l.title),
       CUE: l.words.some(w => w.img) ? "Nhìn hình" : "Đọc câu gợi ý",
-      CSS: "../../" + gameCss, JS: "../../" + gameJs, SYNC_CSS: "../../" + syncCss, SYNC_JS: "../../" + syncJs, DATA: safeJson(data),
+      CSS: "../../" + gameCss, JS: "../../" + gameJs, SYNC_CSS: "../../" + syncCss, SYNC_JS: "../../" + syncJs, THEME_JS: "../../" + themeJs, DATA: safeJson(data),
     }));
     const img = join(DATA, "images", l.base);
     if (existsSync(img)) cpSync(img, join(DIST, "lessons", String(l.id), "img"), { recursive: true });
@@ -194,7 +209,7 @@ export function build() {
     .filter(w => { const k = w.w.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
   const mapData = { lessons: lessons.map(l => ({ id: l.id, name: l.title, game: "../lessons/" + l.id + "/" })), topics, words, links: lessons.flatMap(l => l.links) };
   page("map/index.html", fill(readFileSync(join(SRC, "map/map.html"), "utf8"), { CSS: "../" + mapCss, JS: "../" + mapJs, SYNC_CSS: "../" + syncCss, SYNC_JS: "../" + syncJs, DATA: safeJson(mapData) }));
-  page("index.html", renderHome(lessons, firstSeen.size, { CSS: homeCss, JS: homeJs, SYNC_CSS: syncCss, SYNC_JS: syncJs }));
+  page("index.html", renderHome(lessons, firstSeen.size, { CSS: homeCss, JS: homeJs, SYNC_CSS: syncCss, SYNC_JS: syncJs, THEME_JS: themeJs }));
   rep.summary = lessons.length + " bài, " + words.length + " từ trên bản đồ 3D, " + topics.length + " chủ đề";
   return rep;
 }

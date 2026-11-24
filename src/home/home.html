@@ -2,30 +2,85 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0d1e">
 <title>Spell Quest · Học từ vựng tiếng Anh</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap&subset=vietnamese" rel="stylesheet">
 <link rel="stylesheet" href="{{CSS}}">
 <link rel="stylesheet" href="{{SYNC_CSS}}">
+<script src="{{THEME_JS}}"></script>
 </head>
 <body>
 <main class="wrap">
-  <header class="top">
-    <h1>SPELL QUEST</h1>
-    <p>{{LESSON_COUNT}} bài · {{WORD_COUNT}} từ đã học</p>
+  <header class="hero">
+    <div class="htools">
+    <button class="themebtn" type="button" data-theme-toggle>
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      <span data-theme-label>Màu sáng</span>
+    </button>
+    <button class="acct" id="acct" type="button" data-state="out" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18h10a4 4 0 0 0 .6-7.95A6 6 0 0 0 6 9.5 4.25 4.25 0 0 0 7 18z"/></svg>
+      <span class="acct-text" id="acctText">Đăng nhập</span>
+    </button>
+    </div>
+    <div class="brand">
+      <h1>SPELL QUEST<span class="cursor" aria-hidden="true"></span></h1>
+      <p>Học từ vựng tiếng Anh theo từng bài trong sách: viết từ, trắc nghiệm và bài tập.</p>
+    </div>
+    <dl class="stats">
+      <div class="stat"><dt>Bài học</dt><dd>{{LESSON_COUNT}}</dd></div>
+      <div class="stat"><dt>Từ vựng</dt><dd>{{WORD_COUNT}}</dd></div>
+      <div class="stat"><dt>Đã chơi</dt><dd><span id="statPlayed">0</span><small>/{{LESSON_COUNT}}</small></dd></div>
+      <div class="stat need"><dt>Cần ôn</dt><dd id="statNeed">0</dd></div>
+    </dl>
   </header>
+
+  <section class="review" id="review" aria-labelledby="reviewTitle" hidden>
+    <div class="rhead">
+      <h2 id="reviewTitle">Cần ôn</h2>
+      <p id="reviewSum"></p>
+    </div>
+    <div class="rlist" id="reviewList"></div>
+  </section>
+
   <a class="mapcard" href="map/">
-    <span class="maptitle">Bản đồ từ vựng 3D</span>
-    <span class="meta">Xem mọi từ đã học theo chủ đề, tìm kiếm và ôn các từ hay sai</span>
-    <span class="go" aria-hidden="true">▶</span>
+    <svg class="mapicon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>
+    <span class="mtext">
+      <span class="maptitle">Bản đồ từ vựng 3D</span>
+      <span class="meta">Xem mọi từ đã học theo chủ đề, tìm kiếm và ôn các từ hay sai</span>
+    </span>
+    <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
   </a>
-  <h2>Bài học</h2>
-  <nav class="grid" aria-label="Danh sách bài học">
+
+  <section aria-labelledby="lessonsTitle">
+    <div class="shead">
+      <h2 id="lessonsTitle">Bài học</h2>
+      <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+        <span class="sr">Tìm bài học hoặc từ vựng</span>
+        <input id="q" type="search" placeholder="Tìm bài hoặc từ: coat, áo khoác" autocomplete="off" spellcheck="false" autocapitalize="off" enterkeyhint="search">
+        <kbd aria-hidden="true">/</kbd>
+      </label>
+    </div>
+    <div class="filters" role="group" aria-label="Lọc theo trạng thái">
+      <button type="button" data-f="all" aria-pressed="true">Tất cả <small></small></button>
+      <button type="button" data-f="play" aria-pressed="false"><i class="dot play"></i>Đang học <small></small></button>
+      <button type="button" data-f="need" aria-pressed="false"><i class="dot need"></i>Cần ôn <small></small></button>
+      <button type="button" data-f="new" aria-pressed="false"><i class="dot new"></i>Chưa chơi <small></small></button>
+      <button type="button" data-f="done" aria-pressed="false"><i class="dot done"></i>Điểm tối đa <small></small></button>
+    </div>
+    <p class="found" id="found" role="status"></p>
+    <nav class="grid" id="grid" aria-label="Danh sách bài học">
 {{LESSONS}}
-  </nav>
+    </nav>
+    <div class="empty" id="empty" hidden><p id="emptyText"></p><button type="button" class="btn" id="clear">Xoá tìm kiếm và bộ lọc</button></div>
+    <div class="more" id="moreBox" hidden><button type="button" class="btn" id="more"></button></div>
+  </section>
 </main>
+<script type="application/json" id="lessonIndex">{{INDEX}}</script>
 <script src="{{SYNC_JS}}"></script>
 <script src="{{JS}}"></script>
 </body>

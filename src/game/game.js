@@ -403,7 +403,11 @@ function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;
 /* ---------- writing pad ---------- */
 const cv = $("cv"), ctx = cv.getContext("2d"), pad = $("pad");
 let strokes = [], cur = null, curId = null;
-let tool = "pen", color = "#5debc0", penOnly = false, penSeen = false;
+let tool = "pen", color = "neon", penOnly = false, penSeen = false;
+/* Nét bút lưu tên màu (neon, gold, ink, pink); mã màu thật lấy từ CSS nên đổi chế độ sáng/tối thì nét cũ cũng đổi theo. */
+let PEN = {};
+const penColor = name => PEN[name] || (PEN[name] = getComputedStyle(document.documentElement).getPropertyValue("--pen-" + name).trim() || "#5debc0");
+window.addEventListener("sq-theme", () => { PEN = {}; redraw(); });
 const SIZES = [{n:"MẢNH",v:2.5},{n:"VỪA",v:4},{n:"ĐẬM",v:6.5}];
 let sizeIdx = 1;
 
@@ -423,7 +427,7 @@ function pt(e){
 function widthFor(s, p){ return s.erase ? s.size*5 : s.size*(0.55 + p*0.9); }
 function styleFor(s){
   ctx.globalCompositeOperation = s.erase ? "destination-out" : "source-over";
-  ctx.strokeStyle = s.color; ctx.fillStyle = s.color;
+  ctx.strokeStyle = ctx.fillStyle = penColor(s.color);
   ctx.lineCap = "round"; ctx.lineJoin = "round";
 }
 function drawDot(s){

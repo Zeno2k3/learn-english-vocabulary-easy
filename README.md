@@ -64,6 +64,13 @@ npm run check   # chỉ kiểm tra dữ liệu
 npm run build   # sinh website vào dist/
 ```
 
+Muốn đăng nhập đồng bộ khi chạy trên máy, tạo file `.env.local` (không đưa lên git) rồi chạy lại `npm run dev`:
+
+```text
+SUPABASE_URL=https://xxxx.supabase.co
+SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+```
+
 ## Đưa lên GitHub lần đầu
 
 1. Tạo repository trống trên GitHub.

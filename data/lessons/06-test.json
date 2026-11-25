@@ -275,6 +275,24 @@
             "topic": "care",
             "q": "Cụm từ nhận xét một thói quen hay món ăn nào đó mang lại tác động tích cực cho thể chất?",
             "ex": "Swimming and cycling are ___"
+        },
+        {
+            "w": "health",
+            "ipa": "helθ",
+            "t": "danh từ",
+            "vi": "sức khỏe",
+            "topic": "health_state",
+            "q": "Đây là một từ tiếng Anh chỉ tình trạng khỏe mạnh của cơ thể và tinh thần, điều mà mọi người cần duy trì trong cuộc sống?",
+            "ex": "Regular exercise is good for your ___."
+        },
+        {
+            "w": "illness",
+            "ipa": "ˈɪlnəs",
+            "t": "danh từ",
+            "vi": "bệnh tật, tình trạng ốm đau",
+            "topic": "diseases",
+            "q": "Đây là một từ tiếng Anh chỉ tình trạng cơ thể không khỏe mạnh, có thể khiến một người phải nghỉ ngơi hoặc đến bệnh viện điều trị?",
+            "ex": "Stress can sometimes cause ___."
         }
     ],
     "quiz": [],
@@ -356,6 +374,42 @@
         [
             "feel stressed",
             "relax"
+        ],
+        [
+            "health",
+            "well"
+        ],
+        [
+            "health",
+            "fine"
+        ],
+        [
+            "health",
+            "healthy diet"
+        ],
+        [
+            "health",
+            "exercise"
+        ],
+        [
+            "illness",
+            "feel ill"
+        ],
+        [
+            "illness",
+            "sick"
+        ],
+        [
+            "illness",
+            "doctor"
+        ],
+        [
+            "illness",
+            "hospital"
+        ],
+        [
+            "illness",
+            "vomit"
         ]
     ]
 }

@@ -21,10 +21,24 @@
   function localIds() {
     const ids = new Set();
     for (let i = 0; i < localStorage.length; i++) {
-      const m = /^spellquest-(?:best|qbest|book|miss)-b(\d+)$/.exec(localStorage.key(i) || "");
+      const m = /^spellquest-(?:best|qbest|book|miss|session)-b(\d+)$/.exec(localStorage.key(i) || "");
       if (m) ids.add(m[1]);
     }
     return [...ids];
+  }
+
+  /* Phiên đang làm dở: {run, qrun, bex}, mỗi phần {at, d}. Phần nào có at mới hơn thì thắng (giống merge_session trong database). */
+  const PARTS = ["run", "qrun", "bex"];
+  function cleanSession(v) {
+    const out = {};
+    if (!v || typeof v !== "object") return out;
+    for (const p of PARTS) if (v[p] && typeof v[p] === "object" && Number.isFinite(v[p].at)) out[p] = {at: int(v[p].at), d: v[p].d === undefined ? null : v[p].d};
+    return out;
+  }
+  function mergeSession(a, b) {
+    const out = {};
+    for (const p of PARTS) { const x = a[p], y = b[p]; if (x || y) out[p] = !x ? y : !y ? x : (y.at > x.at ? y : x); }
+    return out;
   }
 
   function snapshot(id) {
@@ -35,7 +49,7 @@
     return {
       id: Number(id), best: int(read(k("best", id), 0)), quizBest: int(read(k("qbest", id), 0)),
       book: hasBook(book) ? {ans: book.ans || {}, res: book.res || {}} : {},
-      bookAt: int(meta.bookAt), wipedAt: int(meta.wipedAt), stats
+      bookAt: int(meta.bookAt), wipedAt: int(meta.wipedAt), stats, session: cleanSession(read(k("session", id), {}))
     };
   }
 
@@ -50,6 +64,8 @@
     put(k("qbest", id), v.quizBest || null);
     put(k("book", id), hasBook(v.book) ? {ans: v.book.ans || {}, res: v.book.res || {}} : null);
     put(k("miss", id), Object.keys(v.stats || {}).length ? v.stats : null);
+    /* máy chủ chưa chạy migration phiên thì không trả "session": giữ nguyên bản trên máy */
+    if (v.session) put(k("session", id), Object.keys(v.session).length ? v.session : null);
     write(metaKey(id), {bookAt: int(v.bookAt), wipedAt: int(v.wipedAt)});
     return changed;
   }
@@ -66,7 +82,7 @@
       stats[key] = {...newer, wrong: Math.max(a.wrong, b.wrong), right: Math.max(a.right, b.right), last: Math.max(a.last, b.last), lastWrong: Math.max(a.lastWrong, b.lastWrong)};
     }
     const localBook = l.bookAt >= s.bookAt;
-    return {id: l.id, best: Math.max(l.best, s.best), quizBest: Math.max(l.quizBest, s.quizBest), book: localBook ? l.book : s.book, bookAt: Math.max(l.bookAt, s.bookAt), wipedAt, stats};
+    return {id: l.id, best: Math.max(l.best, s.best), quizBest: Math.max(l.quizBest, s.quizBest), book: localBook ? l.book : s.book, bookAt: Math.max(l.bookAt, s.bookAt), wipedAt, stats, session: mergeSession(l.session, s.session || l.session)};
   }
 
   function applyServer(data, sent) {
@@ -74,7 +90,7 @@
     let more = false;
     for (const raw of data.lessons || []) {
       const id = String(raw.id), local = snapshot(id);
-      const row = {id: raw.id, best: int(raw.best), quizBest: int(raw.quizBest), book: raw.book || {}, bookAt: int(raw.bookAt), wipedAt: int(raw.wipedAt), stats: raw.stats || {}};
+      const row = {id: raw.id, best: int(raw.best), quizBest: int(raw.quizBest), book: raw.book || {}, bookAt: int(raw.bookAt), wipedAt: int(raw.wipedAt), stats: raw.stats || {}, session: raw.session ? cleanSession(raw.session) : null};
       const touched = (dirty[id] || "") !== (sent[id] || "");
       let next = touched ? mergeLesson(local, row) : row;
       /* Bài làm cũ từ trước khi có đồng bộ không có mốc thời gian: gộp để không thiết bị nào mất bài. */

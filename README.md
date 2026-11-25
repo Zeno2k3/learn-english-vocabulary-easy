@@ -103,11 +103,11 @@ git push -u origin main
 
 ## Tiến độ học và database
 
-Website dùng Supabase. Bài học chỉ đổi khi bạn `git push`: GitHub Actions kiểm tra dữ liệu, build website rồi ghi bài học vào database. Điểm, bài làm và từ hay sai lưu trên máy trước, sau khi đăng nhập (nút ☁ góc dưới phải) thì tự đồng bộ giữa iPad và máy tính. Mất mạng vẫn học được, có mạng lại sẽ tự gửi.
+Website dùng Supabase. Bài học chỉ đổi khi bạn `git push`: GitHub Actions kiểm tra dữ liệu, build website rồi ghi bài học vào database. Điểm, bài làm, từ hay sai và phiên đang làm dở (đang ở từ nào, câu trắc nghiệm nào, bài tập nào) lưu trên máy trước, sau khi đăng nhập (nút ☁ góc dưới phải) thì tự đồng bộ giữa iPad và máy tính. Mất mạng vẫn học được, có mạng lại sẽ tự gửi.
 
 Thiết lập một lần:
 
-1. Trong Supabase, chạy file `supabase/migrations/20261123000000_spell_quest.sql` ở **SQL Editor**.
+1. Trong Supabase, chạy lần lượt các file trong `supabase/migrations/` ở **SQL Editor** (`20261123000000_spell_quest.sql` rồi `20261125000000_lesson_session.sql`). Chưa chạy file thứ hai thì phiên làm dở chỉ lưu trên từng máy, phần còn lại vẫn đồng bộ bình thường.
 2. Tạo tài khoản học ở **Authentication → Users → Add user**, rồi tắt **Allow new users to sign up**.
 3. Trên GitHub, vào **Settings → Secrets and variables → Actions**: thêm Variables `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` và Secret `SUPABASE_SECRET_KEY`.
 

@@ -23,6 +23,83 @@ const S = {i:0, hearts:MAX_HEARTS, score:0, best:0, phase:"write", usedHint:fals
 const MODE_KEY = KEY("mode");
 try { S.best = parseInt(localStorage.getItem(KEY("best"))||"0",10)||0; } catch(e) {}
 
+/* ---------- lưu lượt đang làm dở trên máy: tải lại trang, mất mạng hay đóng tab vẫn làm tiếp được ---------- */
+/* Phiên gồm 3 phần: run (phần 1), qrun (phần 2), bex (bài tập sách đang mở). Mỗi phần {at, d}; bản có at mới hơn thắng khi đồng bộ (src/sync/sync.js). */
+const SESS_KEY = KEY("session");
+const readJson = k => { try { return JSON.parse(localStorage.getItem(k) || "null"); } catch(e) { return null; } };
+/* so sánh không phụ thuộc thứ tự khoá (database jsonb sắp xếp lại khoá) */
+const canonJson = v => Array.isArray(v) ? "[" + v.map(canonJson).join(",") + "]"
+  : v && typeof v === "object" ? "{" + Object.keys(v).sort().map(x => JSON.stringify(x) + ":" + canonJson(v[x])).join(",") + "}"
+  : JSON.stringify(v === undefined ? null : v);
+function sessAll(){ const s = readJson(SESS_KEY); return s && typeof s === "object" && !Array.isArray(s) ? s : {}; }
+function sessGet(part){ const p = sessAll()[part]; return p && typeof p === "object" && typeof p.at === "number" ? p : null; }
+/* at của bản phiên mà trang này đang hiển thị; bản đồng bộ về mới hơn thì nạp lại. */
+const SEEN = {run:0, qrun:0, bex:0};
+function sessPut(part, d){
+  const all = sessAll(), prev = all[part];
+  d = d === undefined ? null : d;
+  if(prev && canonJson(prev.d === undefined ? null : prev.d) === canonJson(d)) return;
+  const at = Math.max(Date.now(), ((prev && +prev.at) || 0) + 1);
+  all[part] = {at, d};
+  try { localStorage.setItem(SESS_KEY, JSON.stringify(all)); } catch(e) {}
+  SEEN[part] = at;
+  SQSync.touch(LESSON.id);
+}
+/* Nét bút gói gọn thành mảng số để gửi lên máy chủ; quá lớn thì bỏ, chỉ giữ vị trí trong lượt chơi. */
+function packStrokes(){
+  const out = strokes.filter(s => s.pts.length).map(s => ({c:s.color, s:s.size, e:s.erase ? 1 : 0, p:s.pts.flatMap(q => [Math.round(q.x), Math.round(q.y), Math.round(q.p * 10) / 10])}));
+  return JSON.stringify(out).length > 30000 ? [] : out;
+}
+function unpackStrokes(a){
+  if(!Array.isArray(a)) return [];
+  return a.filter(s => s && Array.isArray(s.p) && s.p.length >= 3).map(s => {
+    const pts = [];
+    for(let i = 0; i + 2 < s.p.length; i += 3) pts.push({x:+s.p[i] || 0, y:+s.p[i+1] || 0, p:+s.p[i+2] || 0.5});
+    return {color:String(s.c || "neon"), size:+s.s || 4, erase:!!s.e, pts};
+  });
+}
+function saveRun(){
+  if(S.hearts <= 0 || !$("overlay").hidden){ sessPut("run", null); return; }
+  sessPut("run", {v:1, list:LIST.map(it => it.w), i:S.i, hearts:S.hearts, score:S.score, review:!!S.review,
+    phase:S.phase, mode:S.mode, usedHint:!!S.usedHint, firstShown:!!S.firstShown, ipaShown:!!S.ipaShown,
+    typed:S.mode === "type" ? S.typed : [], strokes:S.mode === "pen" ? packStrokes() : []});
+}
+function restoreRun(remote){
+  const p = sessGet("run");
+  SEEN.run = p ? p.at : 0;
+  const r = p && p.d;
+  if(!r || r.v !== 1 || !Array.isArray(r.list) || !r.list.length) return false;
+  const byW = new Map(WORDS.map(it => [it.w, it]));
+  const list = r.list.map(w => byW.get(w));
+  /* bài học vừa đổi nội dung hoặc dữ liệu hỏng: bỏ qua, không xoá để thiết bị khác vẫn giữ được */
+  if(list.some(x => !x) || !Number.isInteger(r.i) || r.i < 0 || r.i >= list.length || !(r.hearts > 0 && r.hearts <= MAX_HEARTS)) return false;
+  LIST = list; S.review = !!r.review;
+  S.i = r.i; S.hearts = r.hearts; S.score = parseInt(r.score, 10) || 0;
+  S.usedHint = !!r.usedHint; S.firstShown = !!r.firstShown; S.ipaShown = !!r.ipaShown;
+  $("track").style.setProperty("--n", LIST.length);
+  $("revBar").hidden = !S.review;
+  if(S.review) $("revTxt").textContent = `ĐANG ÔN ${LIST.length} TỪ HAY SAI`;
+  renderWord(); renderHud();
+  if(S.ipaShown){ $("hintIpa").classList.add("on"); $("hintIpa").textContent = "PHIÊN ÂM ✓"; }
+  if(S.firstShown) $("hintFirst").classList.add("on");
+  const same = r.mode === S.mode;
+  S.typed = same && S.mode === "type" && Array.isArray(r.typed) ? r.typed.filter(c => typeof c === "string" && c.length === 1).slice(0, answerLetters().length) : [];
+  strokes = same && S.mode === "pen" ? unpackStrokes(r.strokes) : []; cur = null;
+  redraw();
+  let phase = same ? r.phase : "write";
+  if(!(S.mode === "type" ? ["write", "retry", "correct"] : ["write", "reveal"]).includes(phase)) phase = "write";
+  if(phase === "reveal" && !strokes.some(s => !s.erase)) phase = "write";
+  if(phase === "correct" && S.typed.join("") !== answerLetters()) phase = "write";
+  S.phase = phase;
+  if(phase === "reveal"){ renderSlots("answer"); showAnswer(); }
+  else if(phase === "retry" || phase === "correct"){ renderSlots("check"); showAnswer(); }
+  else renderSlots("write");
+  renderActions();
+  const next = {reveal:" Bạn viết đúng không?", retry:" Bấm Enter để gõ lại.", correct:" Bấm Enter để sang từ tiếp theo."}[phase] || "";
+  setStatus((remote ? "Đã tải lượt làm dở từ thiết bị khác:" : "Đã khôi phục lượt đang làm dở:") + ` từ ${S.i+1}/${LIST.length}, còn ${S.hearts} tim.` + next, "good");
+  return true;
+}
+
 const HEART = [".XX.XX.","XXXXXXX","XXXXXXX",".XXXXX.","..XXX..","...X..."];
 function heartSvg(full){
   let r = "";
@@ -130,6 +207,7 @@ function reveal(){
   showAnswer();
   setStatus("So từng chữ cái với chữ bạn viết. Bạn viết đúng không?");
   renderActions();
+  saveRun();
   $("rightBtn").focus();
 }
 
@@ -157,6 +235,7 @@ function markWrong(){
   renderSlots("write");
   $("example").textContent = "";
   renderActions();
+  saveRun();
   setStatus(`Mất 1 tim, còn ${S.hearts}. Viết lại từ này nhé.`, "err");
 }
 
@@ -178,6 +257,7 @@ function typeSubmit(){
     S.phase = "correct";
     renderActions();
     showAnswer();
+    saveRun();
     setStatus("Chính xác! Đọc giải thích rồi bấm Enter để sang từ tiếp theo.", "good");
     return;
   }
@@ -189,13 +269,14 @@ function typeSubmit(){
   $("card").classList.remove("shake"); void $("card").offsetWidth; $("card").classList.add("shake");
   showAnswer();
   if(S.hearts <= 0){
-    S.phase = "busy"; renderActions();
+    S.phase = "busy"; renderActions(); saveRun();
     setStatus("Sai rồi, hết tim.", "err");
     setTimeout(showLose, 1200);
     return;
   }
   S.phase = "retry";
   renderActions();
+  saveRun();
   setStatus(`Sai rồi, mất 1 tim (còn ${S.hearts}). Ô đỏ là chữ sai. So với đáp án rồi bấm Enter để gõ lại.`, "err");
 }
 function typeNext(){
@@ -210,6 +291,7 @@ function typeRetry(){
   renderSlots("write");
   $("example").textContent = "";
   renderActions();
+  saveRun();
   setStatus(`Gõ lại từ này nhé. Còn ${S.hearts} tim.`);
 }
 function defaultMode(){
@@ -228,6 +310,7 @@ function setMode(m, save){
   renderSlots("write");
   $("example").textContent = "";
   renderActions();
+  if(save) saveRun();
   setStatus(m==="type" ? CUE + ", gõ từ tiếng Anh bằng bàn phím, rồi bấm Enter."
                        : CUE + ", viết từ tiếng Anh vào ô, rồi bấm “Xem đáp án”.");
   if(m==="pen") requestAnimationFrame(fit);
@@ -255,6 +338,7 @@ document.addEventListener("keydown", e => {
   else if(isLetter && /[-']/.test(k) && !answerLetters().includes(k)) return;
   else if(isLetter && S.typed.length < answerLetters().length) S.typed.push(k.toLowerCase());
   renderSlots("write");
+  saveRun();
   if($("status").classList.contains("err")) setStatus("Gõ xong thì bấm Enter.");
 }, true);
 
@@ -268,6 +352,7 @@ function nextWordReset(){
   renderWord();
   renderHud();
   renderActions();
+  saveRun();
 }
 
 function saveBest(){
@@ -285,10 +370,12 @@ function openModal(kind, title, text, btn){
 }
 function showLose(){
   if(S.hearts > 0) return;
+  sessPut("run", null);
   saveBest();
   openModal("lose","GAME OVER",`Bạn đã sai 3 lần ở từ số ${S.i+1}. Điểm: ${S.score}. Chơi lại lượt mới, các từ sẽ được trộn lại.`,S.review ? "ÔN LẠI TỪ ĐẦU" : "CHƠI LẠI TỪ ĐẦU");
 }
 function showWin(){
+  sessPut("run", null);
   saveBest();
   openModal("win","YOU WIN!",`Bạn viết đúng cả ${LIST.length} từ, còn ${S.hearts} tim. Điểm: ${S.score}.`,S.review ? "ÔN LẠI" : "CHƠI LẠI");
 }
@@ -310,12 +397,14 @@ $("hintIpa").onclick = () => {
   S.ipaShown = true; S.usedHint = true;
   $("hintIpa").classList.add("on"); $("hintIpa").textContent = "PHIÊN ÂM ✓";
   renderTag();
+  saveRun();
 };
 $("hintFirst").onclick = () => {
   if(S.phase!=="write") return;
   S.firstShown = true; S.usedHint = true;
   $("hintFirst").classList.add("on");
   renderSlots("write");
+  saveRun();
 };
 /* ---------- voice ---------- */
 const NOVELTY = /(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox)/i;
@@ -481,7 +570,7 @@ cv.addEventListener("pointermove", e => {
   }
   ctx.globalCompositeOperation = "source-over";
 });
-function endStroke(e){ if(cur && e.pointerId===curId){ cur = null; curId = null; } }
+function endStroke(e){ if(cur && e.pointerId===curId){ cur = null; curId = null; saveRun(); } }
 cv.addEventListener("pointerup", endStroke);
 cv.addEventListener("pointercancel", endStroke);
 cv.addEventListener("touchstart", e => { if(!penOnly || [...e.touches].some(t=>t.touchType==="stylus")) e.preventDefault(); }, {passive:false});
@@ -501,8 +590,8 @@ function setPenOnly(v){
 }
 $("toolPen").onclick = () => setTool("pen");
 $("toolEraser").onclick = () => setTool("eraser");
-$("undoBtn").onclick = () => { strokes.pop(); redraw(); };
-$("clearBtn").onclick = clearCanvas;
+$("undoBtn").onclick = () => { strokes.pop(); redraw(); saveRun(); };
+$("clearBtn").onclick = () => { clearCanvas(); saveRun(); };
 $("penOnlyBtn").onclick = () => setPenOnly(!penOnly);
 $("sizeBtn").onclick = () => { sizeIdx = (sizeIdx+1)%SIZES.length; $("sizeBtn").textContent = "NÉT: " + SIZES[sizeIdx].n; };
 document.querySelectorAll(".swatch").forEach(b => b.onclick = () => {
@@ -515,7 +604,7 @@ if("ResizeObserver" in window) new ResizeObserver(fit).observe(pad); else window
 
 document.addEventListener("keydown", e => {
   if(SQSync.isOpen() || !$("overlay").hidden) return;
-  if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==="z"){ e.preventDefault(); strokes.pop(); redraw(); }
+  if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==="z"){ e.preventDefault(); strokes.pop(); redraw(); saveRun(); }
 });
 
 /* ---------- part 2: common mistakes quiz ---------- */
@@ -542,14 +631,15 @@ function quizHud(){
     return `<i class="${r===true?'done':r===false?'miss':k===Q.pos?'now':''}"></i>`;
   }).join("");
 }
-function quizRender(){
+function quizRender(optOrder){
   const it = QUIZ[Q.order[Q.pos]];
-  Q.answered = false;
+  Q.answered = false; Q.pick = null;
   $("qStage").textContent = `CÂU ${pad2(Q.pos+1)}/${pad2(Q.order.length)}`;
   $("qTag").textContent = "Lỗi: " + it.tag;
   $("qText").innerHTML = escapeHtml(it.q).replace("___", `<span class="blank">______</span>`) + `<span class="vi">${escapeHtml(it.vi)}</span>`;
-  const opts = shuffle(it.o.map((text,k)=>({text, ok:k===0})));
-  $("qOpts").innerHTML = opts.map((o,k)=>`<button class="opt" type="button" data-ok="${o.ok}"><span class="k">${k+1}</span><span>${escapeHtml(o.text)}</span></button>`).join("");
+  Q.opts = optOrder || shuffle(it.o.map((_,k)=>k));
+  const opts = Q.opts.map(k=>({text:it.o[k], ok:k===0, k}));
+  $("qOpts").innerHTML = opts.map((o,k)=>`<button class="opt" type="button" data-ok="${o.ok}" data-i="${o.k}"><span class="k">${k+1}</span><span>${escapeHtml(o.text)}</span></button>`).join("");
   [...$("qOpts").children].forEach(b => b.onclick = () => quizPick(b));
   $("qExplain").hidden = true;
   $("qNext").hidden = true;
@@ -557,12 +647,36 @@ function quizRender(){
   $("qStatus").textContent = "Chọn đáp án đúng. Bấm vào ô hoặc nhấn phím 1 đến " + opts.length + ".";
   quizHud();
 }
+function qSave(){
+  if(!$("qResult").hidden || !Q.order.length){ sessPut("qrun", null); return; }
+  sessPut("qrun", {v:1, n:QUIZ.length, order:Q.order, pos:Q.pos, results:Q.results, opts:Q.opts, pick:Q.answered ? Q.pick : null});
+}
+function quizRestore(remote){
+  const p = sessGet("qrun");
+  SEEN.qrun = p ? p.at : 0;
+  const r = p && p.d;
+  const idx = k => Number.isInteger(k) && k >= 0 && k < QUIZ.length;
+  if(!r || r.v !== 1 || r.n !== QUIZ.length || !Array.isArray(r.order) || !r.order.length || !r.order.every(idx) || !Number.isInteger(r.pos) || r.pos < 0 || r.pos >= r.order.length) return false;
+  Q.order = r.order; Q.pos = r.pos;
+  Q.results = (Array.isArray(r.results) ? r.results : []).slice(0, Q.pos + 1).map(x => x === true ? true : x === false ? false : undefined);
+  delete Q.results[Q.pos];
+  Q.right = Q.results.filter(x => x === true).length;
+  $("qResult").hidden = true; $("qCard").hidden = false; $("qBar").hidden = false;
+  const n = QUIZ[Q.order[Q.pos]].o.length;
+  const ok = Array.isArray(r.opts) && r.opts.length === n && r.opts.slice().sort((a,b)=>a-b).every((k,i)=>k===i);
+  quizRender(ok ? r.opts : null);
+  const b = ok && Number.isInteger(r.pick) ? [...$("qOpts").children].find(x => +x.dataset.i === r.pick) : null;
+  if(b) quizPick(b);
+  else { $("qStatus").className = "status good"; $("qStatus").textContent = (remote ? "Đã tải bài trắc nghiệm làm dở từ thiết bị khác:" : "Đã khôi phục bài trắc nghiệm đang làm dở:") + ` câu ${Q.pos+1}/${Q.order.length}. Chọn đáp án đúng.`; }
+  return true;
+}
 function quizPick(btn){
   if(Q.answered) return;
   Q.answered = true;
   const it = QUIZ[Q.order[Q.pos]];
   const ok = btn.dataset.ok === "true";
   Q.results[Q.pos] = ok;
+  Q.pick = +btn.dataset.i;
   if(ok) Q.right++;
   [...$("qOpts").children].forEach(b => {
     b.disabled = true;
@@ -581,10 +695,11 @@ function quizPick(btn){
   $("qNext").hidden = false;
   $("qNext").focus();
   quizHud();
+  qSave();
 }
 $("qNext").onclick = () => {
   if(!Q.answered) return;
-  if(Q.pos < Q.order.length-1){ Q.pos++; quizRender(); }
+  if(Q.pos < Q.order.length-1){ Q.pos++; quizRender(); qSave(); }
   else quizFinish();
 };
 function quizFinish(){
@@ -604,8 +719,9 @@ function quizFinish(){
     `<div class="actions"><button class="btn big go" type="button" id="qAgain">LÀM LẠI TẤT CẢ</button>` +
     (wrongIdx.length ? `<button class="btn big" type="button" id="qRetry">LÀM LẠI CÂU SAI</button>` : "") + `</div>`;
   $("qCard").hidden = true; $("qBar").hidden = true; $("qResult").hidden = false;
-  $("qAgain").onclick = () => quizStart();
-  if(wrongIdx.length) $("qRetry").onclick = () => quizStart(wrongIdx);
+  sessPut("qrun", null);
+  $("qAgain").onclick = () => { quizStart(); qSave(); };
+  if(wrongIdx.length) $("qRetry").onclick = () => { quizStart(wrongIdx); qSave(); };
   quizHud();
   $("qNum").textContent = `${pad2(n)}/${pad2(n)}`;
   $("qAgain").focus();
@@ -620,6 +736,7 @@ const norm = s => s.toLowerCase().replace(/[’‘]/g,"'").replace(/[.,!?;:]/g,"
 
 const B = {ex:0, ans:{}, res:{}, shown:{}, active:null};
 try { const saved = JSON.parse(localStorage.getItem(KEY("book"))||"null"); if(saved){ B.ans = saved.ans||{}; B.res = saved.res||{}; } } catch(e) {}
+{ const p = sessGet("bex"); SEEN.bex = p ? p.at : 0; if(p && Number.isInteger(p.d) && p.d >= 0 && p.d < EX.length) B.ex = p.d; }
 function bSave(){
   const body = JSON.stringify({ans:B.ans,res:B.res});
   let prev = null;
@@ -643,7 +760,7 @@ function bHud(){
     const done = ks.length && ks.every(k => B.res[k] === true);
     return `<button class="btn small${e===B.ex?' on':''}${done&&e!==B.ex?' done':''}" type="button" data-e="${e}">BÀI ${ex.id}</button>`;
   }).join("");
-  [...$("exNav").children].forEach(b => b.onclick = () => { B.ex = +b.dataset.e; bRender(); });
+  [...$("exNav").children].forEach(b => b.onclick = () => { B.ex = +b.dataset.e; sessPut("bex", B.ex); bRender(); });
 }
 function bStatus(msg, kind){ const el=$("bStatus"); el.textContent = msg; el.className = "status" + (kind?" "+kind:""); }
 
@@ -1096,6 +1213,19 @@ function syncApply(){
   missHud(); renderHud();
   if(QUIZ.length) quizHud();
   if(!$("viewMiss").hidden) renderMiss();
+  sessApply();
+}
+/* Thiết bị khác làm tiếp sau mình thì nạp bản của nó. Bản đã xoá (lượt chơi xong) thì giữ nguyên màn hình ở đây. */
+function sessApply(){
+  const run = sessGet("run");
+  if(run && run.d && run.at > SEEN.run && $("overlay").hidden && !cur) restoreRun(true);
+  const q = sessGet("qrun");
+  if(QUIZ.length && q && q.d && q.at > SEEN.qrun) quizRestore(true);
+  const bx = sessGet("bex");
+  if(EX.length && bx && bx.at > SEEN.bex && Number.isInteger(bx.d) && bx.d >= 0 && bx.d < EX.length && !$("viewBook").contains(document.activeElement)){
+    SEEN.bex = bx.at;
+    if(bx.d !== B.ex){ B.ex = bx.d; bRender(); }
+  }
 }
 $("viewBook").addEventListener("focusout", e => {
   if(!B.stale || (e.relatedTarget && $("viewBook").contains(e.relatedTarget))) return;
@@ -1103,7 +1233,7 @@ $("viewBook").addEventListener("focusout", e => {
 });
 window.addEventListener("sq-sync", e => { if(e.detail.lessons.includes(LESSON.id)) syncApply(); });
 window.addEventListener("sq-sync-auth", () => { if(!$("viewMiss").hidden) renderMiss(); });
-window.addEventListener("storage", e => { if([MISS_KEY, KEY("best"), KEY("qbest"), KEY("book")].includes(e.key)) syncApply(); });
+window.addEventListener("storage", e => { if([MISS_KEY, KEY("best"), KEY("qbest"), KEY("book"), SESS_KEY].includes(e.key)) syncApply(); });
 missHud();
 window.addEventListener("hashchange", () => showView(viewFromHash()));
 if(EX.length) bRender();
@@ -1117,11 +1247,12 @@ document.addEventListener("keydown", e => {
     e.preventDefault(); $("qNext").click();
   }
 });
-if(QUIZ.length) quizStart();
+if(QUIZ.length && !quizRestore()) quizStart();
 showView(viewFromHash());
 
 $("track").style.setProperty("--n", LIST.length);
 renderWord();
 renderHud();
 setMode(defaultMode(), false);
+restoreRun();
 fit();
